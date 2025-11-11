@@ -14,6 +14,10 @@ export const InfiniteMovingCards = ({
     quote: string;
     name: string;
     title: string;
+    company?: string;
+    rating?: number;
+    result?: string;
+    image?: string;
   }[];
   direction?: "left" | "right";
   speed?: "fast" | "normal" | "slow";
@@ -91,24 +95,29 @@ export const InfiniteMovingCards = ({
         
         .testimonial-card {
           position: relative;
-          width: 320px;
+          width: 380px;
           max-width: 100%;
-          background: rgba(255, 255, 255, 0.05);
-          backdrop-filter: blur(10px);
-          border-radius: 16px;
-          padding: 30px;
-          transition: all 0.3s ease;
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+          background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.9) 100%);
+          backdrop-filter: blur(16px);
+          border-radius: 20px;
+          padding: 32px;
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          border: 1px solid rgba(58, 200, 255, 0.15);
+          box-shadow:
+            0 10px 40px rgba(0, 0, 0, 0.3),
+            0 0 0 1px rgba(255, 255, 255, 0.05) inset;
           overflow: hidden;
           display: flex;
           flex-direction: column;
-          height: 100%;
+          min-height: 320px;
         }
-        
+
         .testimonial-card:hover {
-          transform: translateY(-5px);
-          border-color: rgba(4, 190, 120, 0.3);
+          transform: translateY(-8px);
+          border-color: rgba(58, 200, 255, 0.4);
+          box-shadow:
+            0 20px 60px rgba(0, 0, 0, 0.4),
+            0 0 40px rgba(58, 200, 255, 0.15);
         }
         
         .quote-icon {
@@ -119,65 +128,101 @@ export const InfiniteMovingCards = ({
           transform: scale(1.8);
         }
         
+        .rating-stars {
+          display: flex;
+          gap: 4px;
+          margin-bottom: 16px;
+          position: relative;
+          z-index: 2;
+        }
+
+        .rating-stars svg {
+          width: 18px;
+          height: 18px;
+          fill: #fbbf24;
+          filter: drop-shadow(0 2px 4px rgba(251, 191, 36, 0.3));
+        }
+
         .quote-content {
           flex-grow: 1;
           margin-bottom: 1.5rem;
           position: relative;
           z-index: 2;
-          font-size: 0.95rem;
-          line-height: 1.7;
-          color: #cbd5e1;
+          font-size: 1rem;
+          line-height: 1.75;
+          color: #e2e8f0;
+          font-weight: 400;
         }
-        
+
         .author-info {
           display: flex;
           align-items: center;
           position: relative;
           z-index: 2;
+          margin-bottom: 12px;
         }
         
         .avatar {
-          width: 48px;
-          height: 48px;
+          width: 52px;
+          height: 52px;
           border-radius: 50%;
-          background: linear-gradient(135deg, #04BE78, #13FFDA);
+          background: linear-gradient(135deg, #3ac8ff, #2a9fd9);
           display: flex;
           align-items: center;
           justify-content: center;
-          color: #0f172a;
-          font-weight: bold;
-          margin-right: 15px;
+          color: #ffffff;
+          font-weight: 700;
+          margin-right: 14px;
           flex-shrink: 0;
-          font-size: 1.2rem;
+          font-size: 1.3rem;
+          box-shadow: 0 4px 15px rgba(58, 200, 255, 0.3);
         }
-        
+
         .author-details {
           display: flex;
           flex-direction: column;
+          gap: 2px;
         }
-        
+
         .author-name {
-          font-weight: 600;
-          color: #f8fafc;
+          font-weight: 700;
+          color: #ffffff;
           font-size: 1rem;
+          line-height: 1.3;
         }
-        
+
         .author-title {
-          font-size: 0.85rem;
-          color: #94a3b8;
+          font-size: 0.875rem;
+          color: #cbd5e1;
+          line-height: 1.3;
         }
-        
-        .testimonial-tag {
-          position: absolute;
-          bottom: 20px;
-          right: 20px;
-          background: rgba(4, 190, 120, 0.15);
-          color: #13FFDA;
-          padding: 4px 12px;
-          border-radius: 50px;
-          font-size: 0.75rem;
+
+        .author-company {
+          font-size: 0.8rem;
+          color: #94a3b8;
           font-weight: 500;
-          backdrop-filter: blur(5px);
+        }
+
+        .result-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          background: linear-gradient(135deg, rgba(58, 200, 255, 0.15), rgba(58, 200, 255, 0.05));
+          color: #3ac8ff;
+          padding: 8px 16px;
+          border-radius: 12px;
+          font-size: 0.875rem;
+          font-weight: 700;
+          border: 1px solid rgba(58, 200, 255, 0.3);
+          backdrop-filter: blur(8px);
+          position: relative;
+          z-index: 2;
+        }
+
+        .result-badge svg {
+          width: 16px;
+          height: 16px;
+          fill: currentColor;
         }
         
         .card-accent {
@@ -228,13 +273,31 @@ export const InfiniteMovingCards = ({
           min-width: max-content;
           flex-shrink: 0;
           flex-wrap: nowrap;
-          gap: 64px; /* Espacio horizontal aumentado */
+          gap: 32px;
           padding: 8px 0;
         }
-        
+
         /* Añadido margen horizontal extra */
         .testimonial-card {
           margin: 0 8px;
+        }
+
+        @media (max-width: 768px) {
+          .testimonial-card {
+            width: 340px;
+            padding: 24px;
+            min-height: 300px;
+          }
+
+          .avatar {
+            width: 44px;
+            height: 44px;
+            font-size: 1.1rem;
+          }
+
+          .quote-content {
+            font-size: 0.95rem;
+          }
         }
       `}</style>
       
@@ -255,34 +318,49 @@ export const InfiniteMovingCards = ({
         >
           {items.map((item, idx) => (
             <li
-              className="relative w-[320px] max-w-full shrink-0"
+              className="relative w-[380px] max-w-full shrink-0"
               key={`${item.name}-${idx}`}
             >
               <div className="testimonial-card">
                 <div className="card-highlight"></div>
                 <div className="card-accent"></div>
-                
-                <svg 
-                  className="quote-icon" 
-                  width="40" 
-                  height="40" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
+
+                <svg
+                  className="quote-icon"
+                  width="40"
+                  height="40"
+                  viewBox="0 0 24 24"
+                  fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                 >
-                  <path d="M7 17H10C11.6569 17 13 15.6569 13 14V11C13 9.34315 11.6569 8 10 8H7V17ZM7 17V21H3V16C3 13.7909 4.79086 12 7 12M17 17H20C21.6569 17 23 15.6569 23 14V11C23 9.34315 21.6569 8 20 8H17V17ZM17 17V21H13V16C13 13.7909 14.7909 12 17 12" 
-                        stroke="#13FFDA" 
-                        strokeWidth="1.5" 
-                        strokeLinecap="round" 
+                  <path d="M7 17H10C11.6569 17 13 15.6569 13 14V11C13 9.34315 11.6569 8 10 8H7V17ZM7 17V21H3V16C3 13.7909 4.79086 12 7 12M17 17H20C21.6569 17 23 15.6569 23 14V11C23 9.34315 21.6569 8 20 8H17V17ZM17 17V21H13V16C13 13.7909 14.7909 12 17 12"
+                        stroke="#3ac8ff"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
                         strokeLinejoin="round"/>
                 </svg>
-                
+
+                {/* Rating Stars */}
+                {item.rating && (
+                  <div className="rating-stars">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <svg
+                        key={i}
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                    ))}
+                  </div>
+                )}
+
                 <div className="quote-content">
                   <div className="relative z-20 leading-relaxed font-normal">
                     {item.quote}
                   </div>
                 </div>
-                
+
                 <div className="author-info">
                   <div className="avatar">
                     {item.name.charAt(0)}
@@ -290,10 +368,20 @@ export const InfiniteMovingCards = ({
                   <div className="author-details">
                     <span className="author-name">{item.name}</span>
                     <span className="author-title">{item.title}</span>
+                    {item.company && (
+                      <span className="author-company">{item.company}</span>
+                    )}
                   </div>
                 </div>
-                
-                <div className="testimonial-tag">Testimonio</div>
+
+                {item.result && (
+                  <div className="result-badge">
+                    <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" />
+                    </svg>
+                    {item.result}
+                  </div>
+                )}
               </div>
             </li>
           ))}
