@@ -1,15 +1,62 @@
 "use client";
 
-import React from "react";
-import { InfiniteMovingCards } from "@/components/shared/infinite-moving-cards";
+import React, { useState, useEffect } from "react";
 import { testimonials } from "@/data/testimonials";
 import "@/styles/testimonials-section.css";
 
 export function TestimonialsSection() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  // Auto-advance carousel every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [currentIndex]);
+
+  const nextSlide = () => {
+    if (!isTransitioning) {
+      setIsTransitioning(true);
+      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+      setTimeout(() => setIsTransitioning(false), 500);
+    }
+  };
+
+  const prevSlide = () => {
+    if (!isTransitioning) {
+      setIsTransitioning(true);
+      setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+      setTimeout(() => setIsTransitioning(false), 500);
+    }
+  };
+
+  const goToSlide = (index: number) => {
+    if (!isTransitioning && index !== currentIndex) {
+      setIsTransitioning(true);
+      setCurrentIndex(index);
+      setTimeout(() => setIsTransitioning(false), 500);
+    }
+  };
+
+  // Get 3 visible testimonials (prev, current, next)
+  const getVisibleTestimonials = () => {
+    const prevIndex = (currentIndex - 1 + testimonials.length) % testimonials.length;
+    const nextIndex = (currentIndex + 1) % testimonials.length;
+
+    return [
+      { ...testimonials[prevIndex], position: 'prev' },
+      { ...testimonials[currentIndex], position: 'current' },
+      { ...testimonials[nextIndex], position: 'next' },
+    ];
+  };
+
   return (
     <section className="testimonials-section">
       <div className="testimonials-container">
-        {/* Encabezado */}
+        {/* Header */}
         <div className="testimonials-header">
           <div className="testimonials-badge">
             <svg viewBox="0 0 24 24" fill="currentColor" className="badge-icon">
@@ -17,21 +64,94 @@ export function TestimonialsSection() {
             </svg>
             <span>Testimonios</span>
           </div>
-          <h2 className="testimonials-title">Empresas que confían en nosotros</h2>
+          <h2 className="testimonials-title">Lo que dicen nuestros clientes</h2>
           <p className="testimonials-description">
-            Casos reales de clientes que han transformado su presencia digital
-            y alcanzado sus objetivos de negocio con nuestras soluciones.
+            Resultados reales de empresas que han transformado su presencia digital
           </p>
         </div>
 
-        {/* Carrusel infinito */}
-        <div className="testimonials-cards-wrapper">
-          <div className="testimonials-cards-gradient" />
-          <InfiniteMovingCards
-            items={testimonials}
-            direction="left"
-            speed="slow"
-          />
+        {/* Carousel */}
+        <div className="carousel-wrapper">
+          <div className="carousel-track">
+            {getVisibleTestimonials().map((testimonial, idx) => (
+              <div
+                key={`${testimonial.name}-${idx}`}
+                className={`testimonial-card-wrapper ${testimonial.position}`}
+              >
+                <div className="testimonial-card">
+                  {/* Stars Rating */}
+                  <div className="testimonial-rating">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <svg
+                        key={i}
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        className={`star ${i < testimonial.rating ? 'filled' : 'empty'}`}
+                      >
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                    ))}
+                  </div>
+
+                  {/* Quote */}
+                  <blockquote className="testimonial-quote">
+                    "{testimonial.quote}"
+                  </blockquote>
+
+                  {/* Result Badge */}
+                  {testimonial.result && (
+                    <div className="testimonial-result">
+                      <svg viewBox="0 0 20 20" fill="currentColor" className="result-icon">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      <span>{testimonial.result}</span>
+                    </div>
+                  )}
+
+                  {/* Author Info */}
+                  <div className="testimonial-author">
+                    <div className="author-info">
+                      <div className="author-name">{testimonial.name}</div>
+                      <div className="author-title">{testimonial.title}</div>
+                      <div className="author-company">{testimonial.company}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Navigation Arrows */}
+          <button
+            className="carousel-arrow prev"
+            onClick={prevSlide}
+            aria-label="Previous testimonial"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <button
+            className="carousel-arrow next"
+            onClick={nextSlide}
+            aria-label="Next testimonial"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+
+        {/* Indicators */}
+        <div className="carousel-indicators">
+          {testimonials.map((_, index) => (
+            <button
+              key={index}
+              className={`indicator ${index === currentIndex ? 'active' : ''}`}
+              onClick={() => goToSlide(index)}
+              aria-label={`Go to testimonial ${index + 1}`}
+            />
+          ))}
         </div>
       </div>
     </section>
