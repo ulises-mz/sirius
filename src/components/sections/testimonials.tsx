@@ -1,12 +1,22 @@
 "use client";
 
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import { testimonials } from "@/data/testimonials";
 import "@/styles/testimonials-section.css";
 
 export function TestimonialsSection() {
-  // Duplicar testimonios para efecto infinito suave
-  const allTestimonials = [...testimonials, ...testimonials];
+  const trackRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (trackRef.current) {
+      // Force reflow to ensure animation starts
+      trackRef.current.offsetHeight;
+      trackRef.current.classList.add('animate');
+    }
+  }, []);
+
+  // Triplicar testimonios para scroll suave infinito
+  const allTestimonials = [...testimonials, ...testimonials, ...testimonials];
 
   return (
     <section className="testimonials-section">
@@ -27,7 +37,7 @@ export function TestimonialsSection() {
 
         {/* Infinite Scroll Carousel */}
         <div className="testimonials-scroll-wrapper">
-          <div className="testimonials-scroll-track">
+          <div className="testimonials-scroll-track" ref={trackRef}>
             {allTestimonials.map((testimonial, index) => (
               <div key={`testimonial-${index}`} className="testimonial-card-scroll">
                 {/* Rating */}
