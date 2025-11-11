@@ -32,11 +32,12 @@ export const InfiniteMovingCards = ({
   }, []);
   
   const [start, setStart] = useState(false);
-  
+
   function addAnimation() {
     if (containerRef.current && scrollerRef.current) {
       const scrollerContent = Array.from(scrollerRef.current.children);
 
+      // Duplicar items para efecto infinito
       scrollerContent.forEach((item) => {
         const duplicatedItem = item.cloneNode(true);
         if (scrollerRef.current) {
