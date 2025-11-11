@@ -1,0 +1,142 @@
+.about-section {
+  background-color: var(--color-background);
+  padding: 5rem 0rem;
+    padding-bottom: 8rem;
+       /* ✅ Aumenta este número según necesidad */
+}
+
+
+.about-container {
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.about-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .about-content {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+}
+
+.about-text {
+  flex: 1;
+
+  text-align: left;
+}
+
+.about-subtitle {
+  color: var(--color-text-secondary);
+
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  font-size: 2.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.about-title {
+  color: var(--color-text-primary);
+  font-size: 2.25rem;
+  font-weight: bold;
+  margin-bottom: 4rem;
+  line-height: 0;
+}
+
+.about-description {
+  color: var(--color-text-primary);
+  font-size: 1.3rem;
+  line-height: 2rem;
+  margin-bottom: 2rem;
+  max-width: 90%;
+}
+
+.about-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  color: var(--color-text-primary);
+  font-size: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.about-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.about-bullet {
+  color: var(--color-accent);
+  font-size: 1.25rem;
+  line-height: 1;
+  margin-top: 0.25rem;
+}
+@media (max-width: 768px) {
+  .about-container {
+    max-width: 90%;
+  }
+  
+  .about-title {
+    font-size: 1.5rem;
+  }
+  .about-description {
+    font-size: 1.1rem;
+  }
+.about-list {
+    font-size: 1rem;
+  }
+  .about-subtitle {
+    font-size: 1.5rem;
+  }
+}
+.about-images {
+  flex: 1;
+  position: relative;
+  display: flex;
+  justify-content: right;
+  align-items: flex-start;
+  min-height: 260px; /* Altura mínima para permitir superposición */
+}
+
+.laptop-wrapper {
+  width: 290px;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.screen-wrapper {
+  width: 160px;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  position: absolute;
+  top: 120px;
+  left: 10px;
+  z-index: 1;
+}
+
+/* Tablets y desktop */
+@media (min-width: 768px) {
+  .about-images {
+    min-height: 350px;
+  }
+
+  .laptop-wrapper {
+    width: 500px;
+  }
+
+  .screen-wrapper {
+    width: 300px;
+    top: 230px;
+    left: 80px;
+  }
+}

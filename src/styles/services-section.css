@@ -1,0 +1,332 @@
+.services-section {
+  padding: 5rem 1rem;
+  background: linear-gradient(
+    180deg,
+    #070c18 0%,
+    #0a0f1c 15%,
+    var(--color-background-secondary) 30%
+  );
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin-top: -100px; /* Solapamiento para transición más suave */
+  padding-top: calc(5rem + 100px); /* Compensar el margin negativo */
+  border-radius: 60px 60px 0 0; /* Bordes redondeados superiores */
+  overflow: hidden; /* Asegurar que el contenido respete los bordes */
+}
+
+.services-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(var(--accent-rgb), 0.08) 0%, transparent 70%);
+  z-index: 0;
+}
+
+.services-container {
+  display: flex;
+  max-width: 100%;
+  min-width: 80%;
+  gap: 2rem; /* espacio entre columnas */
+  position: relative;
+  z-index: 1;
+}
+.services-left {
+  flex: 0 0 20%; /* ancho fijo para la columna izquierda */
+  position: static; /* scroll normal con la página */
+  height: auto;
+  padding-right: 1rem;
+}
+.services-header {
+  /* elimina el margin-bottom si quieres */
+  margin-bottom: 0;
+  text-align: left; /* para que la línea de decoración quede alineada con el título */
+  position: relative !important; /* Forzar que no sea sticky */
+}
+
+.header-content {
+  display: inline-block;
+  position: relative;
+}
+
+.services-title {
+  color: var(--color-text-primary);
+
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  font-size: 2.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.services-subtitle {
+  color: var(--color-text-secondary);
+
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  font-size: 2.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.decoration-line {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-text-secondary), transparent);
+  flex-grow: 1;
+}
+
+
+
+.services-grid {
+  flex: 1 1 auto; /* ocupa el resto del espacio */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  max-width: none; /* para que no limite el ancho dentro del flex */
+}
+
+.service-item {
+  transform: translateY(30px);
+  opacity: 0;
+  transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  perspective: 1000px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Mostrar cuando es visible o activo (active) */
+
+.service-item.active {
+  transform: translateY(0);
+  opacity: 1;
+  z-index: 10; /* Asegura que esté encima */
+}
+
+/* Card básica */
+.service-card {
+  position: relative;
+  height: 280px;
+  background: var(--color-background-secondary);
+  border: 1px solid rgba(var(--accent-rgb), 0.15);
+  border-radius: 16px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transform-style: preserve-3d;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-text-secondary));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+/* ESTILOS ACTIVOS CON PRIORIDAD SOBRE HOVER */
+.service-item.active .service-card,
+.service-item.active .service-card::before,
+.service-item.active .icon-backdrop,
+.service-item.active .service-icon,
+.service-item.active .service-hover-content {
+  transition: all 0.4s ease !important;
+  /* Forzar prioridad */
+  transform-style: preserve-3d !important;
+}
+
+.service-item.active .service-card {
+  transform: translateY(-10px) rotateX(5deg) !important;
+  box-shadow: 0 15px 35px rgba(var(--accent-rgb), 0.25), 0 0 30px rgba(var(--text-secondary-rgb), 0.15) !important;
+  z-index: 20 !important;
+}
+
+.service-item.active .service-card::before {
+  transform: scaleX(1) !important;
+}
+
+.service-item.active .icon-backdrop {
+  transform: translate(-50%, -50%) scale(1.2) !important;
+  opacity: 0.8 !important;
+  transition: all 0.5s ease !important;
+}
+
+.service-item.active .service-icon {
+  transform: scale(1.1) translateY(-5px) !important;
+  transition: all 0.4s ease !important;
+}
+
+.service-item.active .service-hover-content {
+  transform: translateY(0) !important;
+  opacity: 1 !important;
+  transition: all 0.4s ease !important;
+  z-index: 30 !important;
+}
+
+/* Estilos hover normales */
+.service-item:hover .service-card {
+  transform: translateY(-10px) rotateX(5deg);
+  box-shadow: 0 15px 35px rgba(var(--accent-rgb), 0.25), 0 0 30px rgba(var(--text-secondary-rgb), 0.15);
+}
+
+.service-item:hover .service-card::before {
+  transform: scaleX(1);
+}
+
+.service-item:hover .icon-backdrop {
+  transform: translate(-50%, -50%) scale(1.2);
+  opacity: 0.8;
+}
+
+.service-item:hover .service-icon {
+  transform: scale(1.1) translateY(-5px);
+}
+
+.service-item:hover .service-hover-content {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.service-icon-container {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.icon-backdrop {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(var(--accent-rgb), 0.25) 0%, transparent 70%);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  transition: all 0.5s ease;
+}
+
+.service-icon {
+  position: relative;
+  z-index: 1;
+  transition: all 0.4s ease;
+  width: 60px;
+  height: 60px;
+  color: var(--color-text-secondary);
+}
+
+.service-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  text-align: center;
+  margin-bottom: 1rem;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.service-hover-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2rem;
+  background: rgba(8, 17, 30, 0.9);
+  transform: translateY(100%);
+  transition: all 0.4s ease;
+  opacity: 0;
+  z-index: 2;
+  text-align: center;
+}
+
+.service-description {
+  color: var(--color-text-primary);
+  font-size: 0.9rem;
+  margin-bottom: 1.2rem;
+  line-height: 1.5;
+}
+
+.service-button {
+  background: transparent;
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-text-secondary);
+  padding: 0.5rem 1.5rem;
+  border-radius: 30px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.service-button:hover {
+  background: var(--color-text-secondary);
+  color: var(--color-background);
+}
+
+@media (min-width: 768px) {
+  .services-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .services-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  
+  .services-title {
+    font-size:  2.25rem;;
+  }
+  .services-subtitle {
+    font-size: 2.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .services-container {
+    max-width: 90%;
+    min-width: 90%;
+  }
+  .services-left {
+    position: static; /* en móvil no fijarlo para evitar saltos */
+    top: auto;
+  }
+  
+  .services-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .services-title {
+    font-size: 1.5rem;
+  }
+    .services-subtitle {
+    font-size: 1.5rem;
+  }
+  .service-card {
+    height: 250px;
+    padding: 1.5rem;
+  }
+  
+  .service-item.active .service-card {
+    transform: translateY(-5px) rotateX(3deg) !important;
+  }
+  
+  .service-item.active .service-hover-content {
+    padding: 1rem;
+  }
+  
+  .service-hover-content {
+    padding: 1.5rem;
+  }
+}
+

@@ -1,0 +1,24 @@
+# Robots.txt para CodeINVEST Costa Rica
+User-agent: *
+Allow: /
+
+# Bloquear carpetas administrativas
+Disallow: /admin/
+Disallow: /_next/
+Disallow: /api/
+Disallow: /.well-known/
+
+# Permitir crawlers de imágenes
+User-agent: Googlebot-Image
+Allow: /images/
+
+# Permitir crawlers de Google
+User-agent: Googlebot
+Allow: /
+
+# Sitemap
+Sitemap: https://www.codeinvestcr.com/sitemap.xml
+
+# Crawl-delay para bots menos importantes
+User-agent: *
+Crawl-delay: 1

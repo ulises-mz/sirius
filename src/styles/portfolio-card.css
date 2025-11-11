@@ -1,0 +1,130 @@
+.portfolio-card {
+  background-color: var(--color-primary);
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: row;
+  width: 95%;
+  min-height: 90%;
+  margin: 0;
+  padding: 20px;
+  box-shadow: 0 4px 10px var(--color-shadow);
+}
+
+.portfolio-card:hover {
+  box-shadow: 0 6px 20px var(--color-shadow);
+}
+
+.portfolio-image-placeholder {
+  background-color: var(--color-background-secondary);
+  
+  border-radius: 1rem 0 0 1rem;
+  width: 40%;
+  height: 100%;
+  min-height: 100%;
+}
+
+.portfolio-card-content {
+  padding: 5%;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+}
+
+.portfolio-card-title {
+  color: var(--color-text-primary);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.portfolio-card-description {
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+/* Lista tipo about */
+.portfolio-card-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  color: var(--color-text-primary);
+  font-size: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.portfolio-card-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.portfolio-card-bullet {
+  color: var(--color-accent);
+  font-size: 1.25rem;
+  line-height: 1;
+  margin-top: 0.25rem;
+}
+
+.portfolio-card-link {
+  color: var(--color-link);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+}
+
+.portfolio-card-link:hover {
+  color: var(--color-accent);
+}
+
+.portfolio-card-icon {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+/* === Responsive ajustes === */
+@media (max-width: 768px) {
+  .portfolio-card {
+    flex-direction: column;
+    width: 90%;
+    margin-bottom: 40px;
+  }
+
+  .portfolio-image-placeholder {
+    width: 100%;
+    height: auto;
+    min-height: 12rem;
+    border-radius: 1rem 1rem 0 0;
+  }
+
+  .portfolio-card-content {
+    width: 100%;
+    padding: 5%;
+  }
+
+  .portfolio-card-title {
+    font-size: 1rem;
+  }
+
+  .portfolio-card-description {
+    font-size: 0.9rem;
+  }
+
+  .portfolio-card-list {
+    font-size: 1rem;
+  }
+}
+.portfolio-image-placeholder {
+  height: 200px;
+  width: 100%;
+  background-size:cover;
+  background-position: center;
+}

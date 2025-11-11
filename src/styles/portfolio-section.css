@@ -1,0 +1,114 @@
+/* === PORTFOLIO SECTION === */
+.portfolio-section {
+  background-color: var(--color-background-secondary);
+  padding: 8rem 0rem;
+}
+
+.portfolio-container {
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.portfolio-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .portfolio-content {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+}
+
+/* === TEXTO IZQUIERDA === */
+.portfolio-text {
+  width: 100%;
+  text-align: left;
+}
+
+@media (min-width: 1024px) {
+  .portfolio-text {
+    width: 50%;
+  }
+}
+
+/* === ESTILO TITULOS Y DESCRIPCION === */
+.portfolio-subtitle {
+  color: var(--color-text-secondary);
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  font-size: 2.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.portfolio-title {
+  color: var(--color-text-primary);
+  font-size: 2.25rem;
+  font-weight: bold;
+  margin-bottom: 4rem;
+  line-height: 0;
+}
+
+.portfolio-description {
+  color: var(--color-text-primary);
+  font-size: 1.3rem;
+  line-height: 2rem;
+  margin-bottom: 2rem;
+  
+}
+
+/* Responsive texto */
+@media (max-width: 768px) {
+  .portfolio-container {
+    max-width: 90%;
+  }
+  
+  .portfolio-subtitle {
+    font-size: 1.5rem;
+  }
+
+  .portfolio-title {
+    font-size: 1.5rem;
+  }
+
+  .portfolio-description {
+    font-size: 1.1rem;
+  }
+}
+
+/* === CARDSWAP DERECHA === */
+.portfolio-cardswap {
+  width: 100%;
+  position: relative;
+  height: 40vh;
+}
+
+@media (min-width: 1024px) {
+  .portfolio-cardswap {
+    order: 1;
+    width: 50%;
+    max-height: 50vh;
+  }
+  .portfolio-text {
+    order: 2;
+    width: 50%;
+    max-width: 50%;
+    text-align: right;
+    padding-left: 10rem; /* espacio a la izquierda, porque texto está alineado a la derecha */
+  }
+  .portfolio-description {
+    max-width: 100%; /* asegurar que ocupe todo el ancho */
+  }
+}
+
+@media (max-width: 768px) {
+  .portfolio-cardswap {
+    max-width: 80%;
+    height: 500px;
+    margin-top: 0rem;
+  }
+}

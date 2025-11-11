@@ -1,0 +1,835 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Inline theme animations (Tailwind v4) */
+@theme inline {
+  /* Más movimiento visible: órbitas y derivas con amplitud mayor */
+  --animate-first: driftVertical 32s ease-in-out infinite;
+  --animate-second: orbit1 36s linear infinite;
+  --animate-third: orbit2 48s linear infinite;
+  --animate-fourth: driftHorizontal 38s ease-in-out infinite;
+  --animate-fifth: orbit3 28s ease-in-out infinite;
+
+  /* Derivas amplias */
+  @keyframes driftHorizontal {
+    0%   { transform: translate(-120%, -20%) scale(1); }
+    50%  { transform: translate(120%, 20%) scale(1.08); }
+    100% { transform: translate(-120%, -20%) scale(1); }
+  }
+  @keyframes driftVertical {
+    0%   { transform: translateY(-120%) scale(1); }
+    50%  { transform: translateY(120%)  scale(1.06); }
+    100% { transform: translateY(-120%) scale(1); }
+  }
+
+  /* Órbitas clásicas (rotación + traslación + contra-rotación) */
+  @keyframes orbit1 {
+    0%   { transform: rotate(0deg)   translateX(260px) rotate(0deg); }
+    50%  { transform: rotate(180deg) translateX(260px) rotate(-180deg); }
+    100% { transform: rotate(360deg) translateX(260px) rotate(-360deg); }
+  }
+  @keyframes orbit2 {
+    0%   { transform: rotate(0deg)   translateX(340px) rotate(0deg)   scale(0.95); }
+    50%  { transform: rotate(180deg) translateX(340px) rotate(-180deg) scale(1.05); }
+    100% { transform: rotate(360deg) translateX(340px) rotate(-360deg) scale(0.95); }
+  }
+  @keyframes orbit3 {
+    0%   { transform: rotate(0deg)   translateX(480px) rotate(0deg); }
+    50%  { transform: rotate(180deg) translateX(480px) rotate(-180deg); }
+    100% { transform: rotate(360deg) translateX(480px) rotate(-360deg); }
+  }
+}
+
+/* ============================
+   VARIABLES CSS (ROOT)
+============================ */
+:root {
+  /* =========================
+     PALETA SIRIUS (refinada)
+     Derivada de las imágenes: halo violeta, destellos azul claros, fondo cosmos
+     ========================= */
+  /* Bases de profundidad */
+  --color-primary: #090E19;                  /* capa UI sólida */
+  --color-background: #070C18;               /* fondo principal profundo */
+  --color-background-alt: #0E1626;           /* variante para secciones */
+  --color-background-secondary: #101B2C;     /* paneles / bloques */
+
+  /* Tipografía */
+  --color-text-primary: #F4F7FB;             /* casi blanco suave */
+  --color-text-secondary: #86D4FF;           /* azul luminoso (rayos) */
+  --color-text-tertiary: #8C95A3;            /* texto de apoyo */
+  --color-text-faint: #5D6775;               /* meta info */
+
+  /* Acentos (constelación) */
+  --color-accent: #5E3BEE;                   /* violeta Sirius core */
+  --color-accent-mid: #6C54F7;               /* gradiente medio */
+  --color-accent-glow: #715CFF;              /* brillo violeta claro */
+  --color-accent-alt: #1CA8FF;               /* azul energía secundaria */
+  --color-accent-hover: #4E33D8;             /* hover violeta profundo */
+
+  /* Gradientes de marca */
+  --gradient-accent: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-mid) 40%, var(--color-accent-alt) 100%);
+  --gradient-radial-star: radial-gradient(circle at 50% 50%, #FFFFFF 0%, #C9E7FF 25%, rgba(255,255,255,0) 60%);
+  --gradient-surface: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0) 100%);
+
+  /* Glows y halos */
+  --glow-violet: 0 0 24px rgba(110, 93, 255, 0.45), 0 0 48px rgba(94, 59, 238, 0.35);
+  --glow-blue: 0 0 18px rgba(134, 212, 255, 0.5), 0 0 34px rgba(28, 168, 255, 0.35);
+
+  /* Tags / Badges */
+  --color-tag-bg: #162B42;
+  --color-tag-text: #86D4FF;
+
+  /* Bordes y overlays */
+  --color-border: #1D2A3C;
+  --color-border-strong: #2D3B53;
+
+  /* Utilidades de color */
+  --color-shadow: rgba(0, 0, 0, 0.35);
+  --color-link: var(--color-text-secondary);
+
+  /* RGB helpers */
+  --accent-rgb: 94, 59, 238;           /* violeta */
+  --accent-alt-rgb: 28, 168, 255;      /* azul energía */
+  --accent-glow-rgb: 113, 92, 255;     /* brillo violeta */
+  --text-secondary-rgb: 134, 212, 255; /* azul claro */
+  --surface-rgb: 16, 27, 44;           /* secondary surface */
+  
+  /* Variables para scroll */
+  --scrollbar-width: 10px;
+  --scrollbar-track-color: #0E1624;
+  --scrollbar-thumb-color: var(--color-accent-mid);
+  --scrollbar-thumb-hover-color: var(--color-accent-alt);
+  --scroll-smooth-duration: 0.5s;
+}
+
+/* ============================
+   BOTONES GLOBALES
+============================ */
+.btn, .btn-primary, .btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.2rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  line-height: 1;
+  transition: all 0.25s ease;
+  text-decoration: none;
+}
+.btn-primary {
+  color: #fff;
+  background-image: var(--gradient-accent);
+  box-shadow: 0 8px 22px rgba(var(--accent-rgb), 0.35), 0 2px 8px rgba(0,0,0,0.2);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px rgba(var(--accent-rgb), 0.45), 0 4px 14px rgba(0,0,0,0.25);
+  filter: brightness(1.05);
+}
+.btn-secondary {
+  color: var(--color-text-primary);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--color-border-strong);
+  backdrop-filter: blur(6px);
+}
+.btn-secondary:hover {
+  border-color: var(--color-accent);
+  background: rgba(255,255,255,0.08);
+  transform: translateY(-2px);
+}
+
+/* Utilidad: texto con gradiente */
+.text-gradient {
+  background: linear-gradient(90deg, var(--color-text-secondary), var(--color-accent) 60%, var(--color-accent-alt));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ============================
+   RESET BASE PARA ELIMINAR ESPACIOS
+============================ */
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100%;
+  height: 100%;
+}
+
+main {
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+/* Asegurar que no haya espacio entre header y contenido */
+header + main {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Eliminar cualquier espacio antes del header */
+body > * {
+  margin-top: 0 !important;
+}
+
+body > *:first-child {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Bubbles keyframes for autonomous motion */
+@keyframes bubbleFloat {
+  0% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+  25% { transform: translate(calc(-50% + 40px), calc(-50% - 30px)) scale(1.05) rotate(60deg); }
+  50% { transform: translate(calc(-50% - 35px), calc(-50% + 25px)) scale(0.97) rotate(120deg); }
+  75% { transform: translate(calc(-50% + 25px), calc(-50% + 35px)) scale(1.06) rotate(240deg); }
+  100% { transform: translate(-50%, -50%) scale(1) rotate(360deg); }
+}
+/* ============================
+   CONFIGURACIÓN BASE DE SCROLL
+============================ */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* Espacio para header fijo */
+  overflow: hidden; /* Eliminar completamente el scroll del html */
+  /* Optimizaciones para mejor rendimiento */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* No scroll horizontal */
+  width: 100%;
+  height: 100%;
+  -webkit-overflow-scrolling: touch;
+  /* Optimizaciones adicionales para scroll suave */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Asegurar que solo body tenga scroll vertical */
+/* HTML sin scroll - todo el scroll se maneja en body */
+
+/* Mejora la suavidad del scroll en dispositivos móviles */
+* {
+  -webkit-overflow-scrolling: touch;
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+/* Configuración avanzada de smooth scroll para todo el documento */
+* {
+  scroll-behavior: smooth !important;
+}
+
+/* Smooth scroll con momentum - configuración CSS pura */
+@supports (scroll-behavior: smooth) {
+  body {
+    scroll-behavior: smooth;
+    /* Configuración de momentum más pronunciada */
+    scroll-timeline: --scroll-timeline block;
+    animation-timeline: --scroll-timeline;
+    /* Curva de bezier más suave y prolongada */
+    transition: scroll-top 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+}
+
+/* Configuración específica para scroll suave con inercia */
+body {
+  /* Simular inercia con CSS */
+  scroll-snap-type: y proximity;
+  scroll-snap-stop: normal;
+  /* Configuraciones adicionales para momentum */
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+  /* Mejorar la suavidad del scroll */
+  scrollbar-gutter: stable;
+}
+
+/* ============================
+   PERSONALIZACIÓN DE SCROLLBAR
+============================ */
+/* Para navegadores WebKit - Solo aplicar al scroll del body */
+body::-webkit-scrollbar {
+  width: var(--scrollbar-width);
+  height: var(--scrollbar-width);
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--scrollbar-track-color);
+  border-radius: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb-color);
+  border-radius: 10px;
+  border: 2px solid var(--scrollbar-track-color);
+  transition: background 0.3s ease;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover-color);
+}
+
+/* Para Firefox - Solo scroll del body */
+@supports (scrollbar-color: auto) {
+  body {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-track-color);
+  }
+}
+
+/* ============================
+   CONFIGURACIÓN BASE DEL BODY
+============================ */
+body {
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  font-family: 'Inter', sans-serif;
+  overflow-y: auto; /* Permitir scroll en el body */
+  /* Configuración avanzada de smooth scroll */
+  scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
+  scroll-padding-top: 80px;
+  /* Momentum scrolling para iOS y efectos suaves */
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  /* Transiciones suaves para scroll */
+  transition: scroll-top 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  /* Optimizaciones de rendimiento para scroll suave */
+  will-change: scroll-position, transform;
+  contain: layout style paint;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  overflow-x: hidden;
+  /* Mejorar rendimiento de scroll y animaciones */
+  will-change: transform;
+  backface-visibility: hidden;
+  perspective: 1000px;
+  transform: translateZ(0);
+  /* Optimizaciones adicionales */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* ============================
+   SISTEMA DE FONDOS
+============================ */
+/* Clases base para fondos sólidos */
+.section-bg-primary {
+  background-color: var(--color-background);
+  position: relative;
+}
+
+.section-bg-secondary {
+  background-color: var(--color-background-secondary);
+  position: relative;
+}
+
+/* Fondos alternativos (igual que los principales para simplicidad) */
+.section-bg-primary-alt {
+  background-color: var(--color-background);
+  position: relative;
+}
+
+.section-bg-secondary-alt {
+  background-color: var(--color-background-secondary);
+  position: relative;
+}
+
+/* ============================
+   BOTONES
+============================ */
+.button {
+  padding: 0.5rem 1.5rem;
+  background-color: var(--color-accent);
+  color: var(--color-primary);
+  font-weight: bold;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  background-color: var(--color-accent-hover);
+  color: var(--color-text-primary);
+  transform: translateY(-2px);
+}
+
+.button-outline {
+  background-color: transparent;
+  border: 2px solid var(--color-accent);
+  transition: all 0.3s ease;
+}
+
+.button-outline:hover {
+  background-color: var(--color-accent);
+  transform: translateY(-2px);
+}
+
+/* ============================
+   CARDS
+============================ */
+.card {
+  background-color: var(--color-primary);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 10px var(--color-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(var(--accent-rgb), 0.35), 0 0 0 1px rgba(var(--accent-rgb), 0.25);
+}
+
+.card-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.card-description {
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* ============================
+   TAGS
+============================ */
+.tag {
+  background-color: var(--color-tag-bg);
+  color: var(--color-tag-text);
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.tag:hover {
+  transform: scale(1.05);
+}
+
+/* ============================
+   NAVEGACIÓN
+============================ */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-alt));
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* ============================
+   ANIMACIONES Y EFECTOS
+============================ */
+.scroll-transition {
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.scroll-fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Animación fadeInUp */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-on-scroll {
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+/* Optimizaciones de rendimiento */
+.optimize-scroll {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+/* Indicador visual durante navegación/scroll */
+.page-transition {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.page-transition.loading {
+  opacity: 0.8;
+}
+
+/* ============================
+   MEDIA QUERIES
+============================ */
+/* Animaciones respetando preferencias del usuario */
+@media (prefers-reduced-motion: no-preference) {
+  html, body {
+    scroll-behavior: smooth;
+  }
+  
+  .smooth-scroll {
+    scroll-behavior: smooth;
+  }
+  
+  /* Transiciones suaves más pronunciadas para elementos durante scroll */
+  * {
+    transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+  
+  /* Configuración específica para scroll con momentum */
+  body {
+    scroll-behavior: smooth;
+    transition: scroll-top 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    /* Agregar efecto de rebote suave */
+    overscroll-behavior: contain;
+    scroll-snap-type: y proximity;
+  }
+  
+  /* Enlaces con scroll suave más pronunciado */
+  a[href^="#"] {
+    scroll-behavior: smooth;
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+}
+
+/* Respeto a preferencias de usuario que no quieren animaciones */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  .smooth-scroll {
+    scroll-behavior: auto;
+  }
+  
+  * {
+    transition: none !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* Ajustes para dispositivos móviles */
+@media (max-width: 768px) {
+  html, body {
+    scroll-padding-top: 70px; /* Ajuste para header más pequeño en móvil */
+  }
+  
+  section {
+    scroll-margin-top: 70px;
+  }
+  
+  /* Momentum scroll más pronunciado en móviles */
+  body {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+    scroll-snap-type: y proximity;
+    transition: scroll-top 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+}
+
+/* Optimizaciones adicionales para scroll suave en navegadores webkit */
+@supports (-webkit-overflow-scrolling: touch) {
+  body {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+  }
+}
+
+/* ============================
+   ENLACES
+============================ */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+a:visited {
+  color: inherit;
+}
+
+a:hover {
+  color: var(--color-accent);
+}
+
+/* Enlaces internos */
+a[href^="#"] {
+  scroll-behavior: smooth;
+}
+
+/* ============================
+   SECCIONES Y SCROLL
+============================ */
+section {
+  scroll-margin-top: 80px; /* Ajuste para header fijo */
+}
+
+/* Contenedores con scroll interno */
+.scroll-container {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+/* Clases para scroll suave */
+.smooth-scroll {
+  scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
+  overscroll-behavior: contain;
+  /* Optimizaciones adicionales */
+  will-change: scroll-position;
+  contain: layout style paint;
+}
+
+/* Scroll suave con momentum pronunciado */
+.smooth-scroll-momentum {
+  scroll-behavior: smooth;
+  transition: scroll-top 1.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+  overscroll-behavior: contain;
+  scroll-snap-type: y proximity;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Clase para elementos que deben tener scroll suave interno */
+.scroll-container {
+  scroll-behavior: smooth;
+  transition: scroll-top 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+/* ============================
+   ANIMACIONES DE LOADING
+============================ */
+
+/* Animación de fade para transiciones de página */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+/* Animación del spinner de carga */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Animación de pulso para elementos de carga */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Animación de bounce para los puntos de carga */
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+/* Clases utilitarias para animaciones */
+.fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.fade-out {
+  animation: fadeOut 0.3s ease-in forwards;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+.animate-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.animate-bounce {
+  animation: bounce 1.4s ease-in-out infinite;
+}
+
+/* ============================
+   LOADING ANIMATIONS Y MEJORAS
+============================ */
+
+/* Mejoras de rendimiento para elementos animados */
+.animated-element {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Animación de entrada para el loading */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Animación de pulso suave */
+@keyframes softPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+/* Animación de ondas */
+@keyframes wave {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Animación de rotación suave */
+@keyframes smoothSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Transiciones suaves para links */
+.loading-link {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+.loading-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Overlay de loading mejorado */
+.loading-overlay {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.95);
+  background-image: 
+    radial-gradient(circle at 1px 1px, rgba(59, 130, 246, 0.1) 1px, transparent 0);
+  background-size: 20px 20px;
+  animation: slideIn 0.4s ease-out;
+}
+
+/* Animación de entrada del overlay */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+}
+
+/* Estilos para modo oscuro del loading */
+@media (prefers-color-scheme: dark) {
+  .loading-overlay {
+    background: rgba(15, 23, 42, 0.95);
+    color: white;
+  }
+}
+
+/* Animaciones de rendimiento optimizado */
+.loading-spinner {
+  animation: smoothSpin 1s linear infinite;
+  will-change: transform;
+}
+
+.loading-pulse {
+  animation: softPulse 2s ease-in-out infinite;
+}
+
+.loading-wave {
+  animation: wave 1.5s ease-in-out infinite;
+}

@@ -1,0 +1,1375 @@
+/* ============================
+   CONTACT PAGE STYLES - ESTRUCTURA CONSISTENTE
+============================ */
+
+/* Prevent horizontal overflow */
+* {
+  box-sizing: border-box;
+}
+
+/* Main Container */
+.contact-page {
+  min-height: 100vh;
+  background: var(--color-background);
+  color: var(--color-text-primary);
+  padding-top: 5rem;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* ============================
+   HEADER SECTION
+============================ */
+.contact-header {
+  padding: 4rem 2rem 2rem 2rem;
+  background: var(--color-background);
+}
+
+.contact-header-container {
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.contact-title {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: var(--color-text-primary);
+  letter-spacing: -0.02em;
+}
+
+.contact-subtitle {
+  font-size: 1.125rem;
+  color: var(--color-text-secondary);
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+/* ============================
+   CONTACT SECTION
+============================ */
+.contact-section {
+  padding: 4rem 2rem;
+  background: var(--color-background-secondary);
+}
+
+.contact-container {
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+/* ============================
+   CONTACT INFO
+============================ */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.contact-info h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: var(--color-text-primary);
+}
+
+.contact-info p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text-primary);
+  opacity: 0.9;
+}
+
+/* Contact Methods */
+.contact-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.contact-method-card {
+  background: transparent;
+  border: none;
+  padding: 1.5rem;
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 1rem;
+  align-items: center;
+  text-align: left;
+}
+
+.contact-method-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background: var(--color-text-secondary);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.contact-method-icon svg {
+  width: 24px;
+  height: 24px;
+  color: var(--color-background);
+}
+
+.contact-method-icon.whatsapp {
+  background: #25D366;
+}
+
+.contact-method-content h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0 0 0.25rem 0;
+}
+
+.contact-method-content p {
+  font-size: 0.95rem;
+  color: var(--color-text-primary);
+  opacity: 0.8;
+  margin: 0;
+}
+
+.contact-method-content a {
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-method-content a:hover {
+  color: var(--color-accent);
+}
+
+/* Quick Actions */
+.quick-actions h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 1rem;
+}
+
+.quick-actions-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* ============================
+   CONTACT FORM
+============================ */
+.contact-form {
+  background: var(--color-background);
+  padding: 2.5rem;
+  border-radius: 12px;
+  border: 1px solid rgba(19, 255, 218, 0.1);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.contact-form h2 {
+  font-size: 1.75rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: var(--color-text-primary);
+}
+
+/* Form Elements */
+.form-group {
+  margin-bottom: 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  background: var(--color-background-secondary);
+  border: 1px solid rgba(19, 255, 218, 0.2);
+  border-radius: 8px;
+  color: var(--color-text-primary);
+  font-size: 0.875rem;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--color-text-secondary);
+  box-shadow: 0 0 0 3px rgba(19, 255, 218, 0.1);
+}
+
+.form-input.error,
+.form-textarea.error {
+  border-color: #ef4444;
+}
+
+.form-error {
+  font-size: 0.75rem;
+  color: #ef4444;
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* Submit Button */
+.submit-btn {
+  width: 100%;
+  padding: 1rem 2rem;
+  background: var(--color-accent);
+  color: var(--color-background);
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: var(--color-accent-hover);
+  transform: translateY(-1px);
+}
+
+.submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.submit-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.form-note {
+  font-size: 0.75rem;
+  color: var(--color-text-primary);
+  opacity: 0.7;
+  margin: 0;
+}
+
+/* Status Messages */
+.success-message {
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid #22c55e;
+  color: #22c55e;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+}
+
+.error-message {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid #ef4444;
+  color: #ef4444;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+}
+
+/* ============================
+   FAQ SECTION
+============================ */
+.faq-section {
+  padding: 4rem 2rem;
+  background: var(--color-background);
+}
+
+.faq-container {
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.faq-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 3rem;
+  text-align: center;
+  color: var(--color-text-primary);
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  background: var(--color-background-secondary);
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid rgba(19, 255, 218, 0.1);
+}
+
+.faq-question {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 1rem;
+}
+
+.faq-answer {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text-primary);
+  opacity: 0.9;
+  margin: 0;
+}
+
+/* ============================
+   BENEFITS SECTION
+============================ */
+.contact-benefits-section {
+  padding: 4rem 2rem;
+  background: var(--color-background);
+}
+
+.contact-benefits-container {
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.contact-benefits-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 3rem;
+  text-align: center;
+  color: var(--color-text-primary);
+}
+
+.contact-benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.contact-benefit-card {
+  background: transparent;
+  border: none;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+  text-align: left;
+}
+
+.contact-benefit-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background: var(--color-text-secondary);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.contact-benefit-icon svg {
+  width: 28px;
+  height: 28px;
+  color: var(--color-background);
+}
+
+.contact-benefit-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.contact-benefit-content h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.contact-benefit-content p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--color-text-primary);
+  opacity: 0.8;
+  margin: 0;
+}
+
+/* ============================
+   PROCESS SECTION
+============================ */
+.contact-process-section {
+  padding: 4rem 2rem;
+  background: var(--color-background-secondary);
+}
+
+.contact-process-container {
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.contact-process-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 3rem;
+  text-align: center;
+  color: var(--color-text-primary);
+}
+
+.contact-process-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.contact-process-step {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 2rem;
+  align-items: center;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid rgba(19, 255, 218, 0.1);
+}
+
+.contact-process-step:last-child {
+  border-bottom: none;
+}
+
+.contact-process-step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  background: var(--color-accent);
+  border-radius: 50%;
+  color: var(--color-background);
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.contact-process-step-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.contact-process-step-content h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.contact-process-step-content p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--color-text-primary);
+  opacity: 0.8;
+  margin: 0;
+}
+
+/* ============================
+   AVAILABILITY SECTION
+============================ */
+.contact-availability-section {
+  padding: 4rem 2rem;
+  background: var(--color-background);
+}
+
+.contact-availability-container {
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.contact-availability-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 3rem;
+  text-align: center;
+  color: var(--color-text-primary);
+}
+
+.contact-availability-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.contact-availability-card {
+  background: var(--color-background-secondary);
+  border: 1px solid rgba(19, 255, 218, 0.1);
+  border-radius: 12px;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 1.5rem;
+  align-items: center;
+  text-align: left;
+}
+
+.contact-availability-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background: var(--color-text-secondary);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.contact-availability-icon.whatsapp {
+  background: #25D366;
+}
+
+.contact-availability-icon svg {
+  width: 28px;
+  height: 28px;
+  color: var(--color-background);
+}
+
+.contact-availability-content h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0 0 0.5rem 0;
+}
+
+.contact-availability-content p {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: var(--color-text-primary);
+  opacity: 0.8;
+  margin: 0;
+}
+
+/* ============================
+   TESTIMONIALS SECTION
+============================ */
+.contact-testimonials-section {
+  padding: 4rem 2rem;
+  background: var(--color-background-secondary);
+}
+
+.contact-testimonials-container {
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.contact-testimonials-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 3rem;
+  text-align: center;
+  color: var(--color-text-primary);
+}
+
+.contact-testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.contact-testimonial-card {
+  background: var(--color-background);
+  border: 1px solid rgba(19, 255, 218, 0.1);
+  border-radius: 12px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.contact-testimonial-content p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text-primary);
+  opacity: 0.9;
+  margin: 0;
+  font-style: italic;
+}
+
+.contact-testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.contact-testimonial-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background: var(--color-text-secondary);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.contact-testimonial-avatar svg {
+  width: 24px;
+  height: 24px;
+  color: var(--color-background);
+}
+
+.contact-testimonial-info h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0 0 0.25rem 0;
+}
+
+.contact-testimonial-info p {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* ============================
+   CTA SECTION
+============================ */
+.contact-cta-section {
+  padding: 4rem 2rem;
+  background: var(--color-background-secondary);
+}
+
+.contact-cta-container {
+  max-width: 60%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contact-cta-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: var(--color-text-primary);
+}
+
+.contact-cta-description {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--color-text-primary);
+  opacity: 0.8;
+  margin-bottom: 2.5rem;
+}
+
+.contact-cta-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ============================
+   BUTTONS
+============================ */
+.contact-cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.contact-cta-button.primary {
+  background: var(--color-accent);
+  color: var(--color-background);
+  border-color: var(--color-accent);
+}
+
+.contact-cta-button.primary:hover {
+  background: var(--color-accent-hover);
+  transform: translateY(-2px);
+}
+
+.contact-cta-button.secondary {
+  background: transparent;
+  color: var(--color-text-secondary);
+  border-color: var(--color-text-secondary);
+}
+
+.contact-cta-button.secondary:hover {
+  background: var(--color-text-secondary);
+  color: var(--color-background);
+  transform: translateY(-2px);
+}
+
+.contact-cta-button svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* ============================
+   RESPONSIVE DESIGN
+============================ */
+
+@media (max-width: 1200px) {
+  .contact-header-container,
+  .contact-container,
+  .faq-container {
+    max-width: 90%;
+  }
+
+  .contact-cta-container {
+    max-width: 80%;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-page {
+    padding-top: 4rem;
+  }
+
+  .contact-header,
+  .contact-section,
+  .faq-section,
+  .contact-cta-section,
+  .contact-benefits-section,
+  .contact-process-section,
+  .contact-availability-section,
+  .contact-testimonials-section {
+    padding: 2.5rem 1rem;
+  }
+
+  .contact-header-container,
+  .contact-container,
+  .faq-container,
+  .contact-benefits-container,
+  .contact-process-container,
+  .contact-availability-container,
+  .contact-testimonials-container {
+    max-width: 95%;
+  }
+
+  .contact-title {
+    font-size: clamp(2rem, 8vw, 2.5rem);
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .contact-subtitle {
+    font-size: clamp(0.95rem, 4vw, 1rem);
+    text-align: center;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  /* Contact info section mobile */
+  .contact-info h2 {
+    font-size: clamp(1.5rem, 6vw, 1.875rem);
+    text-align: center;
+  }
+
+  .contact-info p {
+    text-align: center;
+    font-size: 0.95rem;
+  }
+
+  /* Fix form fields on mobile */
+  .contact-form {
+    padding: 2rem 1.5rem;
+    margin: 0;
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: 12px;
+  }
+
+  .contact-form h2 {
+    font-size: clamp(1.5rem, 5vw, 1.75rem);
+    text-align: center;
+  }
+
+  .form-group {
+    margin-bottom: 1.25rem;
+  }
+
+  .form-input,
+  .form-select,
+  .form-textarea {
+    width: 100%;
+    padding: 1rem 0.875rem;
+    font-size: 16px; /* Prevents zoom on iOS */
+    box-sizing: border-box;
+    max-width: 100%;
+    border-radius: 8px;
+    min-height: 44px; /* Better touch target */
+  }
+
+  .form-textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    box-sizing: border-box;
+    min-height: 48px; /* Better touch target */
+  }
+
+  /* Fix contact method cards positioning */
+  .contact-method-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .contact-method-icon {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto;
+  }
+
+  .contact-method-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* Quick actions mobile */
+  .quick-actions-buttons {
+    gap: 1rem;
+  }
+
+  .contact-cta-button {
+    width: 100%;
+    max-width: 280px;
+    padding: 1rem 1.5rem;
+    justify-content: center;
+    min-height: 48px;
+  }
+
+  .contact-cta-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  /* Section titles mobile */
+  .faq-title,
+  .contact-cta-title,
+  .contact-benefits-title,
+  .contact-process-title,
+  .contact-availability-title,
+  .contact-testimonials-title {
+    font-size: clamp(1.75rem, 6vw, 2rem);
+  }
+
+  /* Benefits section responsive */
+  .contact-benefit-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 1.25rem;
+    padding: 1.75rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .contact-benefit-icon {
+    margin: 0 auto;
+    width: 55px;
+    height: 55px;
+  }
+
+  .contact-benefit-icon svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  /* Process section responsive */
+  .contact-process-step {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 1.25rem;
+    padding: 1.75rem 0;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    margin-bottom: 1rem;
+  }
+
+  .contact-process-step:last-child {
+    margin-bottom: 0;
+  }
+
+  .contact-process-step-number {
+    margin: 0 auto;
+    width: 70px;
+    height: 70px;
+    font-size: 1.375rem;
+  }
+
+  /* Availability section responsive */
+  .contact-availability-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 1.25rem;
+    padding: 1.75rem;
+  }
+
+  .contact-availability-icon {
+    margin: 0 auto;
+    width: 55px;
+    height: 55px;
+  }
+
+  .contact-availability-icon svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  /* Testimonials section responsive */
+  .contact-testimonial-card {
+    padding: 1.75rem;
+  }
+
+  .contact-testimonial-avatar {
+    width: 45px;
+    height: 45px;
+  }
+
+  .contact-testimonial-avatar svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  /* FAQ responsive */
+  .faq-item {
+    padding: 1.5rem;
+  }
+
+  .faq-question {
+    font-size: 1.125rem;
+    line-height: 1.4;
+  }
+
+  .faq-answer {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-header,
+  .contact-section,
+  .faq-section,
+  .contact-cta-section,
+  .contact-benefits-section,
+  .contact-process-section,
+  .contact-availability-section,
+  .contact-testimonials-section {
+    padding: 2rem 0.75rem;
+  }
+
+  .contact-header-container,
+  .contact-container,
+  .faq-container,
+  .contact-cta-container,
+  .contact-benefits-container,
+  .contact-process-container,
+  .contact-availability-container,
+  .contact-testimonials-container {
+    max-width: 95%;
+    padding: 0 0.5rem;
+  }
+
+  .contact-title {
+    font-size: clamp(1.75rem, 9vw, 2rem);
+    line-height: 1.2;
+  }
+
+  .contact-subtitle {
+    font-size: clamp(0.875rem, 4vw, 0.95rem);
+    line-height: 1.6;
+  }
+
+  /* Enhanced form for small mobile */
+  .contact-form {
+    padding: 1.5rem 1rem;
+    margin: 0;
+    border-radius: 10px;
+  }
+
+  .contact-form h2 {
+    font-size: clamp(1.25rem, 6vw, 1.5rem);
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .form-label {
+    font-size: 0.8rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .form-input,
+  .form-select,
+  .form-textarea {
+    width: 100%;
+    padding: 0.875rem 0.75rem;
+    font-size: 16px; /* Prevents zoom on iOS */
+    box-sizing: border-box;
+    max-width: 100%;
+    border-radius: 6px;
+    min-height: 44px;
+    margin: 0;
+  }
+
+  .form-textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: 0.875rem;
+    font-size: 0.95rem;
+    box-sizing: border-box;
+    margin-top: 0.5rem;
+    min-height: 48px;
+  }
+
+  .form-note {
+    font-size: 0.7rem;
+    text-align: center;
+  }
+
+  /* Contact method cards - enhanced mobile */
+  .contact-method-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 1rem;
+    padding: 1.25rem 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    margin-bottom: 0.75rem;
+  }
+
+  .contact-method-icon {
+    width: 45px;
+    height: 45px;
+    margin: 0 auto;
+  }
+
+  .contact-method-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .contact-method-content h3 {
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .contact-method-content p,
+  .contact-method-content a {
+    font-size: 0.875rem;
+  }
+
+  /* Section titles mobile small */
+  .faq-title,
+  .contact-cta-title,
+  .contact-benefits-title,
+  .contact-process-title,
+  .contact-availability-title,
+  .contact-testimonials-title {
+    font-size: clamp(1.5rem, 7vw, 1.75rem);
+    margin-bottom: 2rem;
+  }
+
+  /* CTA section mobile small */
+  .contact-cta-container {
+    max-width: 95%;
+  }
+
+  .contact-cta-description {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .contact-cta-button {
+    width: 100%;
+    max-width: 260px;
+    padding: 0.875rem 1.25rem;
+    font-size: 0.9rem;
+    min-height: 48px;
+  }
+
+  .contact-cta-button svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Benefits section mobile small */
+  .contact-benefit-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 1rem;
+    padding: 1.5rem 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .contact-benefit-icon {
+    margin: 0 auto;
+    width: 50px;
+    height: 50px;
+  }
+
+  .contact-benefit-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .contact-benefit-content h3 {
+    font-size: 1.125rem;
+  }
+
+  .contact-benefit-content p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  /* Process section mobile small */
+  .contact-process-step {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 1rem;
+    padding: 1.5rem 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    margin-bottom: 1rem;
+  }
+
+  .contact-process-step-number {
+    margin: 0 auto;
+    width: 60px;
+    height: 60px;
+    font-size: 1.25rem;
+  }
+
+  .contact-process-step-content h3 {
+    font-size: 1.125rem;
+  }
+
+  .contact-process-step-content p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  /* Availability section mobile small */
+  .contact-availability-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 1rem;
+    padding: 1.5rem 1rem;
+  }
+
+  .contact-availability-icon {
+    margin: 0 auto;
+    width: 50px;
+    height: 50px;
+  }
+
+  .contact-availability-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .contact-availability-content h3 {
+    font-size: 1rem;
+  }
+
+  .contact-availability-content p {
+    font-size: 0.875rem;
+  }
+
+  /* Testimonials section mobile small */
+  .contact-testimonial-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .contact-testimonial-content p {
+    font-size: 0.95rem;
+  }
+
+  .contact-testimonial-avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .contact-testimonial-avatar svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .contact-testimonial-info h4 {
+    font-size: 0.95rem;
+  }
+
+  .contact-testimonial-info p {
+    font-size: 0.8rem;
+  }
+
+  /* FAQ mobile small */
+  .faq-item {
+    padding: 1.25rem 1rem;
+  }
+
+  .faq-question {
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  .faq-answer {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  /* Quick actions mobile small */
+  .quick-actions h3 {
+    font-size: 1.125rem;
+    text-align: center;
+  }
+
+  .quick-actions-buttons {
+    gap: 0.875rem;
+  }
+
+  /* Contact info mobile small */
+  .contact-info h2 {
+    font-size: clamp(1.375rem, 6vw, 1.625rem);
+  }
+
+  .contact-info p {
+    font-size: 0.9rem;
+  }
+
+  /* Ensure no horizontal overflow */
+  .contact-page {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+  }
+}
+
+/* ============================
+   EXTRA SMALL MOBILE (max-width: 320px)
+============================ */
+@media (max-width: 320px) {
+  .contact-form {
+    padding: 1rem 0.5rem;
+  }
+
+  .form-input,
+  .form-select,
+  .form-textarea {
+    padding: 0.625rem 0.5rem;
+    font-size: 16px;
+  }
+
+  .form-textarea {
+    min-height: 80px;
+  }
+
+  .submit-btn {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .contact-method-card {
+    padding: 1rem 0.5rem;
+  }
+
+  .contact-method-icon {
+    width: 35px;
+    height: 35px;
+  }
+
+  .contact-method-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .contact-title {
+    font-size: 1.75rem;
+  }
+
+  .contact-subtitle {
+    font-size: 0.875rem;
+  }
+}
