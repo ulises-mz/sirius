@@ -31,32 +31,39 @@ export const InfiniteMovingCards = ({
 
   useEffect(() => {
     addAnimation();
-  }, []);
+  }, [direction, speed]); // Agregar dependencias
 
   function addAnimation() {
     if (containerRef.current && scrollerRef.current) {
       const scrollerContent = Array.from(scrollerRef.current.children);
 
-      // Duplicar items múltiples veces para efecto infinito suave
-      scrollerContent.forEach((item) => {
-        const duplicatedItem = item.cloneNode(true);
-        if (scrollerRef.current) {
-          scrollerRef.current.appendChild(duplicatedItem);
-        }
-      });
+      // Solo duplicar si no se ha hecho antes
+      if (scrollerContent.length === items.length) {
+        // Duplicar items múltiples veces para efecto infinito suave
+        scrollerContent.forEach((item) => {
+          const duplicatedItem = item.cloneNode(true);
+          if (scrollerRef.current) {
+            scrollerRef.current.appendChild(duplicatedItem);
+          }
+        });
 
-      // Duplicar una vez más para más fluidez
-      const allItems = Array.from(scrollerRef.current.children);
-      allItems.forEach((item) => {
-        const duplicatedItem = item.cloneNode(true);
-        if (scrollerRef.current) {
-          scrollerRef.current.appendChild(duplicatedItem);
-        }
-      });
+        // Duplicar una vez más para más fluidez
+        const newItems = Array.from(scrollerRef.current.children).slice(items.length);
+        newItems.forEach((item) => {
+          const duplicatedItem = item.cloneNode(true);
+          if (scrollerRef.current) {
+            scrollerRef.current.appendChild(duplicatedItem);
+          }
+        });
+      }
 
       getDirection();
       getSpeed();
-      setStart(true);
+
+      // Activar animación después de un pequeño delay
+      setTimeout(() => {
+        setStart(true);
+      }, 100);
     }
   }
   
@@ -65,7 +72,7 @@ export const InfiniteMovingCards = ({
       if (direction === "left") {
         containerRef.current.style.setProperty(
           "--animation-direction",
-          "forwards",
+          "normal",
         );
       } else {
         containerRef.current.style.setProperty(
@@ -101,9 +108,8 @@ export const InfiniteMovingCards = ({
         }
 
         .animate-scroll-infinite {
-          animation: scroll-infinite-cards var(--animation-duration, 40s)
-                     var(--animation-direction, forwards)
-                     linear infinite;
+          animation: scroll-infinite-cards var(--animation-duration, 40s) linear infinite;
+          animation-direction: var(--animation-direction, normal);
           will-change: transform;
         }
         
