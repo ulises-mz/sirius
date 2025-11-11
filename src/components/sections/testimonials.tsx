@@ -1,15 +1,17 @@
 "use client";
 
 import React from "react";
-import { InfiniteMovingCards } from "@/components/shared/infinite-moving-cards";
 import { testimonials } from "@/data/testimonials";
 import "@/styles/testimonials-section.css";
 
 export function TestimonialsSection() {
+  // Duplicar testimonios para efecto infinito suave
+  const allTestimonials = [...testimonials, ...testimonials];
+
   return (
     <section className="testimonials-section">
       <div className="testimonials-container">
-        {/* Encabezado */}
+        {/* Header */}
         <div className="testimonials-header">
           <div className="testimonials-badge">
             <svg viewBox="0 0 24 24" fill="currentColor" className="badge-icon">
@@ -17,21 +19,76 @@ export function TestimonialsSection() {
             </svg>
             <span>Testimonios</span>
           </div>
-          <h2 className="testimonials-title">Empresas que confían en nosotros</h2>
+          <h2 className="testimonials-title">Clientes que transformaron su negocio</h2>
           <p className="testimonials-description">
-            Casos reales de clientes que han transformado su presencia digital
-            y alcanzado sus objetivos de negocio con nuestras soluciones.
+            Resultados medibles y crecimiento real para empresas de todos los tamaños
           </p>
         </div>
 
-        {/* Carrusel infinito */}
-        <div className="testimonials-cards-wrapper">
-          <div className="testimonials-cards-gradient" />
-          <InfiniteMovingCards
-            items={testimonials}
-            direction="left"
-            speed="slow"
-          />
+        {/* Infinite Scroll Carousel */}
+        <div className="testimonials-scroll-wrapper">
+          <div className="testimonials-scroll-track">
+            {allTestimonials.map((testimonial, index) => (
+              <div key={`testimonial-${index}`} className="testimonial-card-scroll">
+                {/* Rating */}
+                <div className="testimonial-rating">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <svg
+                      key={i}
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      className={`star ${i < testimonial.rating ? 'filled' : 'empty'}`}
+                    >
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+
+                {/* Quote */}
+                <blockquote className="testimonial-quote">
+                  "{testimonial.quote}"
+                </blockquote>
+
+                {/* Result Badge */}
+                {testimonial.result && (
+                  <div className="testimonial-result-badge">
+                    <svg viewBox="0 0 20 20" fill="currentColor" className="result-icon">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    <span>{testimonial.result}</span>
+                  </div>
+                )}
+
+                {/* Author */}
+                <div className="testimonial-author">
+                  <div className="author-avatar">
+                    <span>{testimonial.name.charAt(0)}</span>
+                  </div>
+                  <div className="author-details">
+                    <div className="author-name">{testimonial.name}</div>
+                    <div className="author-title">{testimonial.title}</div>
+                    <div className="author-company">{testimonial.company}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Stats */}
+        <div className="testimonials-stats">
+          <div className="stat-item">
+            <div className="stat-number">50+</div>
+            <div className="stat-label">Clientes Satisfechos</div>
+          </div>
+          <div className="stat-item">
+            <div className="stat-number">98%</div>
+            <div className="stat-label">Tasa de Satisfacción</div>
+          </div>
+          <div className="stat-item">
+            <div className="stat-number">5.0</div>
+            <div className="stat-label">Calificación Promedio</div>
+          </div>
         </div>
       </div>
     </section>
