@@ -27,18 +27,27 @@ export const InfiniteMovingCards = ({
   const containerRef = React.useRef<HTMLDivElement>(null);
   const scrollerRef = React.useRef<HTMLUListElement>(null);
 
+  const [start, setStart] = useState(false);
+
   useEffect(() => {
     addAnimation();
   }, []);
-  
-  const [start, setStart] = useState(false);
 
   function addAnimation() {
     if (containerRef.current && scrollerRef.current) {
       const scrollerContent = Array.from(scrollerRef.current.children);
 
-      // Duplicar items para efecto infinito
+      // Duplicar items múltiples veces para efecto infinito suave
       scrollerContent.forEach((item) => {
+        const duplicatedItem = item.cloneNode(true);
+        if (scrollerRef.current) {
+          scrollerRef.current.appendChild(duplicatedItem);
+        }
+      });
+
+      // Duplicar una vez más para más fluidez
+      const allItems = Array.from(scrollerRef.current.children);
+      allItems.forEach((item) => {
         const duplicatedItem = item.cloneNode(true);
         if (scrollerRef.current) {
           scrollerRef.current.appendChild(duplicatedItem);
@@ -70,11 +79,11 @@ export const InfiniteMovingCards = ({
   const getSpeed = () => {
     if (containerRef.current) {
       if (speed === "fast") {
-        containerRef.current.style.setProperty("--animation-duration", "20s");
+        containerRef.current.style.setProperty("--animation-duration", "30s");
       } else if (speed === "normal") {
-        containerRef.current.style.setProperty("--animation-duration", "40s");
+        containerRef.current.style.setProperty("--animation-duration", "60s");
       } else {
-        containerRef.current.style.setProperty("--animation-duration", "80s");
+        containerRef.current.style.setProperty("--animation-duration", "90s");
       }
     }
   };
@@ -83,15 +92,19 @@ export const InfiniteMovingCards = ({
     <>
       <style jsx global>{`
         @keyframes scroll-infinite-cards {
+          from {
+            transform: translateX(0);
+          }
           to {
-            transform: translate(calc(-50% - 0.5rem));
+            transform: translateX(calc(-33.333%));
           }
         }
-        
+
         .animate-scroll-infinite {
-          animation: scroll-infinite-cards var(--animation-duration, 40s) 
-                     var(--animation-direction, forwards) 
+          animation: scroll-infinite-cards var(--animation-duration, 40s)
+                     var(--animation-direction, forwards)
                      linear infinite;
+          will-change: transform;
         }
         
         .testimonial-card {
@@ -255,23 +268,23 @@ export const InfiniteMovingCards = ({
           mask-image: linear-gradient(
             to right,
             transparent,
-            var(--color-background) 10%,
-            var(--color-background) 90%,
+            white 10%,
+            white 90%,
             transparent
           );
           -webkit-mask-image: linear-gradient(
             to right,
             transparent,
-            var(--color-background) 10%,
-            var(--color-background) 90%,
+            white 10%,
+            white 90%,
             transparent
           );
           padding: 40px 0;
         }
-        
+
         .card-list {
           display: flex;
-          min-width: max-content;
+          width: fit-content;
           flex-shrink: 0;
           flex-wrap: nowrap;
           gap: 32px;
