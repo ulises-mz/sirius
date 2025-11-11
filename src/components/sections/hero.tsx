@@ -1,15 +1,8 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import "@/styles/hero.css";
-
-const rotatingWords = [
-  "la estrella más brillante",
-  "tecnología que ilumina",
-  "soluciones estelares",
-  "innovación cósmica",
-];
 
 // Ligera detección para desactivar efectos en dispositivos con puntero "coarse" (táctiles)
 const isCoarsePointer = () =>
@@ -330,33 +323,6 @@ function CometField() {
 }
 
 export default function Hero() {
-  // Typing effect
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [currentText, setCurrentText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [typingSpeed, setTypingSpeed] = useState(120);
-
-  useEffect(() => {
-    const currentWord = rotatingWords[currentIndex];
-    const handleTyping = () => {
-      if (!isDeleting && currentText !== currentWord) {
-        setCurrentText(currentWord.substring(0, currentText.length + 1));
-      } else if (isDeleting && currentText !== "") {
-        setCurrentText(currentText.substring(0, currentText.length - 1));
-      } else {
-        if (!isDeleting && currentText === currentWord) {
-          setTimeout(() => setIsDeleting(true), 900);
-        } else if (isDeleting && currentText === "") {
-          setIsDeleting(false);
-          setCurrentIndex((prev) => (prev + 1) % rotatingWords.length);
-          setTypingSpeed(120);
-        }
-      }
-    };
-    const timer = setTimeout(handleTyping, typingSpeed);
-    return () => clearTimeout(timer);
-  }, [currentText, isDeleting, currentIndex, typingSpeed]);
-
   // Parallax con framer-motion
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
@@ -435,24 +401,49 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
           >
-            <h1 className="hero-title">
-              Brilla como Sirius con{" "}
-              <span className="hero-typing">
-                {currentText}
-                <span className="hero-cursor" />
-              </span>
-            </h1>
-            <p className="hero-subtitle">
-              Como la estrella más brillante del cielo, iluminamos tu camino digital con soluciones innovadoras en Costa Rica.
-            </p>
-            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
-              <Link href="/agendar" className="button hero-button neon-cta">
-                Agenda tu Consultoría Gratuita
-              </Link>
-            </motion.div>
-          </motion.div>
+            <div className="hero-badge">
+              <span className="badge-dot"></span>
+              <span className="badge-text">Agencia Digital en Costa Rica</span>
+            </div>
 
-          {/** Ilustración decorativa removida a solicitud del usuario */}
+            <h1 className="hero-title">
+              Transformamos empresas con{" "}
+              <span className="hero-highlight">soluciones digitales</span> que generan resultados
+            </h1>
+
+            <p className="hero-subtitle">
+              Desarrollo web, automatización de procesos y estrategias digitales para empresas que buscan crecer y escalar en el mercado costarricense.
+            </p>
+
+            {/* Estadísticas clave */}
+            <div className="hero-stats">
+              <div className="stat-item">
+                <div className="stat-number">50+</div>
+                <div className="stat-label">Proyectos Exitosos</div>
+              </div>
+              <div className="stat-item">
+                <div className="stat-number">98%</div>
+                <div className="stat-label">Satisfacción Cliente</div>
+              </div>
+              <div className="stat-item">
+                <div className="stat-number">3+</div>
+                <div className="stat-label">Años Experiencia</div>
+              </div>
+            </div>
+
+            <div className="hero-cta-group">
+              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
+                <Link href="/agendar" className="button hero-button primary-cta">
+                  Agenda tu Consultoría Gratuita
+                </Link>
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
+                <Link href="/portafolio" className="button hero-button secondary-cta">
+                  Ver Casos de Éxito
+                </Link>
+              </motion.div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
