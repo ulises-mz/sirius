@@ -1,11 +1,11 @@
+/* Testimonials Section - Professional Design */
 .testimonials-section {
-  position: relative; /* necesario para que el z-index funcione */
-  z-index: 10; /* ⬆️ más alto que la sección anterior */
+  position: relative;
+  z-index: 10;
   background-color: var(--color-background);
-  padding: 5rem 0;
+  padding: 6rem 0;
   padding-bottom: 8rem;
 }
-
 
 .testimonials-container {
   max-width: 80%;
@@ -13,42 +13,70 @@
 }
 
 .testimonials-header {
-  margin-bottom: 4rem;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 4rem;
 }
 
-.testimonials-header.left-align {
-  text-align: left;
+/* Badge */
+.testimonials-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(58, 200, 255, 0.1);
+  border: 1px solid rgba(58, 200, 255, 0.2);
+  border-radius: 20px;
+  margin-bottom: 1.5rem;
+  color: var(--color-accent);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
-.testimonials-subtitle {
-  color: var(--color-text-secondary);
-  font-weight: bold;
-  letter-spacing: 0.05em;
-  font-size: 2.25rem;
-  margin-bottom: 0.5rem;
+.testimonials-badge .badge-icon {
+  width: 16px;
+  height: 16px;
 }
 
 .testimonials-title {
   color: var(--color-text-primary);
-  font-size: 2.25rem;
-  font-weight: bold;
-  margin-bottom: 2rem;
-  line-height: 1.2;
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  line-height: 1.25;
 }
 
+.testimonials-description {
+  color: var(--color-text-primary);
+  font-size: 1.125rem;
+  line-height: 1.7;
+  opacity: 0.85;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
   .testimonials-container {
     max-width: 90%;
   }
-  
+
   .testimonials-title {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
   }
-  .testimonials-subtitle {
-    font-size: 1.5rem;
+
+  .testimonials-description {
+    font-size: 1rem;
+  }
+
+  .testimonials-badge {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.85rem;
   }
 }
 
+/* Cards Wrapper */
 .testimonials-cards-wrapper {
   position: relative;
 }
@@ -58,10 +86,10 @@
   inset: 0;
   background: linear-gradient(
     90deg,
-    var(--color-background) 10%,
-    transparent 30%,
-    transparent 70%,
-    var(--color-background) 90%
+    var(--color-background) 5%,
+    transparent 15%,
+    transparent 85%,
+    var(--color-background) 95%
   );
   z-index: 10;
   pointer-events: none;

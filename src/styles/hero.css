@@ -249,132 +249,188 @@
   .hero-text { width: auto; }
 }
 
+/* Badge profesional */
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(147, 197, 253, 0.1);
+  border: 1px solid rgba(147, 197, 253, 0.2);
+  border-radius: 20px;
+  margin-bottom: 1.5rem;
+  backdrop-filter: blur(10px);
+}
+
+.badge-dot {
+  width: 8px;
+  height: 8px;
+  background: #3ac8ff;
+  border-radius: 50%;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+.badge-text {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #cfe4ff;
+  letter-spacing: 0.5px;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.1); }
+}
+
 .hero-title {
   font-size: 2rem;
   font-weight: 800;
-  letter-spacing: 0.2px;
-  margin-bottom: 1rem;
+  letter-spacing: -0.5px;
+  margin-bottom: 1.25rem;
   line-height: 1.15;
-  text-shadow: 0 2px 24px rgba(109, 107, 255, 0.25);
+  color: #ffffff;
 }
 @media (min-width: 768px) { .hero-title { font-size: 2.75rem; } }
-@media (min-width: 1024px) { .hero-title { font-size: 3.25rem; margin-bottom: 1.25rem; } }
+@media (min-width: 1024px) { .hero-title { font-size: 3.5rem; margin-bottom: 1.5rem; } }
 
-.hero-typing {
-  color: var(--neon-blue);
+.hero-highlight {
+  color: #3ac8ff;
+  position: relative;
   display: inline-block;
-  min-width: 180px;
-  max-width: 100%;
-  word-wrap: break-word;
-  text-shadow: 0 0 16px rgba(58, 200, 255, 0.35);
 }
-@media (min-width: 768px) { .hero-typing { min-width: 220px; } }
-@media (min-width: 1024px) { .hero-typing { min-width: 260px; } }
 
-.hero-cursor {
-  border-right: 2px solid currentColor;
-  margin-left: 0.25rem;
-  animation: pulse 1s infinite;
+.hero-highlight::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #3ac8ff, transparent);
+  opacity: 0.5;
 }
-@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
 
 .hero-subtitle {
   font-size: 1.05rem;
   color: #cfe4ff;
-  max-width: 42ch;
+  max-width: 50ch;
   margin-bottom: 2rem;
-  line-height: 1.6;
-  opacity: 0.92;
+  line-height: 1.7;
+  opacity: 0.9;
+  font-weight: 400;
 }
-@media (min-width: 768px) { .hero-subtitle { font-size: 1.15rem; margin-bottom: 2.4rem; } }
-@media (min-width: 1024px) { .hero-subtitle { font-size: 1.2rem; margin-bottom: 2.8rem; } }
+@media (min-width: 768px) { .hero-subtitle { font-size: 1.15rem; margin-bottom: 2.5rem; } }
+@media (min-width: 1024px) { .hero-subtitle { font-size: 1.25rem; margin-bottom: 3rem; } }
 
-/* CTA con tema estelar/astrológico - efecto constelación */
-.button.hero-button.neon-cta {
+/* Estadísticas */
+.hero-stats {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #3ac8ff;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: #cfe4ff;
+  opacity: 0.8;
+  font-weight: 500;
+}
+
+@media (min-width: 768px) {
+  .stat-number { font-size: 2.5rem; }
+  .stat-label { font-size: 0.9rem; }
+}
+
+/* Grupo de CTAs */
+.hero-cta-group {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 640px) {
+  .hero-cta-group {
+    flex-direction: column;
+  }
+
+  .hero-cta-group .button {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Botones profesionales */
+.button.hero-button {
   position: relative;
   display: inline-block;
-  padding: 0.95rem 2.1rem;
-  font-weight: 700;
-  border-radius: 12px;
+  padding: 1rem 2rem;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+
+.button.hero-button.primary-cta {
+  background: linear-gradient(135deg, #3ac8ff 0%, #2a9fd9 100%);
   color: #ffffff;
-  background: linear-gradient(135deg, #1a1a3e 0%, #2d1b4e 50%, #1a1a3e 100%);
-  background-size: 200% 100%;
-  border: 1px solid rgba(147, 197, 253, 0.3);
-  transition: all 0.4s ease;
-  box-shadow: 
-    0 0 20px rgba(147, 197, 253, 0.2),
-    0 0 40px rgba(147, 197, 253, 0.1),
-    0 4px 15px rgba(0, 0, 0, 0.3),
-    inset 0 0 20px rgba(147, 197, 253, 0.05);
-  overflow: hidden;
+  box-shadow:
+    0 4px 15px rgba(58, 200, 255, 0.3),
+    0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* Efecto de partículas estelares en el fondo */
-.button.hero-button.neon-cta::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: 
-    radial-gradient(circle at 20% 30%, rgba(147, 197, 253, 0.15) 0%, transparent 3%),
-    radial-gradient(circle at 60% 70%, rgba(147, 197, 253, 0.12) 0%, transparent 2%),
-    radial-gradient(circle at 80% 20%, rgba(147, 197, 253, 0.18) 0%, transparent 2.5%),
-    radial-gradient(circle at 40% 60%, rgba(147, 197, 253, 0.1) 0%, transparent 2%),
-    radial-gradient(circle at 90% 80%, rgba(147, 197, 253, 0.14) 0%, transparent 2%);
-  opacity: 0.6;
-  animation: twinkle 3s ease-in-out infinite;
-}
-
-/* Brillo estelar animado */
-.button.hero-button.neon-cta::after {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(
-    45deg,
-    transparent 30%,
-    rgba(147, 197, 253, 0.1) 50%,
-    transparent 70%
-  );
-  animation: shimmer 4s linear infinite;
-}
-
-.button.hero-button.neon-cta:hover {
-  background-position: 100% 0;
+.button.hero-button.primary-cta:hover {
   transform: translateY(-2px);
-  border-color: rgba(147, 197, 253, 0.6);
-  box-shadow: 
-    0 0 30px rgba(147, 197, 253, 0.4),
-    0 0 60px rgba(147, 197, 253, 0.2),
-    0 0 90px rgba(96, 165, 250, 0.1),
-    0 8px 25px rgba(0, 0, 0, 0.4),
-    inset 0 0 30px rgba(147, 197, 253, 0.1);
+  box-shadow:
+    0 6px 25px rgba(58, 200, 255, 0.4),
+    0 4px 10px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, #4dd2ff 0%, #3ab3e8 100%);
 }
 
-.button.hero-button.neon-cta:active {
-  transform: translateY(-1px);
+.button.hero-button.primary-cta:active {
+  transform: translateY(0);
 }
 
-/* Asegurar que el texto esté por encima de los efectos */
-.button.hero-button.neon-cta {
-  z-index: 1;
+.button.hero-button.secondary-cta {
+  background: rgba(147, 197, 253, 0.1);
+  color: #3ac8ff;
+  border: 2px solid rgba(58, 200, 255, 0.4);
+  backdrop-filter: blur(10px);
 }
 
-.button.hero-button.neon-cta > * {
-  position: relative;
-  z-index: 2;
+.button.hero-button.secondary-cta:hover {
+  background: rgba(147, 197, 253, 0.15);
+  border-color: rgba(58, 200, 255, 0.6);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(58, 200, 255, 0.2);
 }
 
-@keyframes twinkle {
-  0%, 100% { opacity: 0.6; }
-  50% { opacity: 1; }
+.button.hero-button.secondary-cta:active {
+  transform: translateY(0);
 }
 
-@keyframes shimmer {
-  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-  100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+@media (min-width: 768px) {
+  .button.hero-button {
+    padding: 1.1rem 2.5rem;
+    font-size: 1.05rem;
+  }
 }
 
 /* Ilustración decorativa (anillos/sparkles) */
