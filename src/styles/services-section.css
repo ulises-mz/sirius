@@ -12,6 +12,24 @@
   border-radius: 60px 60px 0 0; /* Bordes redondeados superiores */
 }
 
+@media (max-width: 768px) {
+  .services-section {
+    padding: 3rem 1rem;
+    margin-top: -50px;
+    padding-top: calc(3rem + 50px);
+    border-radius: 40px 40px 0 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .services-section {
+    padding: 2rem 1rem;
+    margin-top: -30px;
+    padding-top: calc(2rem + 30px);
+    border-radius: 30px 30px 0 0;
+  }
+}
+
 /* Wrapper interior que controla overflow y layout sin romper sticky */
 .services-inner {
   max-width: 1200px;
