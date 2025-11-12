@@ -521,12 +521,13 @@
   display: flex;
   gap: 1.25rem;
   flex-wrap: wrap;
+  width: 100%;
+  max-width: 100%;
 }
 
 @media (max-width: 768px) {
   .hero-cta-group {
     gap: 1rem;
-    width: 100%;
     justify-content: center;
   }
 }
@@ -535,11 +536,7 @@
   .hero-cta-group {
     flex-direction: column;
     gap: 0.875rem;
-  }
-
-  .hero-cta-group .button {
-    width: 100%;
-    text-align: center;
+    align-items: stretch;
   }
 }
 
@@ -547,7 +544,7 @@
 .button.hero-button {
   position: relative;
   display: inline-block;
-  padding: 1.1rem 2.5rem;
+  padding: 1.1rem 2rem;
   font-weight: 600;
   font-size: 1.05rem;
   border-radius: 10px;
@@ -556,34 +553,40 @@
   border: none;
   cursor: pointer;
   white-space: nowrap;
+  max-width: 100%;
+  box-sizing: border-box;
+  text-align: center;
 }
 
 @media (max-width: 1024px) {
   .button.hero-button {
-    padding: 1rem 2.25rem;
+    padding: 1rem 1.75rem;
     font-size: 1rem;
   }
 }
 
 @media (max-width: 768px) {
   .button.hero-button {
-    padding: 0.95rem 2rem;
+    padding: 0.95rem 1.5rem;
     font-size: 0.95rem;
     border-radius: 8px;
+    white-space: normal;
+    line-height: 1.3;
   }
 }
 
 @media (max-width: 640px) {
   .button.hero-button {
-    padding: 0.9rem 1.75rem;
+    width: 100%;
+    padding: 1rem 1.5rem;
+    max-width: 100%;
   }
 }
 
 @media (max-width: 480px) {
   .button.hero-button {
-    padding: 0.85rem 1.5rem;
+    padding: 0.95rem 1.25rem;
     font-size: 0.9rem;
-    white-space: normal;
   }
 }
 
