@@ -40,8 +40,18 @@
   height: auto !important;
   padding-right: 1rem;
   top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
   transform: none !important;
+  -webkit-transform: none !important;
+  -moz-transform: none !important;
+  -ms-transform: none !important;
+  -o-transform: none !important;
   will-change: auto !important;
+  backface-visibility: visible !important;
+  perspective: none !important;
+  contain: none !important;
 }
 .services-header {
   /* elimina el margin-bottom si quieres */
@@ -49,15 +59,32 @@
   text-align: left; /* para que la línea de decoración quede alineada con el título */
   position: static !important; /* Forzar que no sea sticky */
   top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
   transform: none !important;
+  -webkit-transform: none !important;
+  -moz-transform: none !important;
+  -ms-transform: none !important;
+  -o-transform: none !important;
   will-change: auto !important;
+  backface-visibility: visible !important;
+  perspective: none !important;
+  contain: none !important;
 }
 
 .header-content {
   display: inline-block;
   position: static !important;
   top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
   transform: none !important;
+  -webkit-transform: none !important;
+  -moz-transform: none !important;
+  -ms-transform: none !important;
+  -o-transform: none !important;
 }
 
 .services-title {
@@ -68,8 +95,18 @@
   margin-bottom: 0.5rem;
   position: static !important;
   top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
   transform: none !important;
+  -webkit-transform: none !important;
+  -moz-transform: none !important;
+  -ms-transform: none !important;
+  -o-transform: none !important;
   will-change: auto !important;
+  backface-visibility: visible !important;
+  perspective: none !important;
+  contain: none !important;
 }
 
 .services-subtitle {
@@ -80,8 +117,18 @@
   margin-bottom: 0.5rem;
   position: static !important;
   top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
   transform: none !important;
+  -webkit-transform: none !important;
+  -moz-transform: none !important;
+  -ms-transform: none !important;
+  -o-transform: none !important;
   will-change: auto !important;
+  backface-visibility: visible !important;
+  perspective: none !important;
+  contain: none !important;
 }
 
 .decoration-line {
