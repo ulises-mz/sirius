@@ -36,7 +36,7 @@
 }
 .services-left {
   flex: 0 0 20%; /* ancho fijo para la columna izquierda */
-  position: static; /* scroll normal con la página */
+  position: static !important; /* scroll normal con la página */
   height: auto;
   padding-right: 1rem;
 }
@@ -44,7 +44,7 @@
   /* elimina el margin-bottom si quieres */
   margin-bottom: 0;
   text-align: left; /* para que la línea de decoración quede alineada con el título */
-  position: relative !important; /* Forzar que no sea sticky */
+  position: static !important; /* Forzar que no sea sticky */
 }
 
 .header-content {
@@ -54,20 +54,20 @@
 
 .services-title {
   color: var(--color-text-primary);
-
   font-weight: bold;
   letter-spacing: 0.05em;
   font-size: 2.25rem;
   margin-bottom: 0.5rem;
+  position: static !important;
 }
 
 .services-subtitle {
   color: var(--color-text-secondary);
-
   font-weight: bold;
   letter-spacing: 0.05em;
   font-size: 2.25rem;
   margin-bottom: 0.5rem;
+  position: static !important;
 }
 
 .decoration-line {
