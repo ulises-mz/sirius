@@ -11,7 +11,6 @@
   padding-top: calc(5rem + 100px); /* Compensar el margin negativo */
   border-radius: 60px 60px 0 0; /* Bordes redondeados superiores */
   z-index: 10; /* Elevar sobre el hero */
-  overflow: hidden; /* Para contener el efecto de luz */
 
   /* Efecto 3D - Sombras múltiples para crear profundidad */
   box-shadow:
