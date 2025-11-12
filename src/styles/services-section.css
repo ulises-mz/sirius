@@ -37,19 +37,27 @@
 .services-left {
   flex: 0 0 20%; /* ancho fijo para la columna izquierda */
   position: static !important; /* scroll normal con la página */
-  height: auto;
+  height: auto !important;
   padding-right: 1rem;
+  top: auto !important;
+  transform: none !important;
+  will-change: auto !important;
 }
 .services-header {
   /* elimina el margin-bottom si quieres */
   margin-bottom: 0;
   text-align: left; /* para que la línea de decoración quede alineada con el título */
   position: static !important; /* Forzar que no sea sticky */
+  top: auto !important;
+  transform: none !important;
+  will-change: auto !important;
 }
 
 .header-content {
   display: inline-block;
-  position: relative;
+  position: static !important;
+  top: auto !important;
+  transform: none !important;
 }
 
 .services-title {
@@ -59,6 +67,9 @@
   font-size: 2.25rem;
   margin-bottom: 0.5rem;
   position: static !important;
+  top: auto !important;
+  transform: none !important;
+  will-change: auto !important;
 }
 
 .services-subtitle {
@@ -68,6 +79,9 @@
   font-size: 2.25rem;
   margin-bottom: 0.5rem;
   position: static !important;
+  top: auto !important;
+  transform: none !important;
+  will-change: auto !important;
 }
 
 .decoration-line {
