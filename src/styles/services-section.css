@@ -36,38 +36,99 @@
 }
 .services-left {
   flex: 0 0 20%; /* ancho fijo para la columna izquierda */
-  position: static; /* scroll normal con la página */
-  height: auto;
+  position: static !important; /* scroll normal con la página */
+  height: auto !important;
   padding-right: 1rem;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: none !important;
+  -webkit-transform: none !important;
+  -moz-transform: none !important;
+  -ms-transform: none !important;
+  -o-transform: none !important;
+  will-change: auto !important;
+  backface-visibility: visible !important;
+  perspective: none !important;
+  contain: none !important;
 }
 .services-header {
   /* elimina el margin-bottom si quieres */
   margin-bottom: 0;
   text-align: left; /* para que la línea de decoración quede alineada con el título */
-  position: relative !important; /* Forzar que no sea sticky */
+  position: static !important; /* Forzar que no sea sticky */
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: none !important;
+  -webkit-transform: none !important;
+  -moz-transform: none !important;
+  -ms-transform: none !important;
+  -o-transform: none !important;
+  will-change: auto !important;
+  backface-visibility: visible !important;
+  perspective: none !important;
+  contain: none !important;
 }
 
 .header-content {
   display: inline-block;
-  position: relative;
+  position: static !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: none !important;
+  -webkit-transform: none !important;
+  -moz-transform: none !important;
+  -ms-transform: none !important;
+  -o-transform: none !important;
 }
 
 .services-title {
   color: var(--color-text-primary);
-
   font-weight: bold;
   letter-spacing: 0.05em;
   font-size: 2.25rem;
   margin-bottom: 0.5rem;
+  position: static !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: none !important;
+  -webkit-transform: none !important;
+  -moz-transform: none !important;
+  -ms-transform: none !important;
+  -o-transform: none !important;
+  will-change: auto !important;
+  backface-visibility: visible !important;
+  perspective: none !important;
+  contain: none !important;
 }
 
 .services-subtitle {
   color: var(--color-text-secondary);
-
   font-weight: bold;
   letter-spacing: 0.05em;
   font-size: 2.25rem;
   margin-bottom: 0.5rem;
+  position: static !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: none !important;
+  -webkit-transform: none !important;
+  -moz-transform: none !important;
+  -ms-transform: none !important;
+  -o-transform: none !important;
+  will-change: auto !important;
+  backface-visibility: visible !important;
+  perspective: none !important;
+  contain: none !important;
 }
 
 .decoration-line {
