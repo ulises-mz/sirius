@@ -6,13 +6,21 @@
     #0a0f1c 15%,
     var(--color-background-secondary) 30%
   );
-  display: flex;
-  justify-content: center;
   position: relative;
   margin-top: -100px; /* Solapamiento para transición más suave */
   padding-top: calc(5rem + 100px); /* Compensar el margin negativo */
   border-radius: 60px 60px 0 0; /* Bordes redondeados superiores */
-  overflow: hidden; /* Asegurar que el contenido respete los bordes */
+}
+
+/* Wrapper interior que controla overflow y layout sin romper sticky */
+.services-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 3rem;
+  align-items: start;
+  overflow: visible; /* necesario para que sticky funcione */
 }
 
 .services-section::before {
@@ -26,21 +34,17 @@
   z-index: 0;
 }
 
-.services-container {
-  display: flex;
-  max-width: 100%;
-  min-width: 80%;
-  gap: 2rem; /* espacio entre columnas */
-  position: relative;
+.services-sidebar {
+  position: sticky;
+  top: clamp(72px, 12vh, 128px);
+  align-self: start;
+  height: fit-content;
   z-index: 1;
 }
-.services-left {
-  flex: 0 0 20%;
-  position: sticky;
-  top: 2rem; /* Distancia desde el top del viewport cuando se hace sticky */
-  align-self: flex-start; /* Para que el sticky funcione correctamente */
-  padding-right: 1rem;
-  height: fit-content;
+
+/* Estado fijo controlado por JS para mantener visible el título dentro de los límites de la sección */
+.services-left.services-left-fixed {
+  pointer-events: none; /* evita capturar eventos sobre el área fija */
 }
 
 .services-header {
@@ -77,12 +81,22 @@
 
 
 .services-grid {
-  flex: 1 1 auto; /* ocupa el resto del espacio */
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  /* Lista vertical para mantener orden y cálculo de activeIndex coherente */
+  display: flex;
+  flex-direction: column;
   gap: 2rem;
   width: 100%;
-  max-width: none; /* para que no limite el ancho dentro del flex */
+}
+/* Opcional: en pantallas muy anchas, permitir dos columnas manteniendo orden mediante column layout */
+@media (min-width: 1400px) {
+  .services-grid {
+    column-count: 2;
+    column-gap: 2.5rem;
+  }
+  .services-grid .service-item {
+    break-inside: avoid;
+    width: 100%;
+  }
 }
 
 .service-item {
@@ -272,22 +286,21 @@
   color: var(--color-background);
 }
 
-@media (min-width: 768px) {
-  .services-grid {
-    grid-template-columns: repeat(1, 1fr);
+@media (max-width: 1024px) {
+  .services-inner {
+    grid-template-columns: 260px 1fr;
+    gap: 2rem;
   }
 }
-
-@media (min-width: 1024px) {
+@media (max-width: 900px) {
+  .services-inner {
+    grid-template-columns: 1fr;
+  }
+  .services-sidebar {
+    position: static; /* desactivar sticky en móvil */
+  }
   .services-grid {
-    grid-template-columns: repeat(1, 1fr);
-  }
-  
-  .services-title {
-    font-size:  2.25rem;;
-  }
-  .services-subtitle {
-    font-size: 2.25rem;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   }
 }
 

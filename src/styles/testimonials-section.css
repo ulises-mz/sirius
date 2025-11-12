@@ -100,12 +100,8 @@
 
 /* Keyframe Animation */
 @keyframes scroll-left {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(calc(-33.333333% - 0.5rem));
-  }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-33.333333% - 0.5rem)); }
 }
 
 /* Scroll Track with Animation */
@@ -115,8 +111,9 @@
   width: max-content;
 }
 
+/* Velocidad dinámica usando variable CSS --speed con fallback */
 .testimonials-scroll-track.animate {
-  animation: scroll-left 45s linear infinite;
+  animation: scroll-left var(--speed, 45s) linear infinite;
   will-change: transform;
 }
 
@@ -407,10 +404,8 @@
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .testimonials-scroll-track.animate {
-    animation-duration: 120s;
+    animation: none;
+    transform: none !important;
   }
-
-  .testimonial-card-scroll:hover {
-    transform: none;
-  }
+  .testimonial-card-scroll:hover { transform: none; }
 }
