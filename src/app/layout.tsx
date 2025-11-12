@@ -189,7 +189,7 @@ export default function RootLayout({
           })}
         </script>
       </head>
-      <body className={`${inter.className} bg-gray-50`}>
+      <body className={inter.className} style={{ backgroundColor: 'var(--color-background)' }}>
         <LoadingProvider>
           <HMRLoadingDetector />
           <ScrollToTop />
