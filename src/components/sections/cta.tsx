@@ -1,5 +1,37 @@
 'use client';
+import { useEffect } from 'react';
 import Link from 'next/link';
+
+function CalendlyEmbed() {
+  useEffect(() => {
+    // Cargar el script de Calendly
+    const script = document.createElement('script');
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      // Limpiar el script cuando el componente se desmonte
+      const existingScript = document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]');
+      if (existingScript) {
+        document.body.removeChild(existingScript);
+      }
+    };
+  }, []);
+
+  return (
+    <div
+      className="calendly-inline-widget"
+      data-url="https://calendly.com/codeinvestcr/30min?background_color=050F1D&text_color=ffffff&primary_color=3ac8ff"
+      style={{
+        minWidth: '320px',
+        height: '700px',
+        borderRadius: '16px',
+        overflow: 'hidden'
+      }}
+    />
+  );
+}
 
 export default function ContactCTA() {
   return (
@@ -59,21 +91,9 @@ export default function ContactCTA() {
           </div>
         </div>
 
-        {/* CTA Buttons */}
-        <div className="cta-buttons">
-          <Link href="/agendar" className="cta-button primary">
-            <svg viewBox="0 0 20 20" fill="currentColor" className="button-icon">
-              <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
-            </svg>
-            Agendar Consultoría Gratuita
-          </Link>
-          <Link href="/contacto" className="cta-button secondary">
-            <svg viewBox="0 0 20 20" fill="currentColor" className="button-icon">
-              <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-              <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-            </svg>
-            Enviar Mensaje
-          </Link>
+        {/* Calendly Embed */}
+        <div className="calendly-wrapper">
+          <CalendlyEmbed />
         </div>
 
         {/* Contact Methods */}
@@ -101,7 +121,7 @@ export default function ContactCTA() {
           </div>
         </div>
       </div>
-      
+
       <style jsx>{`
         .contact-cta {
           background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.9) 100%);
@@ -124,7 +144,7 @@ export default function ContactCTA() {
         }
 
         .contact-container {
-          max-width: 900px;
+          max-width: 1200px;
           margin: 0 auto;
           text-align: center;
           position: relative;
@@ -176,6 +196,9 @@ export default function ContactCTA() {
           grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
           gap: 2rem;
           margin-bottom: 3rem;
+          max-width: 900px;
+          margin-left: auto;
+          margin-right: auto;
         }
 
         .cta-stat {
@@ -231,55 +254,15 @@ export default function ContactCTA() {
           font-weight: 500;
         }
 
-        /* CTA Buttons */
-        .cta-buttons {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 1rem;
-          justify-content: center;
-          margin-bottom: 3rem;
-        }
-
-        .cta-button {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.75rem;
-          padding: 1.1rem 2.25rem;
-          font-weight: 700;
-          font-size: 1rem;
-          border-radius: 12px;
-          transition: all 0.3s ease;
-          text-decoration: none;
-          cursor: pointer;
-          border: none;
-        }
-
-        .cta-button.primary {
-          background: linear-gradient(135deg, #3ac8ff 0%, #2a9fd9 100%);
-          color: #ffffff;
-          box-shadow: 0 4px 20px rgba(58, 200, 255, 0.4);
-        }
-
-        .cta-button.primary:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 6px 30px rgba(58, 200, 255, 0.5);
-        }
-
-        .cta-button.secondary {
-          background: rgba(58, 200, 255, 0.1);
-          color: #3ac8ff;
-          border: 2px solid rgba(58, 200, 255, 0.3);
-        }
-
-        .cta-button.secondary:hover {
-          background: rgba(58, 200, 255, 0.15);
-          border-color: rgba(58, 200, 255, 0.5);
-          transform: translateY(-2px);
-        }
-
-        .button-icon {
-          width: 20px;
-          height: 20px;
+        /* Calendly Wrapper */
+        .calendly-wrapper {
+          max-width: 1000px;
+          margin: 0 auto 3rem;
+          background: rgba(20, 30, 60, 0.4);
+          border: 1px solid rgba(58, 200, 255, 0.15);
+          border-radius: 16px;
+          padding: 1rem;
+          backdrop-filter: blur(20px);
         }
 
         /* Contact Methods */
@@ -344,14 +327,8 @@ export default function ContactCTA() {
             gap: 1rem;
           }
 
-          .cta-buttons {
-            flex-direction: column;
-          }
-
-          .cta-button {
-            width: 100%;
-            justify-content: center;
-            padding: 1rem 2rem;
+          .calendly-wrapper {
+            padding: 0.5rem;
           }
 
           .contact-methods {
