@@ -43,7 +43,6 @@ export default function ServicesSection() {
   const itemsRef = useRef<(HTMLDivElement | null)[]>([]);
   const rafId = useRef<number | null>(null);
   const visibleSetRef = useRef<Set<number>>(new Set());
-  // Referencia a la sección para futuras mejoras (no usada ahora)
   const sectionRef = useRef<HTMLElement | null>(null);
 
 useEffect(() => {
@@ -176,30 +175,23 @@ useEffect(() => {
     console.log(`[Estado] Active index actualizado: ${activeIndex !== null ? activeIndex + ' (' + services[activeIndex].title + ')' : 'null'}`);
   }, [activeIndex]);
 
-  return (
-    <section className="services-section" ref={sectionRef}>
-  <div className="services-container">
-  {/* Columna izquierda (scroll normal) */}
-    <div className="services-left">
-      <div className="services-header">
-        <h3 className="services-subtitle">Nuestros</h3>
-        <h2 className="services-title"> Servicios</h2>
-
-
-
-
-        <div className="header-content">
-          <div className="title-decoration">
-            <div className="decoration-line"></div>
-            <div className="decoration-dot"></div>
-            <div className="decoration-line"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    {/* Columna derecha con cards */}
-    <div className="services-grid">
+    return (
+      <section className="services-section" ref={sectionRef}>
+        <div className="services-inner">
+          <aside className="services-sidebar">
+            <div className="services-header">
+              <h3 className="services-subtitle">Nuestros</h3>
+              <h2 className="services-title">Servicios</h2>
+              <div className="header-content">
+                <div className="title-decoration">
+                  <div className="decoration-line"></div>
+                  <div className="decoration-dot"></div>
+                  <div className="decoration-line"></div>
+                </div>
+              </div>
+            </div>
+          </aside>
+          <div className="services-grid">
       {services.map((service, index) => (
         <div
           key={service.id}
@@ -226,9 +218,9 @@ useEffect(() => {
           </div>
         </div>
       ))}
-    </div>
-  </div>
-</section>
+          </div>
+        </div>
+      </section>
 
   );
 }

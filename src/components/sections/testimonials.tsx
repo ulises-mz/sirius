@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useMemo } from "react";
 import { testimonials } from "@/data/testimonials";
 import "@/styles/testimonials-section.css";
 
@@ -15,8 +15,19 @@ export function TestimonialsSection() {
     }
   }, []);
 
-  // Triplicar testimonios para scroll suave infinito
-  const allTestimonials = [...testimonials, ...testimonials, ...testimonials];
+  // Triplicar testimonios para scroll suave infinito (3 segmentos idénticos)
+  const allTestimonials = useMemo(() => (
+    [...testimonials, ...testimonials, ...testimonials]
+  ), []);
+
+  // Calcula duración dinámica según cantidad (más items => animación más larga)
+  const animationSpeedSeconds = useMemo(() => {
+    const basePerItem = 6; // segundos por testimonial visible aproximado
+    const uniqueCount = testimonials.length;
+    // Limitar rango razonable
+    const raw = uniqueCount * basePerItem;
+    return Math.min(Math.max(raw, 30), 90); // entre 30s y 90s
+  }, []);
 
   return (
     <section className="testimonials-section">
@@ -37,9 +48,19 @@ export function TestimonialsSection() {
 
         {/* Infinite Scroll Carousel */}
         <div className="testimonials-scroll-wrapper">
-          <div className="testimonials-scroll-track" ref={trackRef}>
+          <div
+            className="testimonials-scroll-track"
+            ref={trackRef}
+            style={{ ['--speed' as any]: `${animationSpeedSeconds}s` }}
+            aria-label="Carrusel de testimonios en desplazamiento horizontal infinito"
+          >
             {allTestimonials.map((testimonial, index) => (
-              <div key={`testimonial-${index}`} className="testimonial-card-scroll">
+              <div
+                key={`testimonial-${index}`}
+                className="testimonial-card-scroll"
+                // Oculta a lectores de pantalla duplicados para evitar repetición
+                aria-hidden={index >= testimonials.length}
+              >
                 {/* Rating */}
                 <div className="testimonial-rating">
                   {Array.from({ length: 5 }).map((_, i) => (

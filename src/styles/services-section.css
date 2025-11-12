@@ -6,13 +6,105 @@
     #0a0f1c 15%,
     var(--color-background-secondary) 30%
   );
-  display: flex;
-  justify-content: center;
   position: relative;
   margin-top: -100px; /* Solapamiento para transición más suave */
   padding-top: calc(5rem + 100px); /* Compensar el margin negativo */
   border-radius: 60px 60px 0 0; /* Bordes redondeados superiores */
-  overflow: hidden; /* Asegurar que el contenido respete los bordes */
+  z-index: 10; /* Elevar sobre el hero */
+
+  /* Efecto 3D - Sombras múltiples para crear profundidad */
+  box-shadow:
+    0 -20px 60px rgba(0, 0, 0, 0.5),
+    0 -10px 30px rgba(0, 0, 0, 0.3),
+    0 -5px 15px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+  /* Borde sutil en la parte superior para efecto de borde elevado */
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Efecto de luz animada en el borde superior */
+.services-section::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -50%;
+  width: 200%;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    transparent 40%,
+    rgba(var(--accent-rgb), 0.4) 45%,
+    rgba(var(--accent-rgb), 0.8) 50%,
+    rgba(var(--text-secondary-rgb), 0.8) 52%,
+    rgba(var(--text-secondary-rgb), 0.4) 55%,
+    transparent 60%,
+    transparent 100%
+  );
+  border-radius: 60px 60px 0 0;
+  animation: movingLight 8s linear infinite;
+  z-index: 2;
+  filter: blur(2px);
+}
+
+@keyframes movingLight {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(50%);
+  }
+}
+
+@media (max-width: 768px) {
+  .services-section {
+    padding: 3rem 1rem;
+    margin-top: -50px;
+    padding-top: calc(3rem + 50px);
+    border-radius: 40px 40px 0 0;
+    box-shadow:
+      0 -15px 45px rgba(0, 0, 0, 0.5),
+      0 -8px 20px rgba(0, 0, 0, 0.3),
+      0 -4px 10px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  .services-section::after {
+    border-radius: 40px 40px 0 0;
+    height: 3px;
+  }
+}
+
+@media (max-width: 480px) {
+  .services-section {
+    padding: 2rem 1rem;
+    margin-top: -30px;
+    padding-top: calc(2rem + 30px);
+    border-radius: 30px 30px 0 0;
+    box-shadow:
+      0 -12px 35px rgba(0, 0, 0, 0.5),
+      0 -6px 15px rgba(0, 0, 0, 0.3),
+      0 -3px 8px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  .services-section::after {
+    border-radius: 30px 30px 0 0;
+    height: 2px;
+    animation: movingLight 6s linear infinite;
+  }
+}
+
+/* Wrapper interior que controla overflow y layout sin romper sticky */
+.services-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 3rem;
+  align-items: start;
+  overflow: visible; /* necesario para que sticky funcione */
 }
 
 .services-section::before {
@@ -26,65 +118,26 @@
   z-index: 0;
 }
 
-.services-container {
-  display: flex;
-  max-width: 100%;
-  min-width: 80%;
-  gap: 2rem; /* espacio entre columnas */
-  position: relative;
+.services-sidebar {
+  position: sticky;
+  top: clamp(72px, 12vh, 128px);
+  align-self: start;
+  height: fit-content;
   z-index: 1;
 }
-.services-left {
-  flex: 0 0 20%; /* ancho fijo para la columna izquierda */
-  position: static !important; /* scroll normal con la página */
-  height: auto !important;
-  padding-right: 1rem;
-  top: auto !important;
-  left: auto !important;
-  right: auto !important;
-  bottom: auto !important;
-  transform: none !important;
-  -webkit-transform: none !important;
-  -moz-transform: none !important;
-  -ms-transform: none !important;
-  -o-transform: none !important;
-  will-change: auto !important;
-  backface-visibility: visible !important;
-  perspective: none !important;
-  contain: none !important;
+
+/* Estado fijo controlado por JS para mantener visible el título dentro de los límites de la sección */
+.services-left.services-left-fixed {
+  pointer-events: none; /* evita capturar eventos sobre el área fija */
 }
+
 .services-header {
-  /* elimina el margin-bottom si quieres */
   margin-bottom: 0;
-  text-align: left; /* para que la línea de decoración quede alineada con el título */
-  position: static !important; /* Forzar que no sea sticky */
-  top: auto !important;
-  left: auto !important;
-  right: auto !important;
-  bottom: auto !important;
-  transform: none !important;
-  -webkit-transform: none !important;
-  -moz-transform: none !important;
-  -ms-transform: none !important;
-  -o-transform: none !important;
-  will-change: auto !important;
-  backface-visibility: visible !important;
-  perspective: none !important;
-  contain: none !important;
+  text-align: left;
 }
 
 .header-content {
   display: inline-block;
-  position: static !important;
-  top: auto !important;
-  left: auto !important;
-  right: auto !important;
-  bottom: auto !important;
-  transform: none !important;
-  -webkit-transform: none !important;
-  -moz-transform: none !important;
-  -ms-transform: none !important;
-  -o-transform: none !important;
 }
 
 .services-title {
@@ -93,20 +146,6 @@
   letter-spacing: 0.05em;
   font-size: 2.25rem;
   margin-bottom: 0.5rem;
-  position: static !important;
-  top: auto !important;
-  left: auto !important;
-  right: auto !important;
-  bottom: auto !important;
-  transform: none !important;
-  -webkit-transform: none !important;
-  -moz-transform: none !important;
-  -ms-transform: none !important;
-  -o-transform: none !important;
-  will-change: auto !important;
-  backface-visibility: visible !important;
-  perspective: none !important;
-  contain: none !important;
 }
 
 .services-subtitle {
@@ -115,20 +154,6 @@
   letter-spacing: 0.05em;
   font-size: 2.25rem;
   margin-bottom: 0.5rem;
-  position: static !important;
-  top: auto !important;
-  left: auto !important;
-  right: auto !important;
-  bottom: auto !important;
-  transform: none !important;
-  -webkit-transform: none !important;
-  -moz-transform: none !important;
-  -ms-transform: none !important;
-  -o-transform: none !important;
-  will-change: auto !important;
-  backface-visibility: visible !important;
-  perspective: none !important;
-  contain: none !important;
 }
 
 .decoration-line {
@@ -140,12 +165,22 @@
 
 
 .services-grid {
-  flex: 1 1 auto; /* ocupa el resto del espacio */
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  /* Lista vertical para mantener orden y cálculo de activeIndex coherente */
+  display: flex;
+  flex-direction: column;
   gap: 2rem;
   width: 100%;
-  max-width: none; /* para que no limite el ancho dentro del flex */
+}
+/* Opcional: en pantallas muy anchas, permitir dos columnas manteniendo orden mediante column layout */
+@media (min-width: 1400px) {
+  .services-grid {
+    column-count: 2;
+    column-gap: 2.5rem;
+  }
+  .services-grid .service-item {
+    break-inside: avoid;
+    width: 100%;
+  }
 }
 
 .service-item {
@@ -335,22 +370,21 @@
   color: var(--color-background);
 }
 
-@media (min-width: 768px) {
-  .services-grid {
-    grid-template-columns: repeat(1, 1fr);
+@media (max-width: 1024px) {
+  .services-inner {
+    grid-template-columns: 260px 1fr;
+    gap: 2rem;
   }
 }
-
-@media (min-width: 1024px) {
+@media (max-width: 900px) {
+  .services-inner {
+    grid-template-columns: 1fr;
+  }
+  .services-sidebar {
+    position: static; /* desactivar sticky en móvil */
+  }
   .services-grid {
-    grid-template-columns: repeat(1, 1fr);
-  }
-  
-  .services-title {
-    font-size:  2.25rem;;
-  }
-  .services-subtitle {
-    font-size: 2.25rem;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   }
 }
 
