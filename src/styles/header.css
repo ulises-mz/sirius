@@ -2,17 +2,29 @@
 /* Header con animación progresiva de fondo al hacer scroll */
 .site-header {
   --header-bg: rgba(7,12,24,0.92); /* Color final (puede sobreescribirse) */
+  --header-ease: cubic-bezier(0.22, 1, 0.36, 1); /* ease-out suave y moderna */
+  --padY: 1.15rem; /* alto base */
   background-color: transparent; /* base transparente */
   color: var(--color-text-primary);
   position: sticky;
   top: 0;
   z-index: 50;
-  transition: box-shadow 0.4s ease, border-color 0.4s ease, background-color 0.4s ease;
+  transition:
+    background-color .5s var(--header-ease),
+    box-shadow .55s var(--header-ease),
+    border-color .5s var(--header-ease),
+    transform .55s var(--header-ease),
+    -webkit-backdrop-filter .5s var(--header-ease),
+    backdrop-filter .5s var(--header-ease);
   isolation: isolate;
   margin: 0;
   margin-top: 0 !important; /* forzar sin margen superior */
   padding: 0;
-  margin-bottom: calc(-1rem - 3rem); /* negativo para compensar su altura */
+  /* Eliminar hacks de margen negativo que generaban artefactos visuales */
+  margin-bottom: 0;
+  /* Soporte para notch/safe-area sin crear huecos visibles */
+  padding-top: env(safe-area-inset-top, 0px);
+  will-change: background-color, box-shadow, transform, backdrop-filter;
 }
 
 /* Capa animada: permite fade + leve slide para dar sensación de aparición */
@@ -21,8 +33,8 @@
   position: absolute;
   inset: 0;
   background: var(--header-bg, rgba(7,12,24,0.92));
-  opacity: 0; /* completamente invisible en top */
-  transition: opacity .45s ease;
+  opacity: 0.1; /* leve velo para evitar ver el fondo como una franja en top */
+  transition: opacity .55s var(--header-ease), -webkit-backdrop-filter .5s var(--header-ease), backdrop-filter .5s var(--header-ease);
   pointer-events: none;
   z-index: -1;
   backdrop-filter: none; /* sin backdrop filter cuando está invisible */
@@ -33,18 +45,20 @@
   background-color: transparent !important;
   border-bottom: 1px solid transparent;
   box-shadow: none;
+  --padY: 1.3rem; /* un poco más alto en top */
 }
 
 .site-header.is-scrolled {
   border-bottom: 1px solid var(--color-border);
   box-shadow: 0 8px 28px -12px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.02) inset;
+  --padY: 0.7rem; /* reducción más suave */
 }
 
 .site-header.is-scrolled::before {
-  opacity: 1;
+  opacity: 0.92; /* color de fondo aparece suave, no 100% sólido */
   /* activar blur/saturate solo cuando hay fondo visible para evitar halo/espacio oscuro */
-  backdrop-filter: saturate(160%) blur(10px);
-  -webkit-backdrop-filter: saturate(160%) blur(10px);
+  backdrop-filter: saturate(160%) blur(12px);
+  -webkit-backdrop-filter: saturate(160%) blur(12px);
 }
 
 /* Respeto a usuarios con reducción de movimiento */
@@ -57,11 +71,16 @@
 .header-container {
   max-width: 80%;
   margin: 0 auto;
-  padding: 1rem 1.5rem;
+  padding: var(--padY) 1.5rem; /* altura animable */
   display: flex;
   align-items: center;
   justify-content: space-between;
+  transition: padding .5s var(--header-ease), transform .55s var(--header-ease);
 }
+
+/* Suavidad adicional: el contenedor sube apenas en scrolled, y en top se ve ligeramente más "amplio" */
+.site-header.is-top .header-container { transform: scale(1.01); }
+.site-header.is-scrolled .header-container { transform: scale(1); }
 
 /* Logo */
 .logo-container {
@@ -98,12 +117,23 @@
   mask-position: center;
   mask-size: contain;
   filter: drop-shadow(0 0 10px rgba(var(--accent-rgb),0.35));
-  transition: filter 0.3s ease, transform 0.3s ease;
+  transition: filter .5s var(--header-ease), transform .5s var(--header-ease);
 }
 
 .logo-link:hover .logo-image-mask {
   filter: drop-shadow(0 0 14px rgba(var(--accent-rgb),0.5)) brightness(1.05);
   transform: translateY(-1px);
+}
+
+/* Sutileza adicional al hacer scroll: logo ligeramente más compacto */
+.site-header.is-scrolled .logo-image-mask {
+  transform: scale(0.96);
+  filter: drop-shadow(0 0 10px rgba(var(--accent-rgb),0.28));
+}
+
+/* En top el logo es un poco más grande para remarcar la transición */
+.site-header.is-top .logo-image-mask {
+  transform: scale(1.06);
 }
 
 .logo-text {
@@ -134,12 +164,17 @@
   color: var(--color-text-primary);
   text-decoration: none;
   font-weight: 500;
-  transition: color 0.3s ease;
+  transition: color .45s var(--header-ease), opacity .45s var(--header-ease), transform .45s var(--header-ease), letter-spacing .45s var(--header-ease);
+  transform-origin: center;
 }
 
 .nav-link:hover {
   color: var(--color-link, var(--color-accent));
 }
+
+/* Tamaño/espaciado más "grande" en top, más compacto al hacer scroll */
+.site-header.is-top .nav-link { transform: scale(1.03); letter-spacing: 0.2px; }
+.site-header.is-scrolled .nav-link { transform: scale(0.985); opacity: 0.96; }
 
 /* Botón CTA - estilo sutil */
 .cta-container {
@@ -156,7 +191,7 @@
   text-decoration: none;
   font-weight: 500;
   letter-spacing: 0.3px;
-  transition: all 0.3s ease;
+  transition: all .5s var(--header-ease);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -166,6 +201,9 @@
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
+
+.site-header.is-top .cta-button { transform: scale(1.03); }
+.site-header.is-scrolled .cta-button { transform: scale(0.985); }
 
 /* Menú hamburguesa (oculto en desktop) */
 .hamburger-button {
