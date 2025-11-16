@@ -70,22 +70,22 @@ export default function Header() {
         {/* Menú principal - visible en desktop por CSS */}
         <nav className="main-nav">
           <LoadingLink href="/" className="nav-link" onClick={handleDesktopNavigation}>
-            Home
+            Inicio
           </LoadingLink>
           <LoadingLink href="/servicios" className="nav-link" onClick={handleDesktopNavigation}>
-            Services
+            Servicios
           </LoadingLink>
           <LoadingLink href="/portafolio" className="nav-link" onClick={handleDesktopNavigation}>
-            Projects
+            Portafolio
           </LoadingLink>
           <LoadingLink href="/nosotros" className="nav-link" onClick={handleDesktopNavigation}>
-            About
+            Nosotros
           </LoadingLink>
           <LoadingLink href="/blog" className="nav-link" onClick={handleDesktopNavigation}>
             Blog
           </LoadingLink>
           <LoadingLink href="/contacto" className="nav-link" onClick={handleDesktopNavigation}>
-            Contact
+            Contacto
           </LoadingLink>
         </nav>
 
@@ -111,22 +111,22 @@ export default function Header() {
       {/* Menú móvil - solo visible cuando está abierto */}
       <div className={`mobile-menu ${isMenuOpen ? 'open' : ''}`}>
         <LoadingLink href="/" className="mobile-link" onClick={handleNavigation}>
-          Home
+          Inicio
         </LoadingLink>
         <LoadingLink href="/servicios" className="mobile-link" onClick={handleNavigation}>
-          Services
+          Servicios
         </LoadingLink>
         <LoadingLink href="/portafolio" className="mobile-link" onClick={handleNavigation}>
-          Projects
+          Portafolio
         </LoadingLink>
         <LoadingLink href="/nosotros" className="mobile-link" onClick={handleNavigation}>
-          About
+          Nosotros
         </LoadingLink>
         <LoadingLink href="/blog" className="mobile-link" onClick={handleNavigation}>
           Blog
         </LoadingLink>
         <LoadingLink href="/contacto" className="mobile-link" onClick={handleNavigation}>
-          Contact
+          Contacto
         </LoadingLink>
         <LoadingLink href="/agendar" className="mobile-cta" onClick={handleNavigation}>
           Agendar Consultoría
