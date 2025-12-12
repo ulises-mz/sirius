@@ -2,46 +2,46 @@ import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
 export async function POST(request: NextRequest) {
-  try {
-    const body = await request.json();
-    const { name, email, phone, company, service, message } = body;
+    try {
+        const body = await request.json();
+        const { name, email, phone, company, service, message } = body;
 
-    // Validación básica
-    if (!name || !email || !phone || !message) {
-      return NextResponse.json(
-        { error: 'Todos los campos obligatorios deben ser completados' },
-        { status: 400 }
-      );
-    }
+        // Validación básica
+        if (!name || !email || !phone || !message) {
+            return NextResponse.json(
+                { error: 'Todos los campos obligatorios deben ser completados' },
+                { status: 400 }
+            );
+        }
 
-    // Validación de email
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return NextResponse.json(
-        { error: 'Email inválido' },
-        { status: 400 }
-      );
-    }
+        // Validación de email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            return NextResponse.json(
+                { error: 'Email inválido' },
+                { status: 400 }
+            );
+        }
 
-    // Configura el transporter SMTP con variables de entorno
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: Number(process.env.SMTP_PORT),
-      secure: true, // true para puerto 465
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    });
+        // Configura el transporter SMTP con variables de entorno
+        const transporter = nodemailer.createTransport({
+            host: process.env.SMTP_HOST,
+            port: Number(process.env.SMTP_PORT),
+            secure: true, // true para puerto 465
+            auth: {
+                user: process.env.SMTP_USER,
+                pass: process.env.SMTP_PASS,
+            },
+        });
 
-    // Email bonito para el admin
-    const adminMailOptions = {
-      from: `"Contacto Web" <${process.env.SMTP_USER}>`,
-      to: process.env.RECEIVER_EMAIL || process.env.SMTP_USER,
-      subject: `Nuevo mensaje de contacto de ${name}`,
-      replyTo: email,
-      html: `
-        <div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;border:1px solid #eee;padding:24px;background:#fafcff;">
+        // Email bonito para el admin
+        const adminMailOptions = {
+            from: `"Contacto Web" <${process.env.SMTP_USER}>`,
+            to: process.env.RECEIVER_EMAIL || process.env.SMTP_USER,
+            subject: `Nuevo mensaje de contacto de ${name}`,
+            replyTo: email,
+            html: `
+        <div style="font-family:'Genova',sans-serif;max-width:600px;margin:auto;border:1px solid #eee;padding:24px;background:#fafcff;">
           <h2 style="color:#1a237e;">Nuevo mensaje de contacto</h2>
           <table style="width:100%;margin-bottom:16px;">
             <tr><td><strong>Nombre:</strong></td><td>${name}</td></tr>
@@ -55,15 +55,15 @@ export async function POST(request: NextRequest) {
           <p style="font-size:14px;color:#333;">Recibido el ${new Date().toLocaleString('es-CR')}</p>
         </div>
       `,
-    };
+        };
 
-    // Email automático para el cliente con diseño elegante y SVG
-    const calendlyUrl = 'https://calendly.com/codeinvestcr/30min';
-    const clientMailOptions = {
-      from: `"CodeINVEST" <${process.env.SMTP_USER}>`,
-      to: email,
-      subject: '¡Gracias por contactar a CodeINVEST!',
-      html: `
+        // Email automático para el cliente con diseño elegante y SVG
+        const calendlyUrl = 'https://calendly.com/codeinvestcr/30min';
+        const clientMailOptions = {
+            from: `"CodeINVEST" <${process.env.SMTP_USER}>`,
+            to: email,
+            subject: '¡Gracias por contactar a CodeINVEST!',
+            html: `
         <!DOCTYPE html>
         <html>
         <head>
@@ -300,25 +300,25 @@ export async function POST(request: NextRequest) {
         </body>
         </html>
       `,
-    };
+        };
 
-    // Enviar ambos correos
-    await transporter.sendMail(adminMailOptions);
-    await transporter.sendMail(clientMailOptions);
+        // Enviar ambos correos
+        await transporter.sendMail(adminMailOptions);
+        await transporter.sendMail(clientMailOptions);
 
-    return NextResponse.json(
-      { 
-        success: true, 
-        message: 'Mensaje enviado exitosamente. Te contactaremos pronto.' 
-      },
-      { status: 200 }
-    );
+        return NextResponse.json(
+            {
+                success: true,
+                message: 'Mensaje enviado exitosamente. Te contactaremos pronto.'
+            },
+            { status: 200 }
+        );
 
-  } catch (error) {
-    console.error('Error processing contact form:', error);
-    return NextResponse.json(
-      { error: 'Error interno del servidor' },
-      { status: 500 }
-    );
-  }
+    } catch (error) {
+        console.error('Error processing contact form:', error);
+        return NextResponse.json(
+            { error: 'Error interno del servidor' },
+            { status: 500 }
+        );
+    }
 }

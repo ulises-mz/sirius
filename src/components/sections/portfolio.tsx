@@ -37,7 +37,7 @@ export default function PortfolioSection() {
 
           {/* DERECHA - TEXTO (1/3 ancho en desktop, full width en móvil) */}
           <div className="portfolio-text">
-            <h2 className="portfolio-subtitle">Proyectos</h2>
+            <h2 className="portfolio-subtitle text-4xl md:text-5xl font-bold leading-tight tracking-tight">Proyectos</h2>
 
             <p className="portfolio-description">
               Casos de éxito desarrollados para clientes locales que confiaron

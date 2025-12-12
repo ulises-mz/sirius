@@ -1,137 +1,134 @@
-'use client';
-import { useState, useEffect } from "react";
-import "@/styles/header.css";
-import { useScrollToTop } from "./ScrollToTop";
+"use client";
+import { useState } from "react";
+import {
+  Navbar,
+  NavBody,
+  NavItems,
+  MobileNav,
+  MobileNavHeader,
+  MobileNavToggle,
+  MobileNavMenu,
+  NavbarButton,
+} from "@/components/ui/resizable-navbar";
 import LoadingLink from "@/components/shared/loading-link";
 
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const { scrollToTop } = useScrollToTop();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 768) setIsMenuOpen(false);
-    };
-
-    handleResize(); // Verificar al montar
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  // Transparencia en top y fondo sólido apenas se mueve (umbral muy pequeño)
-  useEffect(() => {
-    const getScrollTop = () => {
-      if (typeof window === 'undefined') return 0;
-      // Compatibilidad: distintos navegadores/estructuras pueden usar html o body
-      return window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
-    };
-
-    const onScroll = () => {
-      setScrolled(getScrollTop() > 0);
-    };
-
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    // Fallbacks para entornos con contenedores scroll personalizados
-    document.addEventListener("scroll", onScroll, { passive: true, capture: true });
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      document.removeEventListener("scroll", onScroll, { capture: true } as any);
-    };
-  }, []);
-
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-  const closeMenu = () => setIsMenuOpen(false);
-  
-  // Función para cerrar menú y hacer scroll al top cuando se navega
-  const handleNavigation = () => {
-    closeMenu();
-    // Pequeño delay para que se cierre el menú antes del scroll
-    setTimeout(() => scrollToTop(), 100);
-  };
-  
-  // Manejador para navegación desktop (sin cerrar menú)
-  const handleDesktopNavigation = () => {
-    scrollToTop();
-  };
+  const navItems = [
+    { name: "Servicios", link: "/servicios" },
+    { name: "Proyectos", link: "/portafolio" },
+    { name: "Contacto", link: "/contacto" },
+  ];
 
   return (
-    <header className={`site-header ${scrolled ? "is-scrolled" : "is-top"}`}>
-      <div className="header-container">
-        {/* Logo */}
-        <div className="logo-container">
-          <LoadingLink href="/" className="logo-link" onClick={handleNavigation} aria-label="Inicio - Sirius">
-            {/* SVG como máscara para permitir colorear con CSS/gradiente */}
-            <span className="logo-image-mask" aria-hidden="true" />
-          </LoadingLink>
-        </div>
+    <Navbar>
+      {/* Desktop */}
+      <NavBody>
+        {/* Logo / Inicio */}
+        <LoadingLink
+          href="/"
+          className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-base font-semibold text-black dark:text-white"
+          aria-label="Inicio - Sirius"
+        >
+          <span
+            aria-hidden
+            className="block h-10 w-22"
+            style={{
+              WebkitMaskImage: "url(/favicon.svg)",
+              maskImage: "url(/favicon.svg)",
+              WebkitMaskRepeat: "no-repeat",
+              maskRepeat: "no-repeat",
+              WebkitMaskSize: "contain",
+              maskSize: "contain",
+              WebkitMaskPosition: "center",
+              maskPosition: "center",
+              backgroundImage: "linear-gradient(135deg, #3ac8ff 0%, #6d6bff 100%)",
+            }}
+          />
+        </LoadingLink>
 
-        {/* Menú principal - visible en desktop por CSS */}
-        <nav className="main-nav">
-          <LoadingLink href="/" className="nav-link" onClick={handleDesktopNavigation}>
-            Inicio
-          </LoadingLink>
-          <LoadingLink href="/servicios" className="nav-link" onClick={handleDesktopNavigation}>
-            Servicios
-          </LoadingLink>
-          <LoadingLink href="/portafolio" className="nav-link" onClick={handleDesktopNavigation}>
-            Portafolio
-          </LoadingLink>
-          <LoadingLink href="/nosotros" className="nav-link" onClick={handleDesktopNavigation}>
-            Nosotros
-          </LoadingLink>
-          <LoadingLink href="/blog" className="nav-link" onClick={handleDesktopNavigation}>
+        {/* Center items */}
+        <NavItems items={navItems} className="text-base" />
+
+        {/* Right actions */}
+        <div className="flex items-center gap-4">
+          <LoadingLink
+            href="/blog"
+            className="px-3 py-2 text-base font-medium text-neutral-700 hover:text-neutral-900 dark:text-neutral-300"
+          >
             Blog
           </LoadingLink>
-          <LoadingLink href="/contacto" className="nav-link" onClick={handleDesktopNavigation}>
-            Contacto
-          </LoadingLink>
-        </nav>
-
-        {/* Botón CTA - visible en desktop por CSS */}
-        <div className="cta-container">
-          <LoadingLink href="/agendar" className="cta-button" onClick={handleDesktopNavigation}>
-            Agendar Consultoría
-          </LoadingLink>
+          <NavbarButton as={LoadingLink} href="/agendar" variant="primary">
+            Agendar consultoría gratuita
+          </NavbarButton>
         </div>
+      </NavBody>
 
-        {/* Botón hamburguesa - solo visible en móvil por CSS */}
-        <button 
-          className={`hamburger-button ${isMenuOpen ? 'open' : ''}`}
-          onClick={toggleMenu}
-          aria-label="Menu"
+      {/* Mobile */}
+      <MobileNav>
+        <MobileNavHeader>
+          <LoadingLink
+            href="/"
+            className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-base font-semibold text-black dark:text-white"
+            aria-label="Inicio - Sirius"
+          >
+            <span
+              aria-hidden
+              className="block h-12 w-18"
+              style={{
+                WebkitMaskImage: "url(/favicon.svg)",
+                maskImage: "url(/favicon.svg)",
+                WebkitMaskRepeat: "no-repeat",
+                maskRepeat: "no-repeat",
+                WebkitMaskSize: "contain",
+                maskSize: "contain",
+                WebkitMaskPosition: "center",
+                maskPosition: "center",
+                backgroundImage: "linear-gradient(135deg, #3ac8ff 0%, #6d6bff 100%)",
+              }}
+            />
+          </LoadingLink>
+          <MobileNavToggle
+            isOpen={isMobileMenuOpen}
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          />
+        </MobileNavHeader>
+
+        <MobileNavMenu
+          isOpen={isMobileMenuOpen}
+          onClose={() => setIsMobileMenuOpen(false)}
         >
-          <span className="hamburger-line"></span>
-          <span className="hamburger-line"></span>
-          <span className="hamburger-line"></span>
-        </button>
-      </div>
-
-      {/* Menú móvil - solo visible cuando está abierto */}
-      <div className={`mobile-menu ${isMenuOpen ? 'open' : ''}`}>
-        <LoadingLink href="/" className="mobile-link" onClick={handleNavigation}>
-          Inicio
-        </LoadingLink>
-        <LoadingLink href="/servicios" className="mobile-link" onClick={handleNavigation}>
-          Servicios
-        </LoadingLink>
-        <LoadingLink href="/portafolio" className="mobile-link" onClick={handleNavigation}>
-          Portafolio
-        </LoadingLink>
-        <LoadingLink href="/nosotros" className="mobile-link" onClick={handleNavigation}>
-          Nosotros
-        </LoadingLink>
-        <LoadingLink href="/blog" className="mobile-link" onClick={handleNavigation}>
-          Blog
-        </LoadingLink>
-        <LoadingLink href="/contacto" className="mobile-link" onClick={handleNavigation}>
-          Contacto
-        </LoadingLink>
-        <LoadingLink href="/agendar" className="mobile-cta" onClick={handleNavigation}>
-          Agendar Consultoría
-        </LoadingLink>
-      </div>
-    </header>
+          {navItems.map((item, idx) => (
+            <LoadingLink
+              key={`mobile-link-${idx}`}
+              href={item.link}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="relative text-base font-medium text-neutral-700 dark:text-neutral-300"
+            >
+              <span className="block">{item.name}</span>
+            </LoadingLink>
+          ))}
+          <div className="flex w-full flex-col gap-4">
+            <LoadingLink
+              href="/blog"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="w-full px-3 py-2 text-center text-base font-medium text-neutral-700 hover:text-neutral-900 dark:text-neutral-300"
+            >
+              Blog
+            </LoadingLink>
+            <NavbarButton
+              as={LoadingLink}
+              href="/agendar"
+              onClick={() => setIsMobileMenuOpen(false)}
+              variant="primary"
+              className="w-full"
+            >
+              Agendar consultoría gratuita
+            </NavbarButton>
+          </div>
+        </MobileNavMenu>
+      </MobileNav>
+    </Navbar>
   );
 }

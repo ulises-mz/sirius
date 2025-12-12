@@ -4,7 +4,7 @@
 */
 
 :root {
-  --header-height: 88px;
+
   --space-bg: #070812;
   --space-deep: #05050b;
   --neon-violet: #6d6bff;
@@ -19,13 +19,15 @@
   background: radial-gradient(1200px 800px at 20% 10%, #0b0f2b 0%, #080a18 35%, var(--space-bg) 70%, var(--space-deep) 100%);
   color: var(--text-on-dark);
   display: flex;
-  align-items: flex-start; /* llevar contenido más arriba */
+  align-items: center;
+  /* centrar verticalmente */
+  justify-content: center;
+  /* centrar horizontalmente */
   box-sizing: border-box;
   padding: 0 1rem;
   overflow: hidden;
   min-height: 100vh;
   margin: 0;
-  padding-top: 0;
 }
 
 /* Gradiente de transición suave hacia la siguiente sección */
@@ -35,14 +37,15 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 200px;
-  background: linear-gradient(
-    180deg,
-    transparent 0%,
-    rgba(7, 12, 24, 0.3) 30%,
-    rgba(10, 15, 28, 0.6) 60%,
-    var(--color-background-secondary, #0a0f1c) 100%
-  );
+  height: 500px;
+  background: linear-gradient(180deg,
+      transparent 0%,
+      rgba(7, 8, 18, 0.08) 10%,
+      rgba(10, 12, 24, 0.2) 25%,
+      rgba(12, 15, 30, 0.45) 45%,
+      rgba(14, 17, 33, 0.7) 65%,
+      rgba(15, 18, 35, 0.85) 80%,
+      #0a0f1c 100%);
   pointer-events: none;
   z-index: 4;
 }
@@ -52,7 +55,6 @@
     min-height: 100vh;
     padding: 0;
   }
-  :root { --header-height: 100px; }
 }
 
 /* CAPAS DE FONDO */
@@ -62,22 +64,28 @@
   overflow: hidden;
   z-index: 0;
 }
+
 .hero-bg-fade {
   position: absolute;
   inset: 0;
   /* Aclarar la franja superior para que el hero se vea limpio bajo el header en top */
-  background: linear-gradient(180deg, rgba(10,12,26,0) 0%, rgba(5,6,16,0.55) 58%, rgba(3,4,12,0.9) 100%);
+  background: linear-gradient(180deg, rgba(10, 12, 26, 0) 0%, rgba(5, 6, 16, 0.55) 58%, rgba(3, 4, 12, 0.9) 100%);
   pointer-events: none;
 }
+
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(65% 65% at 50% 30%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.15) 60%, rgba(0,0,0,0.5) 100%);
+  background: radial-gradient(65% 65% at 50% 30%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.15) 60%, rgba(0, 0, 0, 0.5) 100%);
   pointer-events: none;
   z-index: 3;
 }
 
-.hero-stars-wrap { position: absolute; inset: 0; }
+.hero-stars-wrap {
+  position: absolute;
+  inset: 0;
+}
+
 .hero-stars {
   width: 100%;
   height: 100%;
@@ -92,21 +100,34 @@
   mix-blend-mode: screen;
   animation: drift 24s ease-in-out infinite;
 }
+
 .nebula-a {
-  width: 50vw; height: 50vw;
-  left: -10vw; top: -5vw;
+  width: 50vw;
+  height: 50vw;
+  left: -10vw;
+  top: -5vw;
   background: radial-gradient(circle at 30% 30%, rgba(61, 35, 255, 0.8), rgba(41, 26, 145, 0.5), transparent 60%);
 }
+
 .nebula-b {
-  width: 60vw; height: 60vw;
-  right: -20vw; bottom: -15vw;
+  width: 60vw;
+  height: 60vw;
+  right: -20vw;
+  bottom: -15vw;
   background: radial-gradient(circle at 60% 40%, rgba(0, 186, 255, 0.8), rgba(10, 76, 156, 0.5), transparent 65%);
   animation-duration: 30s;
 }
 
 @keyframes drift {
-  0%, 100% { transform: translate3d(0,0,0) scale(1); }
-  50% { transform: translate3d(2%, -2%, 0) scale(1.05); }
+
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(2%, -2%, 0) scale(1.05);
+  }
 }
 
 /* Planetas realistas con texturas, sombras y atmósfera */
@@ -118,18 +139,20 @@
 
 /* Planeta pequeño - Estilo Marte (más lejos, más pequeño, más difuso) */
 .planet-small {
-  width: 90px; height: 90px;
-  left: 6%; top: 18%;
+  width: 90px;
+  height: 90px;
+  left: 6%;
+  top: 18%;
   opacity: 0.55;
   filter: blur(1.2px);
   z-index: 1;
-  background: 
+  background:
     radial-gradient(circle at 28% 25%, rgba(255, 200, 150, 0.12) 0%, transparent 8%),
     radial-gradient(circle at 65% 55%, rgba(120, 60, 40, 0.25) 0%, transparent 6%),
     radial-gradient(circle at 48% 72%, rgba(100, 50, 30, 0.2) 0%, transparent 7%),
     radial-gradient(circle at 82% 40%, rgba(150, 80, 50, 0.15) 0%, transparent 5%),
     radial-gradient(circle at 35% 35%, #e8a882 0%, #cd7f5d 20%, #b85f3d 40%, #8f4830 60%, #6b3422 80%, #4a2318 100%);
-  box-shadow: 
+  box-shadow:
     -12px -12px 24px rgba(232, 168, 130, 0.25) inset,
     12px 12px 32px rgba(74, 35, 24, 0.85) inset,
     0 0 35px rgba(205, 127, 93, 0.18),
@@ -139,18 +162,20 @@
 
 /* Planeta mediano - Estilo Neptuno (distancia media) */
 .planet-medium {
-  width: 160px; height: 160px;
-  right: 14%; top: 12%;
+  width: 160px;
+  height: 160px;
+  right: 14%;
+  top: 12%;
   opacity: 0.72;
   filter: blur(0.6px);
   z-index: 2;
-  background: 
+  background:
     linear-gradient(90deg, transparent 0%, rgba(80, 140, 200, 0.2) 18%, transparent 24%),
     linear-gradient(90deg, transparent 35%, rgba(60, 100, 180, 0.18) 48%, transparent 55%),
     linear-gradient(90deg, transparent 68%, rgba(90, 150, 220, 0.22) 80%, transparent 87%),
     radial-gradient(circle at 30% 30%, rgba(180, 220, 255, 0.3) 0%, transparent 12%),
     radial-gradient(circle at 45% 40%, #5a8fd4 0%, #4776c8 22%, #2e5bb8 45%, #1e4285 65%, #12295a 82%, #0a1638 100%);
-  box-shadow: 
+  box-shadow:
     -18px -18px 36px rgba(90, 143, 212, 0.35) inset,
     18px 18px 44px rgba(10, 22, 56, 0.92) inset,
     0 0 52px rgba(71, 118, 200, 0.25),
@@ -160,19 +185,21 @@
 
 /* Planeta grande - Estilo Júpiter (más cerca, más grande, más nítido) */
 .planet-large {
-  width: 280px; height: 280px;
-  right: 6%; bottom: 8%;
+  width: 280px;
+  height: 280px;
+  right: 6%;
+  bottom: 8%;
   opacity: 0.92;
   filter: blur(0px);
   z-index: 3;
-  background: 
+  background:
     radial-gradient(ellipse at 65% 45%, rgba(180, 120, 80, 0.4) 0%, transparent 18%),
     linear-gradient(90deg, transparent 0%, rgba(200, 150, 100, 0.15) 12%, transparent 18%),
     linear-gradient(90deg, transparent 22%, rgba(150, 100, 70, 0.2) 35%, transparent 42%),
     linear-gradient(90deg, transparent 48%, rgba(220, 180, 130, 0.12) 58%, transparent 65%),
     linear-gradient(90deg, transparent 70%, rgba(160, 110, 80, 0.18) 82%, transparent 90%),
     radial-gradient(circle at 40% 40%, #d4b89a 0%, #c9a47a 18%, #b8895f 35%, #a06f48 52%, #7d5435 70%, #5a3a25 85%, #3d261a 100%);
-  box-shadow: 
+  box-shadow:
     -28px -28px 56px rgba(212, 184, 154, 0.45) inset,
     28px 28px 68px rgba(61, 38, 26, 0.98) inset,
     0 0 80px rgba(201, 164, 122, 0.32),
@@ -182,26 +209,33 @@
 
 /* Animación de flotación suave */
 @keyframes float {
-  0%, 100% { 
-    transform: translate3d(0, 0, 0) rotate(0deg); 
+
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
   }
-  25% { 
-    transform: translate3d(1%, -1.5%, 0) rotate(1deg); 
+
+  25% {
+    transform: translate3d(1%, -1.5%, 0) rotate(1deg);
   }
-  50% { 
-    transform: translate3d(-0.5%, 1%, 0) rotate(-0.5deg); 
+
+  50% {
+    transform: translate3d(-0.5%, 1%, 0) rotate(-0.5deg);
   }
-  75% { 
-    transform: translate3d(-1%, -0.5%, 0) rotate(0.8deg); 
+
+  75% {
+    transform: translate3d(-1%, -0.5%, 0) rotate(0.8deg);
   }
 }
 
 /* Glow que sigue cursor */
 .cursor-glow {
   position: absolute;
-  width: 320px; height: 320px;
-  left: calc(50% - 160px); top: calc(50% - 160px);
-  background: radial-gradient(closest-side, rgba(74,222,255,0.22), rgba(74,222,255,0.14), rgba(74,222,255,0));
+  width: 320px;
+  height: 320px;
+  left: calc(50% - 160px);
+  top: calc(50% - 160px);
+  background: radial-gradient(closest-side, rgba(74, 222, 255, 0.22), rgba(74, 222, 255, 0.14), rgba(74, 222, 255, 0));
   filter: blur(28px);
   pointer-events: none;
   mix-blend-mode: screen;
@@ -215,6 +249,7 @@
   z-index: 4;
   pointer-events: none;
 }
+
 .hero-comets {
   width: 100%;
   height: 100%;
@@ -228,27 +263,106 @@
   max-width: 1280px;
   margin-left: auto;
   margin-right: auto;
-  /* Reducir espacio superior y respetar altura del header */
-  padding: calc(var(--header-height) + 1rem) 2rem 3rem;
+  padding: 0 2rem;
   width: 100%;
 }
 
 @media (max-width: 1024px) {
   .hero-container {
     max-width: 100%;
-    padding: calc(var(--header-height) + 0.85rem) 2rem 2.5rem;
+    padding: 0 2rem;
   }
 }
 
 @media (max-width: 768px) {
   .hero-container {
-    padding: calc(var(--header-height) + 0.75rem) 1.5rem 2rem;
+    padding: 0 1rem;
   }
 }
 
 @media (max-width: 480px) {
   .hero-container {
-    padding: calc(var(--header-height) + 0.5rem) 1rem 1.75rem;
+    padding: 0 0.75rem;
+  }
+}
+
+/* Ajustes por altura de viewport para que no se corte en laptops/monitores bajos */
+@media (max-height: 900px) and (min-width: 768px) {
+  .hero-container {
+    padding-bottom: 2rem;
+  }
+
+  .hero-title {
+    font-size: 3rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .hero-subtitle {
+    margin-bottom: 2.25rem;
+  }
+
+  .hero-stats {
+    gap: 2.25rem;
+    margin-bottom: 2.25rem;
+  }
+}
+
+@media (max-height: 800px) and (min-width: 768px) {
+  .hero-container {
+    padding-top: 1rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .hero-title {
+    font-size: 2.6rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .stat-number {
+    font-size: 2.2rem;
+  }
+
+  .stat-label {
+    font-size: 0.9rem;
+  }
+
+  .hero-cta-group {
+    gap: 1rem;
+  }
+}
+
+@media (max-height: 700px) and (min-width: 768px) {
+  .hero-container {
+    padding-top: 0.75rem;
+    padding-bottom: 1rem;
+  }
+
+  .hero-title {
+    font-size: 2.3rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-stats {
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .stat-number {
+    font-size: 2rem;
+  }
+
+  .stat-label {
+    font-size: 0.85rem;
   }
 }
 
@@ -265,6 +379,7 @@
   .hero-content {
     align-items: center;
     text-align: center;
+    transform: translateY(12px);
   }
 }
 
@@ -340,18 +455,29 @@
 
 @media (max-width: 480px) {
   .badge-text {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
   }
 }
 
 @keyframes pulse-dot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.7; transform: scale(1.1); }
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
 }
 
 .hero-title {
-  font-size: 3.5rem;
-  font-weight: 800;
+  font-family: 'Genova', sans-serif;
+  font-size: 4rem;
+  /* Increased slightly for impact */
+  font-weight: 500;
   letter-spacing: -1px;
   margin-bottom: 1.5rem;
   line-height: 1.1;
@@ -368,18 +494,19 @@
 
 @media (max-width: 768px) {
   .hero-title {
-    font-size: 2.25rem;
+    font-size: 2.7rem;
     letter-spacing: -0.6px;
     line-height: 1.15;
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
   }
 }
 
 @media (max-width: 480px) {
   .hero-title {
-    font-size: 1.75rem;
-    letter-spacing: -0.4px;
+    font-size: 2.4rem;
+    letter-spacing: -0.5px;
     line-height: 1.2;
+    margin-bottom: 1rem;
   }
 }
 
@@ -420,19 +547,25 @@
 
 @media (max-width: 768px) {
   .hero-subtitle {
-    font-size: 1.05rem;
+    font-size: 1.2rem;
     max-width: 55ch;
-    margin-bottom: 2rem;
+    margin-bottom: 2.25rem;
     line-height: 1.65;
   }
 }
 
 @media (max-width: 480px) {
   .hero-subtitle {
-    font-size: 0.95rem;
+    font-size: 1.15rem;
     max-width: 100%;
-    margin-bottom: 1.75rem;
-    line-height: 1.6;
+    margin-bottom: 2rem;
+    line-height: 1.65;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-content {
+    transform: translateY(20px);
   }
 }
 
@@ -570,7 +703,7 @@
 @media (max-width: 768px) {
   .button.hero-button {
     padding: 0.95rem 1.5rem;
-    font-size: 0.95rem;
+    font-size: 1rem;
     border-radius: 8px;
     white-space: normal;
     line-height: 1.3;
@@ -587,8 +720,8 @@
 
 @media (max-width: 480px) {
   .button.hero-button {
-    padding: 0.95rem 1.25rem;
-    font-size: 0.9rem;
+    padding: 1rem 1.5rem;
+    font-size: 1.05rem;
   }
 }
 

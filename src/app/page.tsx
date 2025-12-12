@@ -1,12 +1,13 @@
 // src/app/page.tsx
 import Hero from '@/components/sections/hero';
-import ServicesSection from '@/components/sections/services';
-import PortfolioSection from '@/components/sections/portfolio';
+
+import ScrollTabsSection from '@/components/sections/scroll-tabs';
 
 import CtaSection from '@/components/sections/cta';
 import AboutSection from '@/components/sections/about';
+import { FeaturesBentoSection } from '@/components/sections/features-bento';
+import TestimonialsSection from '@/components/sections/testimonials';
 
-import { TestimonialsSection } from '@/components/sections/testimonials';
 import { SITE, SEO_DEFAULT, OPEN_GRAPH_IMAGE } from '@/lib/constants';
 
 export const metadata = {
@@ -44,14 +45,11 @@ export default function Home() {
   return (
     <main>
       <Hero />
-      <ServicesSection />
+      <ScrollTabsSection />
       <AboutSection />
-      
-      <PortfolioSection />
+      <FeaturesBentoSection />
       <TestimonialsSection />
-
-      {/* <LocalIntegrations /> */}
-       <CtaSection /> 
+      <CtaSection />
     </main>
   );
 }

@@ -1,7 +1,6 @@
 // src/app/layout.tsx
 import '@/styles/globals.css';
 
-import { Inter } from 'next/font/google';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import WhatsAppFloat from '@/components/layout/whatsapp-float';
@@ -9,8 +8,6 @@ import ScrollToTop from '@/components/layout/ScrollToTop';
 import { LoadingProvider } from '@/components/shared/loading-provider';
 import HMRLoadingDetector from '@/components/shared/hmr-loading-detector';
 import { SITE, SEO_DEFAULT, OPEN_GRAPH_IMAGE } from '@/lib/constants';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
   title: {
@@ -127,7 +124,7 @@ export default function RootLayout({
                 "name": "Costa Rica"
               },
               {
-                "@type": "State", 
+                "@type": "State",
                 "name": "San José"
               },
               {
@@ -137,7 +134,7 @@ export default function RootLayout({
             ],
             "serviceType": [
               "Desarrollo Web",
-              "Aplicaciones Móviles", 
+              "Aplicaciones Móviles",
               "E-commerce",
               "Automatización de Procesos",
               "Marketing Digital",
@@ -189,15 +186,16 @@ export default function RootLayout({
           })}
         </script>
       </head>
-      <body className={inter.className} style={{ backgroundColor: 'var(--color-background)' }}>
-        <LoadingProvider>
-          <HMRLoadingDetector />
-          <ScrollToTop />
-          <Header />
-          {children}
-          <WhatsAppFloat />
-          <Footer />
-        </LoadingProvider>
+      <body style={{ backgroundColor: 'var(--color-background)', fontFamily: "'Genova', sans-serif" }}>
+
+
+        <HMRLoadingDetector />
+        <ScrollToTop />
+        <Header />
+        {children}
+        <WhatsAppFloat />
+        <Footer />
+
       </body>
     </html>
   );

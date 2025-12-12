@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useMemo, useRef } from "react";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { animate, motion, useInView, useMotionValue, useSpring, useTransform } from "framer-motion";
 import "@/styles/hero.css";
 
 // Ligera detección para desactivar efectos en dispositivos con puntero "coarse" (táctiles)
@@ -160,10 +160,10 @@ function Starfield({ density = 0.8, enableComets = true }: { density?: number; e
       raf = requestAnimationFrame(step);
     };
 
-  resize();
-  // Spawn inicial para que el usuario vea uno rápido
-  spawnComet();
-  step();
+    resize();
+    // Spawn inicial para que el usuario vea uno rápido
+    spawnComet();
+    step();
     const obs = new ResizeObserver(resize);
     obs.observe(canvas);
     return () => {
@@ -322,6 +322,29 @@ function CometField() {
   return <canvas ref={canvasRef} className="hero-comets" />;
 }
 
+// Helper para contador animado
+function Counter({ value, suffix = "" }: { value: number; suffix?: string }) {
+  const nodeRef = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(nodeRef, { once: true, margin: "-20px" });
+
+  useEffect(() => {
+    const node = nodeRef.current;
+    if (!node || !isInView) return;
+
+    const controls = animate(0, value, {
+      duration: 2.5,
+      ease: "easeOut",
+      onUpdate(value) {
+        node.textContent = Math.round(value) + suffix;
+      },
+    });
+
+    return () => controls.stop();
+  }, [value, suffix, isInView]);
+
+  return <span ref={nodeRef}>0{suffix}</span>;
+}
+
 export default function Hero() {
   // Parallax con framer-motion
   const mx = useMotionValue(0);
@@ -340,14 +363,33 @@ export default function Hero() {
   const planetFar = useLayerTransforms(-8);      // Marte (más lejos, movimiento mínimo)
   const planetMid = useLayerTransforms(-25);     // Neptuno (distancia media)
   const planetNear = useLayerTransforms(-45);    // Júpiter (más cerca, máximo movimiento)
-  
+
   const back = useLayerTransforms(-10);
   const mid = useLayerTransforms(-18);
   const front = useLayerTransforms(-28);
   const cursorGlow = useLayerTransforms(-35);
   // Movimiento del TEXTO mucho más sutil (sin rotación)
-  const textX = useTransform(smoothX, (v) => v * -3);
-  const textY = useTransform(smoothY, (v) => v * -3);
+  // Sin parallax en textos
+
+  // Escala responsiva del bloque de texto para que no se salga en pantallas pequeñas
+  const [textScale, setTextScale] = useState(1);
+  const textWrapRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    const updateScale = () => {
+      if (!textWrapRef.current) return;
+      const designW = 900; // coincide con max-width de .hero-content
+      const designH = 840; // alto estimado para incluir stats y CTAs
+      const vw = Math.max(window.innerWidth, 320);
+      const vh = Math.max(window.innerHeight, 480);
+      const sW = vw / (designW + 64); // margen de seguridad lateral
+      const sH = vh / (designH + 96); // margen superior/inferior
+      const s = Math.min(1, Math.max(0.72, Math.min(sW, sH)));
+      setTextScale(s);
+    };
+    updateScale();
+    window.addEventListener("resize", updateScale, { passive: true });
+    return () => window.removeEventListener("resize", updateScale as any);
+  }, []);
 
   const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
     if (isCoarsePointer()) return;
@@ -383,8 +425,7 @@ export default function Hero() {
         {/* Glow que sigue el cursor */}
         <motion.div className="cursor-glow" style={{ x: cursorGlow.x, y: cursorGlow.y }} />
 
-        {/* Overlay para contraste */}
-        <div className="hero-overlay" />
+
 
         {/* Cometas por encima del overlay para máxima visibilidad */}
         <motion.div className="hero-comets-wrap" style={mid}>
@@ -395,55 +436,58 @@ export default function Hero() {
       <div className="hero-container">
         <div className="hero-content">
           {/* Texto */}
-          <motion.div
-            className="hero-text"
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
-          >
-            <div className="hero-badge">
-              <span className="badge-dot"></span>
-              <span className="badge-text">Agencia Digital en Costa Rica</span>
-            </div>
-
-            <h1 className="hero-title">
-              Transformamos empresas con{" "}
-              <span className="hero-highlight">soluciones digitales</span> que generan resultados
-            </h1>
-
-            <p className="hero-subtitle">
-              Desarrollo web, automatización de procesos y estrategias digitales para empresas que buscan crecer y escalar en el mercado costarricense.
-            </p>
-
-            {/* Estadísticas clave */}
-            <div className="hero-stats">
-              <div className="stat-item">
-                <div className="stat-number">50+</div>
-                <div className="stat-label">Proyectos Exitosos</div>
+          <div ref={textWrapRef} style={{ transform: `scale(${textScale})`, transformOrigin: "top center" }}>
+            <motion.div
+              className="hero-text"
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
+            // sin estilo de parallax en textos
+            >
+              <div className="hero-badge">
+                <span className="badge-dot"></span>
+                <span className="badge-text">Agencia Digital en Costa Rica</span>
               </div>
-              <div className="stat-item">
-                <div className="stat-number">98%</div>
-                <div className="stat-label">Satisfacción Cliente</div>
-              </div>
-              <div className="stat-item">
-                <div className="stat-number">3+</div>
-                <div className="stat-label">Años Experiencia</div>
-              </div>
-            </div>
 
-            <div className="hero-cta-group">
-              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
-                <Link href="/agendar" className="button hero-button primary-cta">
-                  Agenda tu Consultoría Gratuita
-                </Link>
-              </motion.div>
-              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
-                <Link href="/portafolio" className="button hero-button secondary-cta">
-                  Ver Casos de Éxito
-                </Link>
-              </motion.div>
-            </div>
-          </motion.div>
+              <h1 className="hero-title font-medium italic">
+                Transformamos empresas con <br />
+                <span className="text-cyan-600 dark:text-cyan-400 text-5xl md:text-6xl lg:text-7xl tracking-wide">soluciones digitales</span>
+              </h1>
+
+              <p className="hero-subtitle">
+                Desarrollo web, automatización y estrategias digitales para impulsar el crecimiento de empresas en Costa Rica.
+              </p>
+
+              {/* Estadísticas clave */}
+              <div className="hero-stats">
+                <div className="stat-item">
+                  <div className="stat-number"><Counter value={20} suffix="+" /></div>
+                  <div className="stat-label">Proyectos Exitosos</div>
+                </div>
+                <div className="stat-item">
+                  <div className="stat-number"><Counter value={98} suffix="%" /></div>
+                  <div className="stat-label">Satisfacción Cliente</div>
+                </div>
+                <div className="stat-item">
+                  <div className="stat-number"><Counter value={4} suffix="+" /></div>
+                  <div className="stat-label">Años Experiencia</div>
+                </div>
+              </div>
+
+              <div className="hero-cta-group">
+                <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
+                  <Link href="/agendar" className="button hero-button primary-cta">
+                    Agenda tu Consultoría Gratuita
+                  </Link>
+                </motion.div>
+                <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
+                  <Link href="/portafolio" className="button hero-button secondary-cta">
+                    Ver Casos de Éxito
+                  </Link>
+                </motion.div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>
