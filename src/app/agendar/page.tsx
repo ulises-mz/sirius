@@ -80,7 +80,7 @@ function CalendlyWidget() {
   return (
     <div
       className="calendly-inline-widget w-full h-full"
-      data-url="https://calendly.com/codeinvestcr/30min?hide_gdpr_banner=1&background_color=0B1221&text_color=F4F7FB&primary_color=5E3BEE"
+      data-url="https://calendly.com/admin-siriusx/30min?hide_gdpr_banner=1&background_color=0B1221&text_color=F4F7FB&primary_color=5E3BEE"
       style={{ minWidth: '320px', height: '100%' }}
     />
   );

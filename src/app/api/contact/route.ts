@@ -58,7 +58,7 @@ export async function POST(request: NextRequest) {
         };
 
         // Email automático para el cliente con diseño elegante y SVG
-        const calendlyUrl = 'https://calendly.com/codeinvestcr/30min';
+        const calendlyUrl = 'https://calendly.com/admin-siriusx/30min';
         const clientMailOptions = {
             from: `"CodeINVEST" <${process.env.SMTP_USER}>`,
             to: email,

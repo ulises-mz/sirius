@@ -23,7 +23,7 @@ function CalendlyEmbed() {
   return (
     <div
       className="calendly-inline-widget"
-      data-url="https://calendly.com/codeinvestcr/30min?background_color=050F1D&text_color=ffffff&primary_color=3ac8ff"
+      data-url="https://calendly.com/admin-siriusx/30min?background_color=050F1D&text_color=ffffff&primary_color=3ac8ff"
       style={{
         width: '100%',
         minWidth: '320px',
