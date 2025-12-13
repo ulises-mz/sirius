@@ -66,6 +66,7 @@ export interface Project {
     title?: string;
     backgroundImage?: string;
     category?: string;
+    technologies?: string[];
     [key: string]: unknown;
 }
 

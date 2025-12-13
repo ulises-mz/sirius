@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { getServices } from "@/lib/cms-data";
-import { revalidatePath } from "next/cache";
 
 // Force dynamic rendering since we are reading from file system
 export const dynamic = 'force-dynamic';

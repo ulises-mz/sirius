@@ -28,7 +28,7 @@ export default function EditProjectPage({ params }: { params: Promise<{ slug: st
 
     const { slug } = use(params);
 
-    const { register, control, handleSubmit, setValue, reset, formState: { errors } } = useForm<ProjectFormData>({
+    const { register, control, handleSubmit, reset } = useForm<ProjectFormData>({
         defaultValues: {
             technologies: [],
             gallery: []
@@ -62,6 +62,7 @@ export default function EditProjectPage({ params }: { params: Promise<{ slug: st
 
                 reset(formattedData);
             } catch (error) {
+                console.error("Load error:", error);
                 toast.error("Error al cargar el proyecto");
                 router.push("/admin/proyectos");
             } finally {
@@ -118,6 +119,7 @@ export default function EditProjectPage({ params }: { params: Promise<{ slug: st
             router.push("/admin/proyectos");
             router.refresh();
         } catch (error) {
+            console.error("Delete error:", error);
             toast.error("Error al eliminar");
             setSaving(false);
         }

@@ -1,5 +1,6 @@
 
 import Link from "next/link";
+import Image from "next/image";
 import { getProjects } from "@/lib/cms-data";
 import { getOptimizedImageUrl } from "@/lib/utils";
 
