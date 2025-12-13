@@ -71,7 +71,7 @@ export default async function AdminProjectsPage() {
                                     </span>
                                 ))}
                                 {(project.technologies?.length || 0) > 3 && (
-                                    <span className="text-[10px] text-gray-500 self-center">+{project.technologies.length - 3}</span>
+                                    <span className="text-[10px] text-gray-500 self-center">+{(project.technologies?.length || 0) - 3}</span>
                                 )}
                             </div>
 
