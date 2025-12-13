@@ -46,7 +46,7 @@ export async function generateMetadata({ params }: ServiceDetailPageProps): Prom
       siteName: 'CodeINVEST',
       images: [
         {
-          url: service.image || `/images/services/${service.slug}.png`,
+          url: (typeof service.image === 'string' && service.image) ? service.image : `/images/services/${service.slug}.png`,
           width: 1200,
           height: 630,
           alt: `${service.title} CodeINVEST`,
