@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getTestimonials, saveTestimonials } from '@/lib/cms-data';
+import { getTestimonials, saveTestimonial } from '@/lib/cms-data';
 
 export async function GET() {
     try {
@@ -13,17 +13,11 @@ export async function GET() {
 export async function POST(request: Request) {
     try {
         const testimonial = await request.json();
-        const testimonials = await getTestimonials();
 
-        const newTestimonial = {
-            ...testimonial,
-            id: Date.now(), // Simple ID generation
-        };
+        await saveTestimonial(testimonial);
 
-        testimonials.push(newTestimonial);
-        await saveTestimonials(testimonials);
-
-        return NextResponse.json(newTestimonial);
+        // Return the created testimonial (MySQL auto-generates ID)
+        return NextResponse.json({ ...testimonial, success: true });
     } catch (error) {
         return NextResponse.json({ error: 'Failed to create testimonial' }, { status: 500 });
     }
