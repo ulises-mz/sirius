@@ -63,10 +63,18 @@ export interface Service {
 
 export interface Project {
     slug: string;
+    id?: number;
     title?: string;
+    description?: string;
     backgroundImage?: string;
     category?: string;
     technologies?: string[];
+    content?: string;
+    keywords?: string;
+    challenge?: string;
+    solution?: string;
+    results?: string;
+    gallery?: string[];
     [key: string]: unknown;
 }
 

@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: PortfolioDetailPageProps): Pr
     title: `${project.title} | Portafolio CodeINVEST`,
     description: `${project.description} Proyecto desarrollado por CodeINVEST Costa Rica usando ${(project.technologies || []).slice(0, 3).join(', ')}.`,
     keywords: [
-      project.title.toLowerCase(),
+      project.title?.toLowerCase() || 'proyecto',
       ...(project.technologies || []).map((tech: string) => tech.toLowerCase()),
       'portafolio',
       'proyectos',
@@ -49,20 +49,20 @@ export async function generateMetadata({ params }: PortfolioDetailPageProps): Pr
       locale: 'es_CR',
       url: `https://www.codeinvestcr.com/portafolio/${project.slug}`,
       siteName: 'CodeINVEST',
-      images: [
+      images: project.backgroundImage ? [
         {
           url: project.backgroundImage,
           width: 1200,
           height: 630,
-          alt: `${project.title} - Proyecto CodeINVEST Costa Rica`,
+          alt: `${project.title || 'Proyecto'} - CodeINVEST Costa Rica`,
         }
-      ],
+      ] : [],
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${project.title} | Portafolio CodeINVEST`,
-      description: project.description,
-      images: [project.backgroundImage],
+      title: `${project.title || 'Proyecto'} | Portafolio CodeINVEST`,
+      description: String(project.description || ''),
+      images: project.backgroundImage ? [project.backgroundImage] : [],
     },
     alternates: {
       canonical: `https://www.codeinvestcr.com/portafolio/${project.slug}`,
