@@ -1,32 +1,12 @@
-"use client";
-import { useState } from "react";
+
 import Link from "next/link";
-import Image from "next/image";
-import { portfolioItems } from "@/data/portfolio";
-import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
-import "@/styles/globals.css";
+import PortfolioClient from "@/components/sections/portfolio/portfolio-client";
+import { getProjects } from "@/lib/cms-data";
 
-export default function PortafolioPage() {
-  const [selectedCategory, setSelectedCategory] = useState("Todos");
+export const revalidate = 60; // ISR
 
-  const categories = ["Todos", "Desarrollo", "Apps Móviles", "Soluciones", "Consultoría"];
-
-  const filteredProjects = selectedCategory === "Todos"
-    ? portfolioItems
-    : portfolioItems.filter(item => {
-      switch (selectedCategory) {
-        case "Desarrollo":
-          return item.technologies.some(tech => ['Next.js', 'React', 'WordPress', 'HTML'].includes(tech));
-        case "Apps Móviles":
-          return item.technologies.some(tech => ['React Native', 'Expo', 'Flutter'].includes(tech)) || item.title.includes('App');
-        case "Soluciones":
-          return item.technologies.some(tech => ['Python', 'AI', 'Node.js'].includes(tech)) && !item.title.includes('App') && !item.title.includes('Web');
-        case "Consultoría":
-          return item.title.includes('Coach') || item.title.includes('Consult');
-        default:
-          return true;
-      }
-    });
+export default async function PortafolioPage() {
+  const projects = await getProjects();
 
   return (
     <div className="min-h-screen bg-[#070C18] text-[#F4F7FB] font-sans selection:bg-[#5E3BEE] selection:text-white pb-20">
@@ -53,89 +33,8 @@ export default function PortafolioPage() {
         <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#5E3BEE] rounded-full mix-blend-screen filter blur-[180px] opacity-[0.1] pointer-events-none" />
       </section>
 
-      {/* 2. Filtros Bento */}
-      <section className="w-[90%] max-w-[1600px] mx-auto mb-16">
-        <div className="flex flex-wrap gap-3">
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setSelectedCategory(category)}
-              className={`text-sm font-medium px-5 py-2.5 rounded-xl border transition-all duration-300
-                ${selectedCategory === category
-                  ? "bg-[#1E293B] border-[#5E3BEE] text-white shadow-[0_0_15px_rgba(94,59,238,0.2)]"
-                  : "bg-[#0B1221] border-[#1D2A3C] text-gray-400 hover:border-[#86D4FF] hover:text-white"
-                }
-              `}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
-      </section>
-
-      {/* 3. Bento Grid */}
-      <section className="w-[90%] max-w-[1600px] mx-auto">
-        <BentoGrid className="md:auto-rows-[25rem] grid-cols-1 md:grid-cols-4 gap-6">
-          {filteredProjects.map((project, i) => {
-            // Lógica para el "ritmo" del bento
-            // Index 0: Large hero (2x2)
-            // Index 3, 6: Wide (2x1)
-            const isLarge = i === 0;
-            const isWide = !isLarge && (i === 3 || i === 6);
-
-            return (
-              <BentoGridItem
-                key={project.id}
-                title={project.title}
-                description={project.description}
-                className={`
-                  ${isLarge ? "md:col-span-2 md:row-span-2" : ""}
-                  ${isWide ? "md:col-span-2" : ""}
-                  bg-[#0B1221] border border-[#1D2A3C] hover:border-[#5E3BEE] hover:bg-[#101B2C] transition-all duration-500 overflow-hidden group
-                `}
-                header={
-                  <div className="relative w-full h-full min-h-[14rem] overflow-hidden rounded-lg">
-                    {/* Image */}
-                    <Image
-                      src={project.backgroundImage}
-                      alt={project.title}
-                      fill
-                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-110 opacity-80 group-hover:opacity-100"
-                      priority={i < 4}
-                    />
-
-                    {/* Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#070C18] via-transparent to-transparent opacity-60" />
-
-                    {/* Floating Badge (Hover) */}
-                    <Link
-                      href={`/portafolio/${project.slug}`}
-                      className="absolute bottom-4 right-4 z-20 flex items-center justify-center w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:bg-[#5E3BEE] hover:border-[#5E3BEE]"
-                    >
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-                    </Link>
-                  </div>
-                }
-                icon={
-                  <div className="flex flex-wrap gap-2 mt-2">
-                    {project.technologies.slice(0, 3).map((tech, idx) => (
-                      <span key={idx} className="text-[10px] uppercase font-bold tracking-wider text-[#86D4FF] bg-[#86D4FF]/10 px-2 py-1 rounded">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                }
-              />
-            );
-          })}
-        </BentoGrid>
-
-        {filteredProjects.length === 0 && (
-          <div className="text-center py-32 rounded-3xl border border-dashed border-[#1D2A3C] bg-[#0B1221]">
-            <p className="text-gray-500 text-xl font-medium">No hay proyectos en esta categoría.</p>
-          </div>
-        )}
-      </section>
+      {/* Client List */}
+      <PortfolioClient projects={projects} />
 
       {/* 4. Footer CTA */}
       <section className="mt-32 w-[90%] max-w-[1600px] mx-auto border-t border-[#1D2A3C] pt-20 pb-20">

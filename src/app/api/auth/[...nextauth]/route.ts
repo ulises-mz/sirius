@@ -12,14 +12,19 @@ export const authOptions: NextAuthOptions = {
                 password: { label: "Password", type: "password" }
             },
             async authorize(credentials) {
+                console.log("[Auth] Attempting login for:", credentials?.email);
+
                 if (!credentials?.email || !credentials?.password) {
+                    console.log("[Auth] Missing credentials");
                     return null;
                 }
 
                 try {
                     const user = await getUserByEmail(credentials.email);
+                    console.log("[Auth] User found:", user ? "YES" : "NO");
 
                     if (!user || !user.passwordHash) {
+                        console.log("[Auth] User not found or no hash");
                         return null;
                     }
 
@@ -27,6 +32,8 @@ export const authOptions: NextAuthOptions = {
                         credentials.password,
                         user.passwordHash
                     );
+
+                    console.log("[Auth] Password valid:", isPasswordValid);
 
                     if (!isPasswordValid) {
                         return null;
@@ -39,7 +46,7 @@ export const authOptions: NextAuthOptions = {
                         role: user.role
                     };
                 } catch (error) {
-                    console.error("Error during authentication:", error);
+                    console.error("[Auth] Error during authentication:", error);
                     return null;
                 }
             }
@@ -51,6 +58,7 @@ export const authOptions: NextAuthOptions = {
     },
     pages: {
         signIn: "/admin/login",
+        error: "/admin/login", // Redirect errors here so we can see them
     },
     callbacks: {
         async jwt({ token, user }) {

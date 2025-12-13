@@ -164,3 +164,17 @@ export async function updateUserPassword(email: string, passwordHash: string) {
         await writeJSON('config.json', data);
     }
 }
+// Testimonials
+export async function getTestimonials() {
+    const data = await readJSON('testimonials.json');
+    return data.testimonials || [];
+}
+
+export async function getTestimonialById(id: number) {
+    const testimonials = await getTestimonials();
+    return testimonials.find((t: any) => t.id === id);
+}
+
+export async function saveTestimonials(testimonials: any[]) {
+    await writeJSON('testimonials.json', { testimonials });
+}

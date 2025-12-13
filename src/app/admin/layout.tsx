@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ReactNode } from "react";
 import "@/styles/globals.css";
+import { Toaster } from "react-hot-toast";
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
     const { data: session } = useSession();
@@ -14,6 +15,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
         { name: "Dashboard", href: "/admin", icon: "dashboard" },
         { name: "Servicios", href: "/admin/servicios", icon: "services" },
         { name: "Proyectos", href: "/admin/proyectos", icon: "projects" },
+        { name: "Testimonios", href: "/admin/testimonios", icon: "testimonials" },
         { name: "Configuración", href: "/admin/configuracion", icon: "settings" },
     ];
 
@@ -25,6 +27,8 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
                 return <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />;
             case "projects":
                 return <path strokeLinecap="round" strokeLinejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />;
+            case "testimonials":
+                return <path strokeLinecap="round" strokeLinejoin="round" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />;
             case "settings":
                 return <path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z" />;
             default:
@@ -63,8 +67,8 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
                                 key={item.href}
                                 href={item.href}
                                 className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${isActive
-                                        ? "bg-[#5E3BEE] text-white"
-                                        : "text-gray-400 hover:bg-[#1E293B] hover:text-white"
+                                    ? "bg-[#5E3BEE] text-white"
+                                    : "text-gray-400 hover:bg-[#1E293B] hover:text-white"
                                     }`}
                             >
                                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
@@ -96,6 +100,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
             {/* Main Content */}
             <main className="flex-1 overflow-auto">
                 <div className="p-8">
+                    <Toaster position="top-right" />
                     {children}
                 </div>
             </main>

@@ -1,23 +1,39 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { motion, useAnimation, useMotionValue } from "framer-motion";
-import { testimonials } from "@/data/testimonials";
+import { useEffect } from "react";
+import { useAnimation, useMotionValue } from "framer-motion";
+import { motion } from "framer-motion"; // Explicit import
 import { Star } from "lucide-react";
 
-export default function TestimonialsSection() {
+interface Testimonial {
+  id?: number | string;
+  quote: string;
+  name: string;
+  title: string;
+  company: string;
+  rating: number;
+  result?: string;
+  image?: string;
+}
+
+export default function TestimonialsSection({ testimonials = [] }: { testimonials?: any[] }) {
   const controls = useAnimation();
   const x = useMotionValue(0);
 
+  // Use dynamic data or fallback to empty
+  const items = testimonials.length > 0 ? testimonials : [];
+
   useEffect(() => {
+    if (items.length === 0) return;
+
     const cardWidth = 400 + 24; // ancho del card + gap
-    const totalWidth = testimonials.length * cardWidth;
+    const totalWidth = items.length * cardWidth;
 
     const animate = async () => {
       await controls.start({
         x: -totalWidth,
         transition: {
-          duration: testimonials.length * 5, // 5 segundos por card
+          duration: items.length * 5, // 5 segundos por card
           ease: "linear",
         },
       });
@@ -28,10 +44,12 @@ export default function TestimonialsSection() {
     };
 
     animate();
-  }, [controls]);
+  }, [controls, items.length]);
 
   // Duplicar testimonios para crear el efecto infinito
-  const duplicatedTestimonials = [...testimonials, ...testimonials];
+  const duplicatedTestimonials = [...items, ...items];
+
+  if (items.length === 0) return null; // Don't render empty section
 
   return (
     <section id="testimonials" className="relative py-20 px-4 sm:py-12 overflow-hidden">
@@ -69,7 +87,7 @@ export default function TestimonialsSection() {
             >
               {/* Rating */}
               <div className="flex gap-1 mb-4">
-                {Array.from({ length: testimonial.rating }).map((_, i) => (
+                {Array.from({ length: testimonial.rating || 5 }).map((_, i) => (
                   <Star
                     key={i}
                     className="w-5 h-5 fill-cyan-400 text-cyan-400"

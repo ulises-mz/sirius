@@ -1,14 +1,11 @@
-// src/app/page.tsx
 import Hero from '@/components/sections/hero';
-
 import ScrollTabsSection from '@/components/sections/scroll-tabs';
-
 import CtaSection from '@/components/sections/cta';
 import AboutSection from '@/components/sections/about';
 import { FeaturesBentoSection } from '@/components/sections/features-bento';
 import TestimonialsSection from '@/components/sections/testimonials';
-
 import { SITE, SEO_DEFAULT, OPEN_GRAPH_IMAGE } from '@/lib/constants';
+import { getServices, getProjects, getTestimonials } from '@/lib/cms-data';
 
 export const metadata = {
   title: `Soluciones Digitales en Costa Rica | ${SITE.name}`,
@@ -41,14 +38,21 @@ export const metadata = {
   },
 };
 
-export default function Home() {
+export default async function Home() {
+  const services = await getServices();
+  const projects = await getProjects();
+  const testimonials = await getTestimonials();
+
+  // Limit to exactly 7 projects for the bento layout
+  const homepageProjects = projects.slice(0, 7);
+
   return (
     <main>
       <Hero />
-      <ScrollTabsSection />
+      <ScrollTabsSection services={services} />
       <AboutSection />
-      <FeaturesBentoSection />
-      <TestimonialsSection />
+      <FeaturesBentoSection projects={homepageProjects} />
+      <TestimonialsSection testimonials={testimonials} />
       <CtaSection />
     </main>
   );

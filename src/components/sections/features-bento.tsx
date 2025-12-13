@@ -2,11 +2,30 @@
 import { cn } from "@/lib/utils";
 import React from "react";
 import { BentoGrid, BentoGridItem } from "../ui/bento-grid";
-import { portfolioItems } from "@/data/portfolio";
 import Image from "next/image";
 import Link from "next/link";
 
-export function FeaturesBentoSection() {
+interface Project {
+  id: number | string;
+  slug: string;
+  title: string;
+  description: string;
+  backgroundImage: string;
+  technologies: string[];
+}
+
+export function FeaturesBentoSection({ projects = [] }: { projects?: any[] }) {
+  // Ensure we display at most 7 items if passed more, though parent should handle slicing.
+  // We map the incoming CMS data to ensure it matches the expected structure if there are minor differences.
+  const displayProjects = projects.slice(0, 7).map(p => ({
+    id: p.id,
+    slug: p.slug,
+    title: p.title,
+    description: p.description,
+    backgroundImage: p.backgroundImage || p.image, // Fallback if naming differs
+    technologies: p.technologies || []
+  }));
+
   return (
     <section className="relative py-20 px-4 sm:py-12">
       <div className="mx-auto w-[95%] lg:w-[80%]">
@@ -32,7 +51,7 @@ export function FeaturesBentoSection() {
 
         {/* Bento Grid */}
         <BentoGrid className="mx-auto">
-          {portfolioItems.map((item, i) => (
+          {displayProjects.map((item, i) => (
             <BentoGridItem
               key={item.id}
               title={item.title}
@@ -53,7 +72,7 @@ export function FeaturesBentoSection() {
               }
               icon={
                 <div className="flex flex-wrap gap-1.5 mt-2">
-                  {item.technologies.slice(0, 3).map((tech, idx) => (
+                  {item.technologies.slice(0, 3).map((tech: string, idx: number) => (
                     <span
                       key={idx}
                       className="rounded-full bg-cyan-100 px-2 py-0.5 text-[10px] font-medium text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-300"

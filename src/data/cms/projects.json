@@ -1,4 +1,165 @@
 {
-    "projects": [],
-    "lastUpdated": "2025-12-12T00:00:00.000Z"
+  "projects": [
+    {
+      "id": 1,
+      "slug": "cash-of-grapplers",
+      "title": "Cash of Grappler",
+      "description": "Plataforma oficial de eventos BJJ con streaming y tienda online",
+      "backgroundImage": "https://res.cloudinary.com/dheqvwpxs/image/upload/v1765584844/web-cash-of-grapplers_w3xxlz.webp",
+      "technologies": [
+        "Next.js",
+        "Stripe",
+        "AWS",
+        "Tailwind CSS",
+        "PostgreSQL"
+      ],
+      "content": "Plataforma integral para eventos de Jiu-Jitsu. Se centralizó la gestión de torneos.",
+      "challenge": "Centralizar la gestión de torneos, venta de entradas y streaming en vivo para una audiencia internacional.",
+      "solution": "- Desarrollo de plataforma escalable en Next.js\n- Integración de pasarela de pagos Stripe para tickets y PPV\n- Sistema de streaming de alta disponibilidad\n- Gestión de brackets y resultados en tiempo real",
+      "results": "- Venta de entradas simplificada y segura\n- Experiencia de usuario fluida durante transmisiones en vivo",
+      "gallery": [
+        "https://res.cloudinary.com/dheqvwpxs/image/upload/v1765584844/web-cash-of-grapplers_w3xxlz.webp"
+      ],
+      "keywords": "bjj, grappling, streaming, eventos deportivos, nextjs",
+      "category": "Desarrollo"
+    },
+    {
+      "id": 2,
+      "slug": "app-cash-of-grapplers",
+      "title": "App Cash of Grapplers",
+      "description": "Experiencia móvil para competidores y fans con seguimiento en vivo",
+      "backgroundImage": "https://res.cloudinary.com/dheqvwpxs/image/upload/v1765584844/app-cash-of-grapplers_eoblhg.webp",
+      "technologies": [
+        "React Native",
+        "Expo",
+        "Firebase",
+        "Real-time DB"
+      ],
+      "content": "Aplicación móvil complementaria para torneos.",
+      "challenge": "Llevar la emoción del evento al bolsillo de los asistentes y competidores con notificaciones en tiempo real.",
+      "solution": "- App nativa para iOS y Android\n- Notificaciones push para llamados a pelea\n- Visualización de brackets y tiempos en vivo\n- Perfiles de atletas y estadísticas",
+      "results": "- Mayor engagement durante los eventos\n- Reducción de tiempos de espera para competidores",
+      "gallery": [],
+      "keywords": "app movil, react native, deportes, bjj, expo",
+      "category": "Apps Móviles"
+    },
+    {
+      "id": 3,
+      "slug": "barf-natural-pets",
+      "title": "Barf Natural Pets",
+      "description": "E-commerce especializado en alimentación natural cruda para mascotas",
+      "backgroundImage": "https://res.cloudinary.com/dheqvwpxs/image/upload/v1765584844/web-barf-natural-pets_qa5w0w.webp",
+      "technologies": [
+        "WordPress",
+        "WooCommerce",
+        "SEO Local",
+        "Analytics"
+      ],
+      "content": "Tienda online para alimentación natural de mascotas.",
+      "challenge": "Posicionar una marca de nicho (Dieta BARF) y facilitar la compra recurrente de productos frescos.",
+      "solution": "- Tienda online optimizada para conversión\n- Sistema de suscripción para pedidos recurrentes\n- Blog educativo integrado para estrategia SEO\n- Optimización de carga rápida para móviles",
+      "results": "- Posicionamiento líder en búsquedas relacionadas a BARF en CR\n- Incremento en la retención de clientes recurrentes",
+      "gallery": [],
+      "keywords": "barf, mascotas, ecommerce, woocommerce, costa rica",
+      "category": "Desarrollo"
+    },
+    {
+      "id": 4,
+      "slug": "great-events-cr",
+      "title": "Great Events CR",
+      "description": "Sitio corporativo para planificación y gestión de eventos premium",
+      "backgroundImage": "https://res.cloudinary.com/dheqvwpxs/image/upload/v1765584844/web-great-events_ymenv3.webp",
+      "technologies": [
+        "React",
+        "Framer Motion",
+        "EmailJS",
+        "UI/UX Design"
+      ],
+      "content": "Presencia digital para productora de eventos.",
+      "challenge": "Transmitir la elegancia y magnitud de los eventos corporativos y sociales a través de una experiencia web.",
+      "solution": "- Diseño visual de alto impacto con galerías inmersivas\n- Animaciones suaves con Framer Motion\n- Formularios de cotización detallados\n- Portafolio de eventos categorizado",
+      "results": "- Aumento en la calidad de los leads entrantes\n- Presentación de marca alineada con clientes de alto perfil",
+      "gallery": [],
+      "keywords": "eventos, corporate, react, diseño web, costa rica",
+      "category": "Desarrollo"
+    },
+    {
+      "id": 5,
+      "slug": "runners-not-runners",
+      "title": "Runners not Runners",
+      "description": "Comunidad digital y blog para corredores y entusiastas del fitness",
+      "backgroundImage": "https://res.cloudinary.com/dheqvwpxs/image/upload/v1765584844/web-bp-creations_qgdo1k.webp",
+      "technologies": [
+        "Next.js",
+        "Sanity CMS",
+        "Tailwind CSS",
+        "Newsletter"
+      ],
+      "content": "Blog y comunidad para estilo de vida runner.",
+      "challenge": "Crear un espacio digital que conecte con corredores amateurs y profesionales, diferenciándose de los medios tradicionales.",
+      "solution": "- CMS headless (Sanity) para gestión ágil de contenido\n- Diseño moderno y motivador\n- Integración con newsletter para fidelización\n- Optimización para lectura en móviles",
+      "results": "- Crecimiento orgánico de la comunidad\n- Alta tasa de suscripción al newsletter",
+      "gallery": [],
+      "keywords": "running, blog, comunidad, nextjs, fitness",
+      "category": "Desarrollo"
+    },
+    {
+      "id": 6,
+      "slug": "blindpoint",
+      "title": "BlindPoint",
+      "description": "Plataforma tecnológica enfocada en seguridad y accesibilidad digital",
+      "backgroundImage": "https://res.cloudinary.com/dheqvwpxs/image/upload/v1765584844/web-blindpoint_e8wydv.webp",
+      "technologies": [
+        "React",
+        "Node.js",
+        "Cybersecurity",
+        "AI Integration"
+      ],
+      "content": "Soluciones tecnológicas avanzadas.",
+      "challenge": "Desarrollar una presencia web que refleje innovación, seguridad y solidez técnica.",
+      "solution": "- Arquitectura web moderna y segura\n- Integración de demostraciones interactivas\n- Diseño UI enfocado en claridad y accesibilidad\n- Panel de control para gestión de servicios",
+      "results": "- Validación de autoridad en el sector tecnológico\n- Plataforma preparada para escalar servicios digitales",
+      "gallery": [],
+      "keywords": "tech, seguridad, accesibilidad, software, react",
+      "category": "Soluciones"
+    },
+    {
+      "id": 7,
+      "slug": "bpcreation",
+      "title": "BP Creation",
+      "description": "Tienda online de fotografía artística y productos personalizados",
+      "backgroundImage": "https://res.cloudinary.com/dheqvwpxs/image/upload/v1765584844/web-bp-creations_qgdo1k.webp",
+      "technologies": [
+        "Shopify",
+        "Liquid",
+        "Custom CSS",
+        "Instagram Feed"
+      ],
+      "content": "E-commerce de arte y fotografía.",
+      "challenge": "Vender arte y productos visuales con una experiencia de usuario que respete la estética de las obras.",
+      "solution": "- Personalización avanzada de tema Shopify\n- Galerías de alta resolución optimizadas\n- Proceso de checkout fluido\n- Integración visual con redes sociales",
+      "results": "- Experiencia de compra visualmente atractiva\n- Gestión eficiente de inventario y pedidos internacionales",
+      "gallery": [],
+      "keywords": "fotografia, arte, shopify, ecommerce, diseño",
+      "category": "Desarrollo"
+    },
+    {
+      "technologies": [
+        "Next.js",
+        "React"
+      ],
+      "title": "Lazer Zone",
+      "slug": "lazer-zone",
+      "description": "Lazer zone es una pagina de laser tag",
+      "category": "Desarrollo",
+      "backgroundImage": "https://res.cloudinary.com/dheqvwpxs/image/upload/v1765584844/web-cash-of-grapplers_w3xxlz.webp",
+      "content": "Lazer zone es lindo",
+      "challenge": "Crear una experiencia web divertida.",
+      "solution": "Sitio web interactivo.",
+      "results": "Clientes felices.",
+      "gallery": [],
+      "keywords": "react,seo,web"
+    }
+  ],
+  "lastUpdated": "2025-12-13T01:32:25.143Z"
 }

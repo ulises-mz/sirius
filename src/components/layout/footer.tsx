@@ -1,8 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { SITE } from "@/lib/constants";
+
+interface Props {
+  siteConfig?: {
+    siteName?: string;
+    contactEmail?: string;
+    phone?: string;
+    address?: string;
+  };
+}
 
 function SocialIcon({ label, href, children }: { label: string; href: string; children: React.ReactNode }) {
   if (!href) return null;
@@ -19,8 +27,14 @@ function SocialIcon({ label, href, children }: { label: string; href: string; ch
   );
 }
 
-export default function Footer() {
+export default function Footer({ siteConfig }: Props) {
   const year = new Date().getFullYear();
+
+  // Merge dynamic config with defaults
+  const name = siteConfig?.siteName || SITE.name;
+  const email = siteConfig?.contactEmail || SITE.primaryEmail;
+  const phone = siteConfig?.phone || SITE.phone;
+  const address = siteConfig?.address || `${SITE.address.street}, ${SITE.address.city}`;
 
   const navPrimary = [
     { href: "/servicios", label: "Servicios" },
@@ -106,15 +120,15 @@ export default function Footer() {
           {/* Contacto */}
           <div className="space-y-3">
             <h3 className="mb-3 text-white font-semibold">Contacto</h3>
-            <p className="text-white/75">{SITE.address.street}, {SITE.address.city}</p>
+            <p className="text-white/75">{address}</p>
             <p>
-              <Link href={`tel:${SITE.phone}`} className="text-white/75 transition-colors hover:text-white">
-                {SITE.phone}
+              <Link href={`tel:${phone}`} className="text-white/75 transition-colors hover:text-white">
+                {phone}
               </Link>
             </p>
             <p>
-              <Link href={`mailto:${SITE.primaryEmail}`} className="text-white/75 transition-colors hover:text-white">
-                {SITE.primaryEmail}
+              <Link href={`mailto:${email}`} className="text-white/75 transition-colors hover:text-white">
+                {email}
               </Link>
             </p>
             <p className="text-white/60">Lunes a viernes 8am a 5pm y sábados de 8 a 12md.</p>
@@ -138,7 +152,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-6 text-white/60 md:flex-row">
           <p>
-            © {year} {SITE.legalName}. Todos los derechos reservados.
+            © {year} {name}. Todos los derechos reservados.
           </p>
           <div className="flex flex-wrap items-center gap-4">
             <Link href="/privacidad" className="hover:text-white">Privacidad</Link>

@@ -1,18 +1,18 @@
 {
-    "config": {
-        "siteName": "Sirius",
-        "contactEmail": "admin@siriusx.net",
-        "phone": "+506 7221 7873",
-        "address": "Pozos de Santa Ana, San José, Costa Rica"
-    },
-    "users": [
-        {
-            "id": "admin-1",
-            "email": "admin@siriusx.net",
-            "passwordHash": "$2b$10$SSqOIoVI9nkzxdkN.PP8c.v5HNya6N9CkpfUv5BWrddCaOvxOUFC2",
-            "name": "Admin",
-            "role": "admin"
-        }
-    ],
-    "lastUpdated": "2025-12-12T00:00:00.000Z"
+  "config": {
+    "siteName": "Sirius",
+    "contactEmail": "admin@siriusx.net",
+    "phone": "+506 7221 7872",
+    "address": "Pozos de Santa Ana, San José, Costa Rica"
+  },
+  "users": [
+    {
+      "id": "admin-1",
+      "email": "admin@siriusx.net",
+      "passwordHash": "$2b$10$/KHBu4wHj49oswRb3fI7c.8/KE0iY23LGLdX62k3gsL3Xx6FkJKmq",
+      "name": "Admin",
+      "role": "admin"
+    }
+  ],
+  "lastUpdated": "2025-12-12T23:47:52.183Z"
 }

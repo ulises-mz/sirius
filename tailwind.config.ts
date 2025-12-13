@@ -5,11 +5,11 @@ const config: Config = {
     './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    fontFamily: {
+      sans: ['Genova', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+      display: ['Genova', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+    },
     extend: {
-      fontFamily: {
-        sans: ['Genova', 'sans-serif'],
-        display: ['Genova', 'sans-serif'],
-      },
       animation: {
         first: 'moveVertical 30s ease infinite',
         second: 'moveInCircle 20s reverse infinite',

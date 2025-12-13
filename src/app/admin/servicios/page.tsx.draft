@@ -1,0 +1,20 @@
+"use client";
+
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { getServices } from "@/lib/cms-data"; // This won't work client-side directly if not via API
+// Actually, we need to fetch via API for client components usually, 
+// OR since we are using JSON files and this is a server component... wait.
+// "use client" means we can't use node fs directly.
+// We need to create the API endpoints FIRST to consume them, OR make this a Server Component.
+// Let's make the main list page a Server Component to fetch data directly (since it's JSON read).
+// But we want interactivity (delete buttons).
+// Best pattern: Server Component fetches data, passes to Client Component list.
+
+// Let's create the API endpoints first as planned in Phase 4? 
+// No, I can make this page a Server Component and simple actions.
+// But wait, "getServices" uses "fs" which is Node-only. 
+// So yes, I cannot use "getServices" in a Client Component.
+// I SHOULD make the page a Server Component.
+
+// RE-WRITING AS SERVER COMPONENT

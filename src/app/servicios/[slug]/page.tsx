@@ -1,9 +1,8 @@
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
-import { services } from "@/data/services";
+import { getServices, getServiceBySlug } from "@/lib/cms-data";
 import ServiceDetailClient from "./ServiceDetailClient";
 import "@/styles/globals.css";
-import "@/styles/service-detail-page.css";
 
 interface ServiceDetailPageProps {
   params: Promise<{
@@ -12,6 +11,7 @@ interface ServiceDetailPageProps {
 }
 
 export async function generateStaticParams() {
+  const services = await getServices();
   return services.map((service) => ({
     slug: service.slug,
   }));
@@ -19,7 +19,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: ServiceDetailPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const service = services.find((s) => s.slug === slug);
+  const service = await getServiceBySlug(slug);
 
   if (!service) {
     return {
@@ -30,40 +30,28 @@ export async function generateMetadata({ params }: ServiceDetailPageProps): Prom
 
   return {
     title: `${service.title} | CodeINVEST Costa Rica`,
-    description: `${service.description} Especialistas en ${service.title.toLowerCase()} para empresas en Costa Rica. Consulta gratuita disponible.`,
+    description: `${service.description} Especialistas en ${service.title} para empresas.`,
     keywords: [
       service.title.toLowerCase(),
-      service.category.toLowerCase(),
-      ...service.technologies.map((tech: string) => tech.toLowerCase()),
-      'Costa Rica',
-      'San José',
+      service.category?.toLowerCase() || 'servicios',
+      ...(service.technologies || []).map((tech: string) => tech.toLowerCase()),
       'CodeINVEST',
-      'agencia digital CR'
+      'Costa Rica'
     ],
     openGraph: {
       title: `${service.title} | CodeINVEST`,
-      description: `${service.description} Especialistas para empresas en Costa Rica.`,
+      description: service.description,
       type: 'website',
-      locale: 'es_CR',
       url: `https://www.codeinvestcr.com/servicios/${service.slug}`,
       siteName: 'CodeINVEST',
       images: [
         {
-          url: `/images/services/${service.slug}.png`,
+          url: service.image || `/images/services/${service.slug}.png`,
           width: 1200,
           height: 630,
-          alt: `${service.title} CodeINVEST Costa Rica`,
+          alt: `${service.title} CodeINVEST`,
         }
       ],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: `${service.title} | CodeINVEST`,
-      description: service.description,
-      images: [`/images/services/${service.slug}.png`],
-    },
-    alternates: {
-      canonical: `https://www.codeinvestcr.com/servicios/${service.slug}`,
     },
   };
 }
@@ -71,9 +59,9 @@ export async function generateMetadata({ params }: ServiceDetailPageProps): Prom
 export default async function ServiceDetailPage({ params }: ServiceDetailPageProps) {
   // Await the params promise
   const { slug } = await params;
-  
-  // Buscar el servicio por slug
-  const service = services.find(s => s.slug === slug);
+
+  // Buscar el servicio por slug usando CMS
+  const service = await getServiceBySlug(slug);
 
   if (!service) {
     notFound();

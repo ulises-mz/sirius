@@ -113,7 +113,7 @@ export default function Header() {
             <LoadingLink
               href="/blog"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="w-full px-3 py-2 text-center text-base font-medium text-neutral-700 hover:text-neutral-900 dark:text-neutral-300"
+              className="relative text-base font-medium text-neutral-700 hover:text-neutral-900 dark:text-neutral-300"
             >
               Blog
             </LoadingLink>
