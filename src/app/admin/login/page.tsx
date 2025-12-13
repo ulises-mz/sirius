@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, Suspense } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 const AdminLoginForm = () => {
@@ -55,9 +55,10 @@ const AdminLoginForm = () => {
             }
             setLoading(false);
 
-        } catch (err: any) {
-            console.error("Fetch exception:", err);
-            setError(`Excepción: ${err.message}`);
+        } catch (err: unknown) {
+            const error = err as Error;
+            console.error("Fetch exception:", error);
+            setError(`Excepción: ${error.message}`);
             setLoading(false);
         }
     };
@@ -122,7 +123,7 @@ const AdminLoginForm = () => {
 
                     <button
                         type="button"
-                        onClick={() => handleSubmit(null as any)}
+                        onClick={() => handleSubmit(undefined as unknown as React.FormEvent)}
                         disabled={loading}
                         className="w-full bg-[#5E3BEE] hover:bg-[#4E33D8] text-white font-bold py-3 px-4 rounded-xl transition-all transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                     >

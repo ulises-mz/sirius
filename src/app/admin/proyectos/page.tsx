@@ -27,7 +27,7 @@ export default async function AdminProjectsPage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {projects.map((project: any) => (
+                {projects.map((project) => (
                     <Link
                         key={project.slug}
                         href={`/admin/proyectos/${project.slug}`}
@@ -36,10 +36,11 @@ export default async function AdminProjectsPage() {
                         {/* Image Header */}
                         <div className="h-48 relative bg-[#101B2C] overflow-hidden">
                             {project.backgroundImage ? (
-                                <img
+                                <Image
                                     src={getOptimizedImageUrl(project.backgroundImage)}
-                                    alt={project.title}
-                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                    alt={project.title || 'Project'}
+                                    fill
+                                    className="object-cover transition-transform duration-500 group-hover:scale-105"
                                 />
                             ) : (
                                 <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#5E3BEE]/20 to-[#86D4FF]/20">
