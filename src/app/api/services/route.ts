@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { getServices, saveService } from "@/lib/cms-data";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth-options";
 
 export async function GET() {
     try {
@@ -29,7 +29,7 @@ export async function POST(request: Request) {
         // Auto-generate ID if missing (simple max + 1 logic for JSON)
         const services = await getServices();
         if (!data.id) {
-            const maxId = services.reduce((max, s) => Math.max(max, s.id || 0), 0);
+            const maxId = services.reduce((max, s) => Math.max(max, (s.id as number) || 0), 0);
             data.id = maxId + 1;
         }
 

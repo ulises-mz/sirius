@@ -8,7 +8,7 @@ export function cn(...inputs: ClassValue[]) {
 export function isValidUrl(urlString: string) {
   try {
     return Boolean(new URL(urlString));
-  } catch (e) {
+  } catch (_) {
     return false;
   }
 }
@@ -37,7 +37,7 @@ export function getOptimizedImageUrl(url: string | undefined): string {
       // - https://lh3.googleusercontent.com/d/ID (Often works better for CDN)
       return `https://drive.google.com/uc?export=view&id=${fileId}`;
     }
-  } catch (error) {
+  } catch (_) {
     console.warn("Failed to transform Drive URL:", url);
   }
 

@@ -34,8 +34,64 @@ export async function writeJSON<T>(filename: string, data: T): Promise<void> {
 /**
  * Get all services
  */
+// Types to avoid 'any'
+export interface CMSContent {
+    slug: string;
+    [key: string]: unknown;
+}
+
+export interface Service {
+    slug: string;
+    id?: number;
+    title?: string;
+    description?: string;
+    icon?: string;
+    popular?: boolean;
+    longDescription?: string;
+    features?: string[];
+    technologies?: string[];
+    price?: string;
+    category?: string;
+    benefits?: string[];
+    process?: string[];
+    faq?: Array<{
+        question: string;
+        answer: string;
+    }>;
+    [key: string]: unknown;
+}
+
+export interface Project {
+    slug: string;
+    title?: string;
+    backgroundImage?: string;
+    category?: string;
+    [key: string]: unknown;
+}
+
+export interface User {
+    id: string;
+    email: string;
+    name: string;
+    role: string;
+    passwordHash?: string;
+    [key: string]: unknown;
+}
+
+export interface Config {
+    [key: string]: unknown;
+}
+
+export interface Testimonial {
+    id: number;
+    [key: string]: unknown;
+}
+
+/**
+ * Get all services
+ */
 export async function getServices() {
-    const data = await readJSON<{ services: any[]; lastUpdated: string }>('services.json');
+    const data = await readJSON<{ services: Service[]; lastUpdated: string }>('services.json');
     return data.services;
 }
 
@@ -50,8 +106,8 @@ export async function getServiceBySlug(slug: string) {
 /**
  * Create or update service
  */
-export async function saveService(service: any) {
-    const data = await readJSON<{ services: any[]; lastUpdated: string }>('services.json');
+export async function saveService(service: Service) {
+    const data = await readJSON<{ services: Service[]; lastUpdated: string }>('services.json');
 
     const existingIndex = data.services.findIndex((s) => s.slug === service.slug);
 
@@ -73,7 +129,7 @@ export async function saveService(service: any) {
  * Delete service
  */
 export async function deleteService(slug: string) {
-    const data = await readJSON<{ services: any[]; lastUpdated: string }>('services.json');
+    const data = await readJSON<{ services: Service[]; lastUpdated: string }>('services.json');
     data.services = data.services.filter((s) => s.slug !== slug);
     data.lastUpdated = new Date().toISOString();
     await writeJSON('services.json', data);
@@ -83,7 +139,7 @@ export async function deleteService(slug: string) {
  * Get all projects
  */
 export async function getProjects() {
-    const data = await readJSON<{ projects: any[]; lastUpdated: string }>('projects.json');
+    const data = await readJSON<{ projects: Project[]; lastUpdated: string }>('projects.json');
     return data.projects;
 }
 
@@ -98,8 +154,8 @@ export async function getProjectBySlug(slug: string) {
 /**
  * Save project
  */
-export async function saveProject(project: any) {
-    const data = await readJSON<{ projects: any[]; lastUpdated: string }>('projects.json');
+export async function saveProject(project: Project) {
+    const data = await readJSON<{ projects: Project[]; lastUpdated: string }>('projects.json');
 
     const existingIndex = data.projects.findIndex((p) => p.slug === project.slug);
 
@@ -119,7 +175,7 @@ export async function saveProject(project: any) {
  * Delete project
  */
 export async function deleteProject(slug: string) {
-    const data = await readJSON<{ projects: any[]; lastUpdated: string }>('projects.json');
+    const data = await readJSON<{ projects: Project[]; lastUpdated: string }>('projects.json');
     data.projects = data.projects.filter((p) => p.slug !== slug);
     data.lastUpdated = new Date().toISOString();
     await writeJSON('projects.json', data);
@@ -129,15 +185,15 @@ export async function deleteProject(slug: string) {
  * Get config
  */
 export async function getConfig() {
-    const data = await readJSON<{ config: any; users: any[]; lastUpdated: string }>('config.json');
+    const data = await readJSON<{ config: Config; users: User[]; lastUpdated: string }>('config.json');
     return data.config;
 }
 
 /**
  * Update config
  */
-export async function updateConfig(config: any) {
-    const data = await readJSON<{ config: any; users: any[]; lastUpdated: string }>('config.json');
+export async function updateConfig(config: Config) {
+    const data = await readJSON<{ config: Config; users: User[]; lastUpdated: string }>('config.json');
     data.config = config;
     data.lastUpdated = new Date().toISOString();
     await writeJSON('config.json', data);
@@ -147,7 +203,7 @@ export async function updateConfig(config: any) {
  * Get user by email (for authentication)
  */
 export async function getUserByEmail(email: string) {
-    const data = await readJSON<{ config: any; users: any[]; lastUpdated: string }>('config.json');
+    const data = await readJSON<{ config: Config; users: User[]; lastUpdated: string }>('config.json');
     return data.users.find((u) => u.email === email);
 }
 
@@ -155,7 +211,7 @@ export async function getUserByEmail(email: string) {
  * Update user password hash
  */
 export async function updateUserPassword(email: string, passwordHash: string) {
-    const data = await readJSON<{ config: any; users: any[]; lastUpdated: string }>('config.json');
+    const data = await readJSON<{ config: Config; users: User[]; lastUpdated: string }>('config.json');
     const user = data.users.find((u) => u.email === email);
 
     if (user) {
@@ -166,15 +222,15 @@ export async function updateUserPassword(email: string, passwordHash: string) {
 }
 // Testimonials
 export async function getTestimonials() {
-    const data = await readJSON<{ testimonials: any[] }>('testimonials.json');
+    const data = await readJSON<{ testimonials: Testimonial[] }>('testimonials.json');
     return data.testimonials || [];
 }
 
 export async function getTestimonialById(id: number) {
     const testimonials = await getTestimonials();
-    return testimonials.find((t: any) => t.id === id);
+    return testimonials.find((t) => t.id === id);
 }
 
-export async function saveTestimonials(testimonials: any[]) {
+export async function saveTestimonials(testimonials: Testimonial[]) {
     await writeJSON('testimonials.json', { testimonials });
 }

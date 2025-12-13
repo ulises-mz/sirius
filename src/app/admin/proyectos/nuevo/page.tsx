@@ -21,7 +21,7 @@ export default function NewProjectPage() {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
 
-    const { register, control, handleSubmit, setValue, watch, formState: { errors } } = useForm<ProjectFormData>({
+    const { register, control, handleSubmit, setValue } = useForm<ProjectFormData>({
         defaultValues: {
             technologies: [{ value: "" }]
         }

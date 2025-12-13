@@ -1,41 +1,31 @@
 "use client";
 
 import { useState, Suspense } from "react";
-import { signIn } from "next-auth/react";
-import { useRouter, useSearchParams } from "next/navigation";
-import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 const AdminLoginForm = () => {
     const searchParams = useSearchParams();
-    const router = useRouter();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(searchParams?.get("error") || "");
     const [loading, setLoading] = useState(false);
-    const [debugLog, setDebugLog] = useState<string[]>([]);
-
-    const addLog = (msg: string) => setDebugLog(prev => [...prev, `${new Date().toISOString().split('T')[1]} - ${msg}`]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         if (e) e.preventDefault();
 
         setError("");
         setLoading(true);
-        addLog("Iniciando FETCH manual...");
 
         try {
             // 1. Get CSRF Token
-            addLog("Obteniendo CSRF Token...");
             const csrfRes = await fetch("/api/auth/csrf");
             const csrfData = await csrfRes.json();
             const csrfToken = csrfData.csrfToken;
-            addLog(`CSRF Token: ${csrfToken?.substring(0, 10)}...`);
 
             if (!csrfToken) throw new Error("No se pudo obtener CSRF Token");
 
             // 2. Post Credentials
-            addLog("Enviando credenciales...");
             const formData = new URLSearchParams();
             formData.append("email", email);
             formData.append("password", password);
@@ -50,18 +40,14 @@ const AdminLoginForm = () => {
                 body: formData
             });
 
-            addLog(`Status: ${res.status}`);
             const text = await res.text();
-            addLog(`Response: ${text.substring(0, 100)}...`);
             console.log("Response Full:", text);
 
             if (res.ok) {
                 const data = JSON.parse(text);
                 if (data.url && data.url.includes("error")) {
                     setError("Auth falló (Redirect a error detectado)");
-                    addLog("Falló: " + data.url);
                 } else {
-                    addLog("Login OK! Redirigiendo...");
                     window.location.href = "/admin";
                 }
             } else {
@@ -69,10 +55,10 @@ const AdminLoginForm = () => {
             }
             setLoading(false);
 
-        } catch (err: any) {
-            console.error("Fetch exception:", err);
-            setError(`Excepción: ${err.message}`);
-            addLog(`Excepción: ${err.message}`);
+        } catch (err: unknown) {
+            const error = err as Error;
+            console.error("Fetch exception:", error);
+            setError(`Excepción: ${error.message}`);
             setLoading(false);
         }
     };
@@ -137,7 +123,7 @@ const AdminLoginForm = () => {
 
                     <button
                         type="button"
-                        onClick={() => handleSubmit(null as any)}
+                        onClick={() => handleSubmit(undefined as unknown as React.FormEvent)}
                         disabled={loading}
                         className="w-full bg-[#5E3BEE] hover:bg-[#4E33D8] text-white font-bold py-3 px-4 rounded-xl transition-all transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                     >
