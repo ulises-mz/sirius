@@ -1,0 +1,90 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  role         String   @default("admin")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("users")
+}
+
+model Service {
+  id              Int      @id @default(autoincrement())
+  slug            String   @unique
+  title           String
+  description     String   @db.Text
+  icon            String?
+  popular         Boolean  @default(false)
+  longDescription String?  @db.Text
+  features        Json?
+  technologies    Json?
+  price           String?
+  category        String?
+  benefits        Json?
+  process         Json?
+  faq             Json?
+  image           String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@map("services")
+}
+
+model Project {
+  id              Int      @id @default(autoincrement())
+  slug            String   @unique
+  title           String
+  description     String   @db.Text
+  backgroundImage String?
+  category        String?
+  technologies    Json?
+  content         String?  @db.Text
+  keywords        String?  @db.Text
+  challenge       String?  @db.Text
+  solution        String?  @db.Text
+  results         String?  @db.Text
+  gallery         Json?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@map("projects")
+}
+
+model Testimonial {
+  id        Int      @id @default(autoincrement())
+  name      String
+  title     String?
+  company   String?
+  rating    Int      @default(5)
+  quote     String   @db.Text
+  result    String?  @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("testimonials")
+}
+
+model Config {
+  id           String   @id @default("site-config")
+  siteName     String
+  contactEmail String
+  phone        String?
+  address      String?  @db.Text
+  updatedAt    DateTime @updatedAt
+
+  @@map("config")
+}

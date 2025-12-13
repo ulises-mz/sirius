@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getTestimonials, saveTestimonials, getTestimonialById } from '@/lib/cms-data';
+import { getTestimonialById, saveTestimonial, deleteTestimonial } from '@/lib/cms-data';
 
 export async function GET(
     request: Request,
@@ -22,17 +22,11 @@ export async function PUT(
     try {
         const { id } = await params;
         const body = await request.json();
-        const testimonials = await getTestimonials();
 
-        const index = testimonials.findIndex((t: any) => t.id === Number(id));
-        if (index === -1) {
-            return NextResponse.json({ error: 'Testimonial not found' }, { status: 404 });
-        }
+        await saveTestimonial({ ...body, id: Number(id) });
+        const updated = await getTestimonialById(Number(id));
 
-        testimonials[index] = { ...body, id: Number(id) };
-        await saveTestimonials(testimonials);
-
-        return NextResponse.json(testimonials[index]);
+        return NextResponse.json(updated);
     } catch (error) {
         return NextResponse.json({ error: 'Failed to update testimonial' }, { status: 500 });
     }
@@ -44,10 +38,8 @@ export async function DELETE(
 ) {
     try {
         const { id } = await params;
-        const testimonials = await getTestimonials();
 
-        const filtered = testimonials.filter((t: any) => t.id !== Number(id));
-        await saveTestimonials(filtered);
+        await deleteTestimonial(Number(id));
 
         return NextResponse.json({ success: true });
     } catch (error) {
