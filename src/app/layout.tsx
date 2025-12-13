@@ -1,16 +1,16 @@
 // src/app/layout.tsx
 import '@/styles/globals.css';
 
-import { Inter } from 'next/font/google';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import WhatsAppFloat from '@/components/layout/whatsapp-float';
 import ScrollToTop from '@/components/layout/ScrollToTop';
+import PageShell from '@/components/layout/PageShell';
 import { LoadingProvider } from '@/components/shared/loading-provider';
 import HMRLoadingDetector from '@/components/shared/hmr-loading-detector';
 import { SITE, SEO_DEFAULT, OPEN_GRAPH_IMAGE } from '@/lib/constants';
-
-const inter = Inter({ subsets: ['latin'] });
+import { NextAuthProvider } from '@/components/providers/NextAuthProvider';
+import { getConfig } from '@/lib/cms-data';
 
 export const metadata = {
   title: {
@@ -21,6 +21,7 @@ export const metadata = {
   keywords: SEO_DEFAULT.keywords,
   authors: [{ name: SITE.name }],
   creator: SITE.name,
+
   publisher: SITE.name,
   metadataBase: new URL(SITE.url),
   alternates: {
@@ -86,11 +87,19 @@ export const viewport = {
   maximumScale: 1,
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  let siteConfig;
+  try {
+    siteConfig = await getConfig();
+  } catch (error) {
+    console.error("Error fetching site config for layout:", error);
+    // Continue with default constants if config fails
+  }
+
   return (
     <html lang="es-CR">
       <head>
@@ -99,14 +108,14 @@ export default function RootLayout({
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": ["Organization", "LocalBusiness", "ProfessionalService"],
-            "name": SITE.name,
+            "name": siteConfig?.siteName || SITE.name,
             "legalName": SITE.legalName,
             "description": SEO_DEFAULT.description,
             "url": SITE.url,
             "logo": `${SITE.url}/favicon.svg`,
             "image": `${SITE.url}${OPEN_GRAPH_IMAGE}`,
-            "telephone": SITE.phone,
-            "email": SITE.primaryEmail,
+            "telephone": siteConfig?.phone || SITE.phone,
+            "email": siteConfig?.contactEmail || SITE.primaryEmail,
             "foundingDate": "2020",
             "address": {
               "@type": "PostalAddress",
@@ -127,7 +136,7 @@ export default function RootLayout({
                 "name": "Costa Rica"
               },
               {
-                "@type": "State", 
+                "@type": "State",
                 "name": "San José"
               },
               {
@@ -137,7 +146,7 @@ export default function RootLayout({
             ],
             "serviceType": [
               "Desarrollo Web",
-              "Aplicaciones Móviles", 
+              "Aplicaciones Móviles",
               "E-commerce",
               "Automatización de Procesos",
               "Marketing Digital",
@@ -158,7 +167,7 @@ export default function RootLayout({
             ],
             "contactPoint": {
               "@type": "ContactPoint",
-              "telephone": SITE.phone,
+              "telephone": siteConfig?.phone || SITE.phone,
               "contactType": "customer service",
               "areaServed": "CR",
               "availableLanguage": ["Spanish", "English"]
@@ -170,34 +179,16 @@ export default function RootLayout({
             }
           })}
         </script>
-
-        {/* Schema.org para WebSite */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            "name": SITE.name,
-            "url": SITE.url,
-            "potentialAction": {
-              "@type": "SearchAction",
-              "target": {
-                "@type": "EntryPoint",
-                "urlTemplate": `${SITE.url}/search?q={search_term_string}`
-              },
-              "query-input": "required name=search_term_string"
-            }
-          })}
-        </script>
       </head>
-      <body className={inter.className} style={{ backgroundColor: 'var(--color-background)' }}>
-        <LoadingProvider>
+      <body style={{ backgroundColor: 'var(--color-background)', fontFamily: "'Genova', sans-serif" }}>
+
+        <NextAuthProvider>
           <HMRLoadingDetector />
-          <ScrollToTop />
-          <Header />
-          {children}
-          <WhatsAppFloat />
-          <Footer />
-        </LoadingProvider>
+          <PageShell siteConfig={siteConfig}>
+            {children}
+          </PageShell>
+        </NextAuthProvider>
+
       </body>
     </html>
   );

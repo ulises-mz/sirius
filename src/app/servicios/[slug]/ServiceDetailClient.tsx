@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { Badge } from "@/components/shared";
+import Image from "next/image";
 
 interface Service {
   id: number;
@@ -19,6 +19,8 @@ interface Service {
     question: string;
     answer: string;
   }>;
+  image?: string;
+  category?: string;
 }
 
 interface ServiceDetailClientProps {
@@ -33,186 +35,181 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
   };
 
   return (
-    <div className="service-detail-page">
-      {/* Breadcrumb */}
-      <div className="service-breadcrumb">
-        <nav className="service-breadcrumb-nav">
-          <Link href="/" className="service-breadcrumb-link">Inicio</Link>
-          <span>›</span>
-          <Link href="/servicios" className="service-breadcrumb-link">Servicios</Link>
-          <span>›</span>
-          <span className="service-breadcrumb-current">{service.title}</span>
-        </nav>
-      </div>
+    <div className="min-h-screen bg-[#070C18] text-[#F4F7FB] selection:bg-[#5E3BEE] selection:text-white pb-20">
 
-      {/* Service Header */}
-      <header className="service-header">
-        <div className="service-header-meta">
-          {service.popular && (
-            <Badge 
-              variant="success"
-              icon={
-                <svg fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                </svg>
-              }
-            >
-              Servicio popular
-            </Badge>
+      {/* 1. Hero Section - Clean & Immersive */}
+      <section className="relative w-full h-[50vh] min-h-[400px] flex flex-col justify-center">
+        {/* Background */}
+        <div className="absolute inset-0 z-0 overflow-hidden text-clip">
+          {service.image ? (
+            <Image src={service.image} alt={service.title} fill className="object-cover opacity-20" priority />
+          ) : (
+            <div className="w-full h-full bg-gradient-to-br from-[#0B1221] to-[#1E293B]" />
           )}
-        </div>
-        <h1 className="service-title">
-          {service.title}
-        </h1>
-        <p className="service-subtitle">
-          {service.longDescription}
-        </p>
-      </header>
+          <div className="absolute inset-0 bg-[#070C18]/80 backdrop-blur-[2px]" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#070C18] via-transparent to-transparent" />
 
-      {/* Main Service Card */}
-      <section className="service-pricing-card">
-        <div className="service-pricing-content">
-          <div className="service-pricing-icon">
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-              {service.icon === 'desarrollo' && (
-                <path strokeLinecap="round" strokeLinejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
-              )}
-              {service.icon === 'marketing' && (
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-              )}
-              {service.icon === 'diseño' && (
-                <path strokeLinecap="round" strokeLinejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
-              )}
-              {service.icon === 'consultoria' && (
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-              )}
-              {service.icon === 'ecommerce' && (
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17M17 13v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6m8 0V9a2 2 0 00-2-2H9a2 2 0 00-2 2v4.01"/>
-              )}
-              {service.icon === 'hosting' && (
-                <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"/>
-              )}
-            </svg>
+          {/* Cosmic Glow (Top Right) */}
+          <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#5E3BEE] rounded-full mix-blend-screen filter blur-[180px] opacity-[0.15] pointer-events-none" />
+        </div>
+
+        <div className="relative z-10 w-[90%] max-w-[1600px] mx-auto h-full flex flex-col justify-center items-start">
+          <Link href="/servicios" className="group inline-flex items-center gap-2 text-gray-400 hover:text-white mb-8 transition-colors">
+            <div className="w-8 h-8 rounded-full border border-[#1D2A3C] flex items-center justify-center group-hover:border-[#5E3BEE] bg-[#0B1221] transition-colors">
+              <svg className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
+            </div>
+            <span className="text-sm font-medium tracking-wide">Volver a Servicios</span>
+          </Link>
+
+          <div className="flex items-center gap-4 mb-6">
+            {service.popular && (
+              <span className="px-3 py-1 rounded-full bg-[#5E3BEE] text-white text-xs font-bold uppercase tracking-wider shadow-lg shadow-[#5E3BEE]/20 animate-fade-in-up">
+                Más Popular
+              </span>
+            )}
+            {service.category && (
+              <span className="px-3 py-1 rounded-full bg-[#86D4FF]/10 border border-[#86D4FF]/20 text-[#86D4FF] text-xs font-bold uppercase tracking-wider animate-fade-in-up delay-100">
+                {service.category}
+              </span>
+            )}
           </div>
-          <div className="service-pricing-info">
-            <h3 className="service-pricing-title">Solicitar cotización</h3>
-            <div className="service-pricing-price">
-              <span className="service-price">{service.price}</span>
+
+          <h1 className="text-5xl md:text-7xl font-bold text-white mb-4 leading-none tracking-tight animate-fade-in-up delay-100">{service.title}</h1>
+        </div>
+      </section>
+
+      {/* 2. Main Content & Sidebar */}
+      <section className="w-[90%] max-w-[1600px] mx-auto -mt-20 relative z-20">
+
+        {/* Split into specific grid to control sticky behavior */}
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 items-start">
+
+          {/* LEFT COLUMN: Sidebar Pricing & CTA (Sticky) */}
+          <div className="lg:col-span-1 lg:sticky lg:top-32 h-fit order-2 lg:order-1">
+            <div className="bg-[#0B1221] border border-[#1D2A3C] rounded-3xl p-8 hover:border-[#5E3BEE] transition-all duration-500 shadow-xl flex flex-col gap-8">
+              <div>
+                <h4 className="text-xs text-gray-500 uppercase tracking-wider font-bold mb-3">Inversión Estimada</h4>
+                <div className="flex items-baseline gap-1">
+                  <span className="text-3xl font-bold text-white">{service.price}</span>
+                  {service.price !== 'A medida' && <span className="text-gray-500 text-sm">/ proyecto</span>}
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <Link
+                  href={`/contacto?service=${service.slug}`}
+                  className="block w-full py-4 rounded-xl bg-[#5E3BEE] text-white font-bold text-center hover:bg-[#4E33D8] transition-all hover:scale-[1.02] shadow-[0_0_20px_rgba(94,59,238,0.4)]"
+                >
+                  Solicitar Cotización
+                </Link>
+                <a
+                  href="https://wa.me/50661274805"
+                  target="_blank"
+                  className="block w-full py-4 rounded-xl border border-[#1D2A3C] text-gray-300 font-bold text-center hover:bg-[#1E293B] hover:text-white transition-colors"
+                >
+                  Consultar por WhatsApp
+                </a>
+              </div>
+
+              <div className="pt-8 border-t border-[#1D2A3C]">
+                <h4 className="text-xs text-gray-500 uppercase tracking-wider font-bold mb-3">Tecnologías Incluidas</h4>
+                <div className="flex flex-wrap gap-2">
+                  {service.technologies?.map((tech, i) => (
+                    <span key={i} className="text-[10px] uppercase font-bold tracking-wider text-[#86D4FF] bg-[#86D4FF]/10 px-2 py-1 rounded border border-[#86D4FF]/20">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </div>
-            <p className="service-pricing-description">
-              Precio personalizado según tus necesidades específicas
-            </p>
-            <Link href="/contacto" className="service-pricing-button">
-              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
-              </svg>
-              Contactar ahora
-            </Link>
+          </div>
+
+          {/* RIGHT COLUMN: Main Content Stack */}
+          <div className="lg:col-span-3 space-y-6 order-1 lg:order-2">
+
+            {/* CARD 2: Overview (Wide - Long Description) */}
+            <div className="bg-[#0B1221] border border-[#1D2A3C] rounded-3xl p-8 md:p-10 hover:border-[#5E3BEE] hover:bg-[#101B2C] transition-all duration-500 group">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-10 h-10 rounded-full bg-[#5E3BEE]/10 flex items-center justify-center text-[#5E3BEE] group-hover:scale-110 transition-transform">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                </div>
+                <h2 className="text-2xl font-bold text-white tracking-tight">Descripción del Servicio</h2>
+              </div>
+              <p className="text-lg text-gray-400 leading-relaxed font-light whitespace-pre-line">
+                {service.longDescription || service.title}
+              </p>
+            </div>
+
+            {/* CARD 3: Features & Benefits (Wide) */}
+            <div className="bg-[#0B1221] border border-[#1D2A3C] rounded-3xl p-8 md:p-10 hover:border-[#5E3BEE] hover:bg-[#101B2C] transition-all duration-500 group">
+              <div className="flex items-center gap-4 mb-8">
+                <div className="w-10 h-10 rounded-full bg-[#5E3BEE]/10 flex items-center justify-center text-[#5E3BEE] group-hover:scale-110 transition-transform">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                </div>
+                <h2 className="text-2xl font-bold text-white tracking-tight">¿Qué incluye?</h2>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {service.features?.map((feature, i) => (
+                  <div key={i} className="flex gap-3 items-start">
+                    <div className="mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#5E3BEE]" />
+                    <p className="text-gray-400 leading-relaxed">{feature}</p>
+                  </div>
+                ))}
+                {service.benefits?.map((benefit, i) => (
+                  <div key={`b-${i}`} className="flex gap-3 items-start">
+                    <div className="mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#86D4FF]" />
+                    <p className="text-gray-300 font-medium leading-relaxed">{benefit}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* CARD 4: Process (Tall/Wide) */}
+            {service.process && service.process.length > 0 && (
+              <div className="bg-[#0B1221] border border-[#1D2A3C] rounded-3xl p-8 md:p-10 hover:border-[#5E3BEE] hover:bg-[#101B2C] transition-all duration-500 group">
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="w-10 h-10 rounded-full bg-[#5E3BEE]/10 flex items-center justify-center text-[#5E3BEE] group-hover:scale-110 transition-transform">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" /></svg>
+                  </div>
+                  <h2 className="text-2xl font-bold text-white tracking-tight">Nuestro Proceso</h2>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {service.process.map((step, idx) => (
+                    <div key={idx} className="flex gap-4 items-start p-4 rounded-2xl bg-[#080C15] border border-[#1D2A3C] hover:border-[#5E3BEE]/30 transition-colors">
+                      <span className="text-3xl font-black text-[#1E293B] flex-shrink-0">{(idx + 1).toString().padStart(2, '0')}</span>
+                      <p className="text-gray-300 leading-relaxed pt-1">{step}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="service-content-section">
-        <h2 className="service-section-title">
-          Características incluidas
-        </h2>
-        
-        <div className="service-features-grid">
-          {service.features.map((feature, index) => (
-            <div key={index} className="service-feature-item">
-              <div className="service-feature-icon">
-                <svg fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-                </svg>
-              </div>
-              <span className="service-feature-text">{feature}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Benefits Section */}
-      <section className="service-content-section">
-        <h2 className="service-section-title">
-          Beneficios que obtendrás
-        </h2>
-        
-        <div className="service-benefits-grid">
-          {service.benefits.map((benefit, index) => (
-            <div key={index} className="service-benefit-item">
-              <div className="service-benefit-icon">
-                <svg fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/>
-                </svg>
-              </div>
-              <span className="service-benefit-text">{benefit}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Process Section */}
-      <section className="service-content-section">
-        <h2 className="service-section-title">
-          Nuestro proceso de trabajo
-        </h2>
-        
-        <div className="service-process-container">
-          {service.process.map((step, index) => (
-            <div key={index} className="service-process-step">
-              <div className="service-process-number">
-                {index + 1}
-              </div>
-              <p className="service-process-text">{step}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Technologies Section */}
-      <section className="service-content-section">
-        <h2 className="service-section-title">
-          Tecnologías que utilizamos
-        </h2>
-        
-        <div className="service-technologies-container">
-          {service.technologies.map((technology, index) => (
-            <span key={index} className="service-technology-tag">
-              {technology}
-            </span>
-          ))}
-        </div>
-      </section>
-
-      {/* FAQ Section */}
+      {/* 3. FAQs Section - Separate Container to stop sticky behavior overlap */}
       {service.faq && service.faq.length > 0 && (
-        <section className="service-faq-section">
-          <div className="service-faq-container">
-            <h2 className="service-faq-title">
-              Preguntas frecuentes sobre {service.title}
-            </h2>
-            
-            <div className="service-faq-list">
-              {service.faq.map((faq, index) => (
-                <div key={index} className="service-faq-item">
-                  <button 
-                    className="service-faq-question"
+        <section className="w-[90%] max-w-[1600px] mx-auto mt-6">
+          <div className="bg-[#0B1221] border border-[#1D2A3C] rounded-3xl p-8 md:p-10 hover:border-[#5E3BEE] transition-all duration-500">
+            <div className="flex items-center gap-4 mb-8">
+              <div className="w-10 h-10 rounded-full bg-[#5E3BEE]/10 flex items-center justify-center text-[#5E3BEE]">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              </div>
+              <h2 className="text-2xl font-bold text-white tracking-tight">Preguntas Frecuentes</h2>
+            </div>
+            <div className="space-y-4">
+              {service.faq.map((item, index) => (
+                <div key={index} className="border border-[#1D2A3C] rounded-2xl bg-[#080C15] overflow-hidden">
+                  <button
+                    className="w-full flex items-center justify-between p-6 text-left hover:bg-[#101B2C] transition-colors"
                     onClick={() => toggleFaq(index)}
                   >
-                    <h3>{faq.question}</h3>
-                    <svg 
-                      className={`service-faq-icon ${openFaq === index ? 'service-faq-icon-open' : ''}`} 
-                      fill="none" 
-                      stroke="currentColor" 
-                      viewBox="0 0 24 24"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
+                    <span className="font-medium text-white">{item.question}</span>
+                    <svg className={`w-5 h-5 text-[#5E3BEE] transition-transform ${openFaq === index ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                   </button>
                   {openFaq === index && (
-                    <div className="service-faq-answer">
-                      <p>{faq.answer}</p>
+                    <div className="p-6 pt-0 text-gray-400 border-t border-[#1D2A3C]/50">
+                      <p className="leading-relaxed">{item.answer}</p>
                     </div>
                   )}
                 </div>
@@ -222,28 +219,14 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
         </section>
       )}
 
-      {/* CTA Section */}
-      <section className="service-cta-final">
-        <div className="service-cta-final-container">
-          <div className="service-cta-icon">
-            <svg fill="currentColor" viewBox="0 0 24 24">
-              <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/>
-            </svg>
-          </div>
-          <h2 className="service-cta-title">¿Listo para comenzar con {service.title}?</h2>
-          <p className="service-cta-description">
-            Contáctanos hoy mismo para una consulta gratuita y descubre cómo podemos ayudarte.
-          </p>
-          <div className="service-cta-buttons">
-            <Link href="/contacto" className="service-cta-primary">
-              Solicitar cotización
-            </Link>
-            <Link href="/servicios" className="service-cta-secondary">
-              Ver todos los servicios
-            </Link>
-          </div>
-        </div>
+      {/* 4. Footer CTA - The "Big" One */}
+      <section className="mt-32 w-[90%] max-w-[1000px] mx-auto pb-32 text-center">
+        <h2 className="text-4xl md:text-5xl font-bold text-white mb-8 tracking-tight">¿Listo para escalar tu negocio?</h2>
+        <Link href="/contacto" className="inline-block px-12 py-5 bg-[#5E3BEE] text-white font-bold tracking-wide rounded-full hover:bg-[#4b2fbe] hover:shadow-[0_0_30px_rgba(94,59,238,0.5)] transition-all duration-300 transform hover:-translate-y-1">
+          AGENDAR CONSULTORÍA
+        </Link>
       </section>
+
     </div>
   );
 }

@@ -1,20 +1,35 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: 'export',
-  trailingSlash: true,
+  /* config options here */
   images: {
-    unoptimized: true,
-    loader: 'custom',
-    loaderFile: './src/lib/image-loader.js'
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'drive.google.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
   },
-  compress: true,
-  generateEtags: false,
-  poweredByHeader: false,
-  experimental: {
-    optimizeCss: true,
-    optimizePackageImports: ['lucide-react', 'react-icons']
-  }
 };
 
 export default nextConfig;

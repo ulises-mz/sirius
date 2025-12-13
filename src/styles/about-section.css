@@ -8,7 +8,6 @@
 }
 
 .about-container {
-  max-width: 1200px;
   margin: 0 auto;
   padding: 0 1.5rem;
 }
@@ -42,7 +41,7 @@
 }
 
 .about-title {
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-weight: 800;
   color: var(--color-text-primary);
   line-height: 1.25;
@@ -253,8 +252,13 @@
     padding: 4rem 0;
   }
 
+  .about-container {
+    max-width: 95%;
+    padding: 0 1rem;
+  }
+
   .about-title {
-    font-size: 1.75rem;
+    font-size: 1.875rem;
   }
 
   .about-description {
@@ -295,10 +299,11 @@
 @media (max-width: 480px) {
   .about-container {
     padding: 0 1rem;
+    max-width: 95%;
   }
 
   .about-title {
-    font-size: 1.5rem;
+    font-size: 1.875rem;
   }
 
   .feature-icon-wrapper {

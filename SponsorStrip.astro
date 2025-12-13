@@ -1,0 +1,139 @@
+---
+---
+
+<section class="sponsor-strip">
+  <div class="sponsor-strip__container">
+    <h2 class="sponsor-strip__title">Algunos de nuestros clientes</h2>
+    <div class="sponsor-strip__logos-wrapper">
+      <div class="sponsor-strip__fade sponsor-strip__fade--left"></div>
+      <div class="sponsor-strip__logos">
+        <div class="sponsor-logo"><img src="/assets/sponsors/concasa.webp" alt="Logo Concasa" /></div>
+        <div class="sponsor-logo"><img src="/assets/sponsors/expedicion-cr.webp" alt="Logo Expedicion CR" /></div>
+        <div class="sponsor-logo"><img src="/assets/sponsors/lanco.webp" alt="Logo Lanco" /></div>
+        <div class="sponsor-logo"><img src="/assets/sponsors/nutrisalud.webp" alt="Logo Nutrisalud" /></div>
+        <div class="sponsor-logo"><img src="/assets/sponsors/oxigeno.webp" alt="Logo Oxigeno" style="max-height:80px;max-width:160px;" /></div>
+        <div class="sponsor-logo"><img src="/assets/sponsors/panalito.webp" alt="Logo Panalito" /></div>
+        <div class="sponsor-logo"><img src="/assets/sponsors/practica.webp" alt="Logo Practica" /></div>
+        <div class="sponsor-logo"><img src="/assets/sponsors/ready-pizza.webp" alt="Logo Ready Pizza" /></div>
+        <!-- Duplicados para efecto infinito -->
+        <div class="sponsor-logo"><img src="/assets/sponsors/concasa.webp" alt="Logo Concasa" /></div>
+        <div class="sponsor-logo"><img src="/assets/sponsors/expedicion-cr.webp" alt="Logo Expedicion CR" /></div>
+        <div class="sponsor-logo"><img src="/assets/sponsors/lanco.webp" alt="Logo Lanco" /></div>
+        <div class="sponsor-logo"><img src="/assets/sponsors/nutrisalud.webp" alt="Logo Nutrisalud" /></div>
+        <div class="sponsor-logo"><img src="/assets/sponsors/oxigeno.webp" alt="Logo Oxigeno" style="max-height:80px;max-width:160px;" /></div>
+        <div class="sponsor-logo"><img src="/assets/sponsors/panalito.webp" alt="Logo Panalito" /></div>
+        <div class="sponsor-logo"><img src="/assets/sponsors/practica.webp" alt="Logo Practica" /></div>
+        <div class="sponsor-logo"><img src="/assets/sponsors/ready-pizza.webp" alt="Logo Ready Pizza" /></div>
+      </div>
+      <div class="sponsor-strip__fade sponsor-strip__fade--right"></div>
+    </div>
+  </div>
+</section>
+  </div>
+</section>
+
+<style>
+.sponsor-strip {
+  width: 100%;
+  overflow: hidden;
+  background: linear-gradient(90deg, #0f2027 0%, #2c5364 100%);
+  padding: 2.5rem 0 2rem 0;
+  border-top: 2px solid #00e5ff22;
+  border-bottom: 2px solid #00e5ff22;
+}
+.sponsor-strip__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+.sponsor-strip__title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #00e5ff;
+  margin-bottom: 1.5rem;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 8px #0006;
+}
+.sponsor-strip__logos-wrapper {
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
+}
+.sponsor-strip__fade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 60px;
+  z-index: 2;
+  pointer-events: none;
+}
+.sponsor-strip__fade--left {
+  left: 0;
+  background: linear-gradient(to right, #0f2027ff 0%, #0f202700 100%);
+}
+.sponsor-strip__fade--right {
+  right: 0;
+  background: linear-gradient(to left, #2c5364ff 0%, #2c536400 100%);
+}
+.sponsor-strip__logos {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  animation: sponsor-scroll 30s linear infinite;
+  width: max-content;
+  max-width: 100%;
+  margin: 0 auto;
+}
+.sponsor-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff2;
+  border-radius: 1rem;
+  box-shadow: 0 2px 12px #0002;
+  padding: 0.5rem 1.5rem;
+  min-width: 120px;
+  min-height: 70px;
+  max-width: 140px;
+  max-height: 80px;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+.sponsor-logo img {
+  max-height: 60px;
+  max-width: 120px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: grayscale(1) brightness(0.9);
+  transition: filter 0.3s, transform 0.3s;
+}
+.sponsor-logo:hover {
+  background: #fff6;
+  box-shadow: 0 4px 16px #00e5ff44;
+}
+.sponsor-logo img:hover {
+  filter: grayscale(0) brightness(1.1) drop-shadow(0 0 8px #00e5ff88);
+  transform: scale(1.07);
+}
+@keyframes sponsor-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@media (max-width: 900px) {
+  .sponsor-strip__logos {
+    gap: 1.5rem;
+  }
+  .sponsor-logo {
+    min-width: 90px;
+    min-height: 50px;
+    max-width: 100px;
+    max-height: 60px;
+    padding: 0.3rem 0.7rem;
+  }
+  .sponsor-logo img {
+    max-height: 40px;
+    max-width: 80px;
+  }
+}
+</style>

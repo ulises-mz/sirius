@@ -1,148 +1,163 @@
 export const portfolioItems = [
   {
     id: 1,
-    slug: "landing-coach",
-    title: "Coach Personal",
-    description: "Sitio web moderno con formulario de contacto para captar nuevos clientes",
-    backgroundImage: "/portfolio/Coach.webp",
-    technologies: ["Next.js", "Tailwind CSS", "EmailJS", "Vercel", "SEO"],
-    content: `## Presencia online para coach personal
+    slug: "cash-of-grapplers",
+    title: "Cash of Grapplers",
+    description: "Plataforma oficial de eventos BJJ con streaming y tienda online",
+    backgroundImage: "/portfolio/web-cash-of-grapplers.webp",
+    technologies: ["Next.js", "Stripe", "AWS", "Tailwind CSS", "PostgreSQL"],
+    content: `## Plataforma integral para eventos de Jiu-Jitsu
 
 **Reto:**
-Captar nuevos clientes de forma profesional y generar confianza.
+Centralizar la gestión de torneos, venta de entradas y streaming en vivo para una audiencia internacional.
 
 **Solución:**
-- Diseño moderno con enfoque emocional
-- Formulario de contacto vía correo electrónico
-- Optimización SEO para mayor visibilidad
+- Desarrollo de plataforma escalable en Next.js
+- Integración de pasarela de pagos Stripe para tickets y PPV
+- Sistema de streaming de alta disponibilidad
+- Gestión de brackets y resultados en tiempo real
 
 **Resultados:**
-- Incremento en solicitudes de contacto
-- Imagen profesional sólida en el mercado digital`,
-    keywords: "coach personal, landing page, contacto clientes"
+- Venta de entradas simplificada y segura
+- Experiencia de usuario fluida durante transmisiones en vivo`,
+    keywords: "bjj, grappling, streaming, eventos deportivos, nextjs"
   },
   {
     id: 2,
-    slug: "web-rayca",
-    title: "Rayca",
-    description: "Página informativa con formularios de contacto y SEO geolocalizado",
-    backgroundImage: "/portfolio/Rayca.webp",
-    technologies: ["Next.js", "Tailwind CSS", "React Hook Form", "SEO local", "Vercel"],
-    content: `## Portal profesional para firma de contadores RAYCA
+    slug: "app-cash-of-grapplers",
+    title: "App Cash of Grapplers",
+    description: "Experiencia móvil para competidores y fans con seguimiento en vivo",
+    backgroundImage: "/portfolio/app-cash-of-grapplers.webp",
+    technologies: ["React Native", "Expo", "Firebase", "Real-time DB"],
+    content: `## Aplicación móvil complementaria para torneos
 
 **Reto:**
-Mostrar servicios contables de forma clara y captar clientes locales.
+Llevar la emoción del evento al bolsillo de los asistentes y competidores con notificaciones en tiempo real.
 
 **Solución:**
-- Diseño web profesional y responsive
-- Formularios de contacto efectivos
-- SEO geolocalizado para aumentar visibilidad en zonas específicas
+- App nativa para iOS y Android
+- Notificaciones push para llamados a pelea
+- Visualización de brackets y tiempos en vivo
+- Perfiles de atletas y estadísticas
 
 **Resultados:**
-- Mayor captación de clientes por región
-- Imagen profesional alineada a los valores de la firma`,
-    keywords: "firma contable, rayca, servicios contables, SEO local"
+- Mayor engagement durante los eventos
+- Reducción de tiempos de espera para competidores`,
+    keywords: "app movil, react native, deportes, bjj, expo"
   },
   {
     id: 3,
-    slug: "lazerzone-canada",
-    title: "Lazer Zone",
-    description: "Web informativa con e-commerce, reservas, formularios y panel administrativo",
-    backgroundImage: "/portfolio/LazerZone.webp",
-    technologies: [
-      "React",
-      "Tailwind CSS",
-      "Node.js",
-      "Express",
-      "MongoDB",
-      "Stripe",
-      "JWT Auth",
-      "Admin Dashboard",
-      "Calendario de Reservas",
-      "Formulario de Contacto"
-    ],
-    content: `## Plataforma completa para centro de entretenimiento canadiense
+    slug: "barf-natural-pets",
+    title: "Barf Natural Pets",
+    description: "E-commerce especializado en alimentación natural cruda para mascotas",
+    backgroundImage: "/portfolio/web-barf-natural-pets.webp",
+    technologies: ["WordPress", "WooCommerce", "SEO Local", "Analytics"],
+    content: `## Tienda online para alimentación natural de mascotas
 
 **Reto:**
-Crear una página web que combinara presencia informativa, comercio electrónico y gestión administrativa en un solo sistema.
+Posicionar una marca de nicho (Dieta BARF) y facilitar la compra recurrente de productos frescos.
 
 **Solución:**
-- Sitio web informativo desarrollado en React
-- Tienda online integrada con pagos vía Stripe
-- Sistema de reservas en línea con calendario y control de disponibilidad
-- Formularios de contacto para clientes
-- Dashboard administrativo para gestionar pedidos, categorías, tipos de servicios y usuarios
+- Tienda online optimizada para conversión
+- Sistema de suscripción para pedidos recurrentes
+- Blog educativo integrado para estrategia SEO
+- Optimización de carga rápida para móviles
 
 **Resultados:**
-- Centralización y automatización de la operación digital
-- Mejora en la experiencia del cliente y gestión interna eficiente`,
-    keywords: "lazer zone, ecommerce canada, sistema de reservas, react nodejs"
+- Posicionamiento líder en búsquedas relacionadas a BARF en CR
+- Incremento en la retención de clientes recurrentes`,
+    keywords: "barf, mascotas, ecommerce, woocommerce, costa rica"
   },
   {
     id: 4,
-    slug: "tienda-canamo",
-    title: "Karticos",
-    description: "WordPress + WooCommerce para tienda de productos a base de cáñamo",
-    backgroundImage: "/portfolio/Karticos.webp",
-    technologies: ["WordPress", "WooCommerce", "Elementor", "SEO", "CSS personalizado", "Hosting local"],
-    content: `## Comercio electrónico para productos derivados del cáñamo
+    slug: "great-events-cr",
+    title: "Great Events CR",
+    description: "Sitio corporativo para planificación y gestión de eventos premium",
+    backgroundImage: "/portfolio/web-great-events.webp",
+    technologies: ["React", "Framer Motion", "EmailJS", "UI/UX Design"],
+    content: `## Presencia digital para productora de eventos
 
 **Reto:**
-Ofrecer una tienda confiable y educativa sobre productos de cáñamo industrial.
+Transmitir la elegancia y magnitud de los eventos corporativos y sociales a través de una experiencia web.
 
 **Solución:**
-- WordPress con WooCommerce personalizado
-- Pasarela de pagos integrada y diseño amigable
-- SEO optimizado para posicionamiento en el nicho del cáñamo
+- Diseño visual de alto impacto con galerías inmersivas
+- Animaciones suaves con Framer Motion
+- Formularios de cotización detallados
+- Portafolio de eventos categorizado
 
 **Resultados:**
-- Mayor confianza del cliente final
-- Ventas consistentes desde el lanzamiento
-- Mayor tiempo de navegación y menor tasa de rebote`,
-    keywords: "tienda cáñamo, productos naturales, woocommerce costa rica"
+- Aumento en la calidad de los leads entrantes
+- Presentación de marca alineada con clientes de alto perfil`,
+    keywords: "eventos, corporate, react, diseño web, costa rica"
   },
   {
     id: 5,
-    slug: "bot-whatsapp-barberia",
-    title: "Mich Barber Bot",
-    description: "Automatización de reservas y respuestas frecuentes vía WhatsApp",
-    backgroundImage: "/portfolio/MichBarber.webp",
-    technologies: ["Node.js", "Express", "Twilio WhatsApp API", "Dialogflow", "MongoDB"],
-    content: `## Atención automatizada para barbería
+    slug: "runners-not-runners",
+    title: "Runners not Runners",
+    description: "Comunidad digital y blog para corredores y entusiastas del fitness",
+    backgroundImage: "/portfolio/Coach.webp", // Placeholder
+    technologies: ["Next.js", "Sanity CMS", "Tailwind CSS", "Newsletter"],
+    content: `## Blog y comunidad para estilo de vida runner
 
 **Reto:**
-Reducir la carga operativa en agendamiento de citas y atención al cliente.
+Crear un espacio digital que conecte con corredores amateurs y profesionales, diferenciándose de los medios tradicionales.
 
 **Solución:**
-- Bot para WhatsApp con agendamiento automático
-- Respuestas programadas a preguntas frecuentes
-- Configuración de horarios y disponibilidad
+- CMS headless (Sanity) para gestión ágil de contenido
+- Diseño moderno y motivador
+- Integración con newsletter para fidelización
+- Optimización para lectura en móviles
 
 **Resultados:**
-- Reducción del 90% en mensajes manuales
-- Aumento en reservas sin intervención humana`,
-    keywords: "bot whatsapp barbería, automatización reservas, atención clientes"
+- Crecimiento orgánico de la comunidad
+- Alta tasa de suscripción al newsletter`,
+    keywords: "running, blog, comunidad, nextjs, fitness"
   },
   {
     id: 6,
-    slug: "automatizacion-datos-ventas",
-    title: "InsightFlow",
-    description: "Extracción y análisis automatizado de datos usando IA",
-    backgroundImage: "/portfolio/InsightFlow.webp",
-    technologies: ["Python", "Pandas", "OpenAI API", "Google Sheets API", "Streamlit"],
-    content: `## Análisis de datos automatizado con IA
+    slug: "blindpoint",
+    title: "BlindPoint",
+    description: "Plataforma tecnológica enfocada en seguridad y accesibilidad digital",
+    backgroundImage: "/portfolio/web-blindpoint.webp",
+    technologies: ["React", "Node.js", "Cybersecurity", "AI Integration"],
+    content: `## Soluciones tecnológicas avanzadas
 
 **Reto:**
-Cliente realizaba análisis de ventas manualmente, tardando horas o días.
+Desarrollar una presencia web que refleje innovación, seguridad y solidez técnica.
 
 **Solución:**
-- Sistema de extracción automática desde diferentes fuentes
-- Limpieza, procesamiento y análisis de datos con inteligencia artificial
-- Reportes en tiempo real con métricas clave
+- Arquitectura web moderna y segura
+- Integración de demostraciones interactivas
+- Diseño UI enfocado en claridad y accesibilidad
+- Panel de control para gestión de servicios
 
 **Resultados:**
-- Reducción de tiempos de análisis de días a minutos
-- Mejor toma de decisiones basada en datos reales`,
-    keywords: "automatización ventas, análisis IA, extracción de datos"
+- Validación de autoridad en el sector tecnológico
+- Plataforma preparada para escalar servicios digitales`,
+    keywords: "tech, seguridad, accesibilidad, software, react"
+  },
+  {
+    id: 7,
+    slug: "bpcreation",
+    title: "BP Creation",
+    description: "Tienda online de fotografía artística y productos personalizados",
+    backgroundImage: "/portfolio/web-bp-creations.webp",
+    technologies: ["Shopify", "Liquid", "Custom CSS", "Instagram Feed"],
+    content: `## E-commerce de arte y fotografía
+
+**Reto:**
+Vender arte y productos visuales con una experiencia de usuario que respete la estética de las obras.
+
+**Solución:**
+- Personalización avanzada de tema Shopify
+- Galerías de alta resolución optimizadas
+- Proceso de checkout fluido
+- Integración visual con redes sociales
+
+**Resultados:**
+- Experiencia de compra visualmente atractiva
+- Gestión eficiente de inventario y pedidos internacionales`,
+    keywords: "fotografia, arte, shopify, ecommerce, diseño"
   }
 ];

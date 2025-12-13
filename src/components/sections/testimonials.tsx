@@ -1,126 +1,125 @@
 "use client";
 
-import React, { useRef, useEffect, useMemo } from "react";
-import { testimonials } from "@/data/testimonials";
-import "@/styles/testimonials-section.css";
+import { useEffect } from "react";
+import { useAnimation, useMotionValue } from "framer-motion";
+import { motion } from "framer-motion"; // Explicit import
+import { Star } from "lucide-react";
 
-export function TestimonialsSection() {
-  const trackRef = useRef<HTMLDivElement>(null);
+interface Testimonial {
+  id?: number | string;
+  quote: string;
+  name: string;
+  title: string;
+  company: string;
+  rating: number;
+  result?: string;
+  image?: string;
+}
+
+export default function TestimonialsSection({ testimonials = [] }: { testimonials?: any[] }) {
+  const controls = useAnimation();
+  const x = useMotionValue(0);
+
+  // Use dynamic data or fallback to empty
+  const items = testimonials.length > 0 ? testimonials : [];
 
   useEffect(() => {
-    if (trackRef.current) {
-      // Force reflow to ensure animation starts
-      trackRef.current.offsetHeight;
-      trackRef.current.classList.add('animate');
-    }
-  }, []);
+    if (items.length === 0) return;
 
-  // Triplicar testimonios para scroll suave infinito (3 segmentos idénticos)
-  const allTestimonials = useMemo(() => (
-    [...testimonials, ...testimonials, ...testimonials]
-  ), []);
+    const cardWidth = 400 + 24; // ancho del card + gap
+    const totalWidth = items.length * cardWidth;
 
-  // Calcula duración dinámica según cantidad (más items => animación más larga)
-  const animationSpeedSeconds = useMemo(() => {
-    const basePerItem = 6; // segundos por testimonial visible aproximado
-    const uniqueCount = testimonials.length;
-    // Limitar rango razonable
-    const raw = uniqueCount * basePerItem;
-    return Math.min(Math.max(raw, 30), 90); // entre 30s y 90s
-  }, []);
+    const animate = async () => {
+      await controls.start({
+        x: -totalWidth,
+        transition: {
+          duration: items.length * 5, // 5 segundos por card
+          ease: "linear",
+        },
+      });
+
+      // Resetear instantáneamente a la posición inicial
+      controls.set({ x: 0 });
+      animate(); // Repetir
+    };
+
+    animate();
+  }, [controls, items.length]);
+
+  // Duplicar testimonios para crear el efecto infinito
+  const duplicatedTestimonials = [...items, ...items];
+
+  if (items.length === 0) return null; // Don't render empty section
 
   return (
-    <section className="testimonials-section">
-      <div className="testimonials-container">
-        {/* Header */}
-        <div className="testimonials-header">
-          <div className="testimonials-badge">
-            <svg viewBox="0 0 24 24" fill="currentColor" className="badge-icon">
-              <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
-            </svg>
-            <span>Testimonios</span>
+    <section id="testimonials" className="relative py-20 px-4 sm:py-12 overflow-hidden">
+      <div className="mx-auto w-[95%] lg:w-[80%]">
+        <div className="mb-16 text-center sm:mb-10">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-400/30 bg-cyan-50/50 px-4 py-2 dark:bg-cyan-900/10">
+            <div className="h-2 w-2 rounded-full bg-cyan-400" />
+            <span className="text-sm font-semibold text-cyan-700 dark:text-cyan-300">
+              Testimonios
+            </span>
           </div>
-          <h2 className="testimonials-title">Clientes que transformaron su negocio</h2>
-          <p className="testimonials-description">
-            Resultados medibles y crecimiento real para empresas de todos los tamaños
+          <h2 className="mb-6 text-4xl md:text-5xl font-bold leading-tight tracking-tight text-neutral-900 dark:text-white sm:text-2xl sm:mb-4">
+            Lo que dicen nuestros{" "}
+            <span className="text-cyan-600 dark:text-cyan-400 font-thin italic">
+              clientes
+            </span>
+          </h2>
+          <p className="mx-auto max-w-2xl text-lg md:text-xl text-neutral-600 dark:text-neutral-400 sm:text-base">
+            Resultados reales de empresas que confiaron en nuestras soluciones digitales
           </p>
         </div>
+      </div>
 
-        {/* Infinite Scroll Carousel */}
-        <div className="testimonials-scroll-wrapper">
-          <div
-            className="testimonials-scroll-track"
-            ref={trackRef}
-            style={{ ['--speed' as any]: `${animationSpeedSeconds}s` }}
-            aria-label="Carrusel de testimonios en desplazamiento horizontal infinito"
-          >
-            {allTestimonials.map((testimonial, index) => (
-              <div
-                key={`testimonial-${index}`}
-                className="testimonial-card-scroll"
-                // Oculta a lectores de pantalla duplicados para evitar repetición
-                aria-hidden={index >= testimonials.length}
-              >
-                {/* Rating */}
-                <div className="testimonial-rating">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <svg
-                      key={i}
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      className={`star ${i < testimonial.rating ? 'filled' : 'empty'}`}
-                    >
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  ))}
-                </div>
+      <div className="relative">
+        {/* Contenedor del scroll infinito */}
+        <motion.div
+          className="flex gap-6"
+          animate={controls}
+          style={{ x }}
+        >
+          {duplicatedTestimonials.map((testimonial, index) => (
+            <div
+              key={index}
+              className="flex-shrink-0 w-[400px] rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-8 shadow-sm hover:shadow-md transition-all duration-300"
+            >
+              {/* Rating */}
+              <div className="flex gap-1 mb-4">
+                {Array.from({ length: testimonial.rating || 5 }).map((_, i) => (
+                  <Star
+                    key={i}
+                    className="w-5 h-5 fill-cyan-400 text-cyan-400"
+                  />
+                ))}
+              </div>
 
-                {/* Quote */}
-                <blockquote className="testimonial-quote">
-                  "{testimonial.quote}"
-                </blockquote>
+              {/* Quote */}
+              <p className="text-neutral-700 dark:text-neutral-300 mb-6 text-sm leading-relaxed">
+                "{testimonial.quote}"
+              </p>
+
+              {/* Author Info */}
+              <div className="border-t border-neutral-200 dark:border-neutral-800 pt-4">
+                <p className="font-semibold text-neutral-900 dark:text-white">{testimonial.name}</p>
+                <p className="text-sm text-neutral-600 dark:text-neutral-400">{testimonial.title}</p>
+                <p className="text-sm text-cyan-600 dark:text-cyan-400 font-medium">
+                  {testimonial.company}
+                </p>
 
                 {/* Result Badge */}
                 {testimonial.result && (
-                  <div className="testimonial-result-badge">
-                    <svg viewBox="0 0 20 20" fill="currentColor" className="result-icon">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    <span>{testimonial.result}</span>
+                  <div className="mt-3 inline-block">
+                    <span className="bg-cyan-100 dark:bg-cyan-900/30 text-cyan-700 dark:text-cyan-300 px-3 py-1 rounded-full text-xs font-semibold">
+                      {testimonial.result}
+                    </span>
                   </div>
                 )}
-
-                {/* Author */}
-                <div className="testimonial-author">
-                  <div className="author-avatar">
-                    <span>{testimonial.name.charAt(0)}</span>
-                  </div>
-                  <div className="author-details">
-                    <div className="author-name">{testimonial.name}</div>
-                    <div className="author-title">{testimonial.title}</div>
-                    <div className="author-company">{testimonial.company}</div>
-                  </div>
-                </div>
               </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Stats */}
-        <div className="testimonials-stats">
-          <div className="stat-item">
-            <div className="stat-number">50+</div>
-            <div className="stat-label">Clientes Satisfechos</div>
-          </div>
-          <div className="stat-item">
-            <div className="stat-number">98%</div>
-            <div className="stat-label">Tasa de Satisfacción</div>
-          </div>
-          <div className="stat-item">
-            <div className="stat-number">5.0</div>
-            <div className="stat-label">Calificación Promedio</div>
-          </div>
-        </div>
+            </div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );

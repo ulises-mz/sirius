@@ -4,24 +4,24 @@ export const SITE = {
 	name: 'Sirius',
 	shortName: 'Sirius',
 	legalName: 'Sirius Agencia de Soluciones Digitales',
-	domain: 'siriusdigital.cr', // TODO: confirmar dominio final (ej: siriusagencia.com)
-	url: 'https://www.siriusdigital.cr', // TODO: actualizar cuando se defina el dominio productivo
+	domain: 'siriusx.net',
+	url: 'https://www.siriusx.net',
 	locale: 'es_CR',
 	tagline: 'Soluciones digitales que aceleran tu crecimiento',
 	description:
 		'Agencia de soluciones digitales: desarrollo web, automatización, marketing y estrategia tecnológica orientada a resultados.',
-	primaryEmail: 'contacto@siriusdigital.cr', // TODO: reemplazar con email oficial
-	phone: '+506 0000 0000', // TODO: reemplazar con teléfono oficial
+	primaryEmail: 'admin@siriusx.net',
+	phone: '+506 7221 7873',
 	address: {
-		street: 'San José Centro',
+		street: 'Pozos de Santa Ana',
 		city: 'San José',
 		region: 'San José',
-		postalCode: '10101',
+		postalCode: '10903',
 		countryCode: 'CR'
 	},
 	social: {
 		facebook: 'https://www.facebook.com/sirius', // TODO
-		instagram: 'https://www.instagram.com/sirius', // TODO
+		instagram: 'https://www.instagram.com/siriusx_cr/',
 		linkedin: 'https://www.linkedin.com/company/sirius', // TODO
 		twitter: 'https://x.com/sirius' // TODO
 	}
