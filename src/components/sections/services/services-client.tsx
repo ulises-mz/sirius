@@ -4,27 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-
-// Types
-export interface Service {
-    id: number;
-    title: string;
-    slug: string;
-    icon: string;
-    description: string;
-    longDescription: string;
-    features: string[];
-    technologies: string[];
-    price: string;
-    popular: boolean;
-    category: string;
-    benefits: string[];
-    process: string[];
-    faq: Array<{
-        question: string;
-        answer: string;
-    }>;
-}
+import type { Service } from "@/lib/cms-data";
 
 // Helper for Specific Service Icons
 const ServiceIcon = ({ icon }: { icon: string }) => {
@@ -137,7 +117,7 @@ export default function ServicesClient({ services }: { services: Service[] }) {
 
                             {/* Product Header with Icon */}
                             <div className="flex items-start justify-between mb-8 relative z-10 pointer-events-none">
-                                <ServiceProductVisual type={service.slug} icon={service.icon} />
+                                <ServiceProductVisual type={service.slug} icon={service.icon || 'default'} />
                                 <div className="text-right">
                                     <p className="text-sm text-gray-500 mb-1">Inversión desde</p>
                                     <p className="text-2xl font-thin text-white">{service.price}</p>
@@ -179,7 +159,7 @@ export default function ServicesClient({ services }: { services: Service[] }) {
                             <div className="mt-auto pt-8 border-t border-[#1D2A3C]/50">
                                 <p className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4">Lo que incluye:</p>
                                 <ul className="space-y-3">
-                                    {service.features.slice(0, 5).map((feature, idx) => (
+                                    {(service.features || []).slice(0, 5).map((feature, idx) => (
                                         <li key={idx} className="flex items-start gap-3 text-sm text-gray-300">
                                             <svg className="w-5 h-5 text-[#00F260] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />

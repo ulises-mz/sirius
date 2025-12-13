@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm, useFieldArray } from "react-hook-form";
 import Link from "next/link";
-import { toast } from "react-hot-toast"; // assuming we install it or implement simple alert
 
 interface ServiceFormData {
     title: string;
@@ -24,7 +23,7 @@ export default function NewServicePage() {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
 
-    const { register, control, handleSubmit, formState: { errors }, watch, setValue } = useForm<ServiceFormData>({
+    const { register, control, handleSubmit, setValue } = useForm<ServiceFormData>({
         defaultValues: {
             popular: false,
             features: [{ value: "" }],
@@ -36,10 +35,8 @@ export default function NewServicePage() {
     // Dynamic fields
     const { fields: featureFields, append: appendFeature, remove: removeFeature } = useFieldArray({ control, name: "features" });
     const { fields: techFields, append: appendTech, remove: removeTech } = useFieldArray({ control, name: "technologies" });
-    const { fields: benefitFields, append: appendBenefit, remove: removeBenefit } = useFieldArray({ control, name: "benefits" });
 
     // Auto-generate slug from title
-    const title = watch("title");
 
     const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const val = e.target.value;

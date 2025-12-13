@@ -2,26 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-
-interface Service {
-  id: number;
-  title: string;
-  slug: string;
-  longDescription: string;
-  price: string;
-  icon: string;
-  popular?: boolean;
-  features: string[];
-  benefits: string[];
-  process: string[];
-  technologies: string[];
-  faq?: Array<{
-    question: string;
-    answer: string;
-  }>;
-  image?: string;
-  category?: string;
-}
+import type { Service } from "@/lib/cms-data";
 
 interface ServiceDetailClientProps {
   service: Service;
@@ -41,8 +22,8 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
       <section className="relative w-full h-[50vh] min-h-[400px] flex flex-col justify-center">
         {/* Background */}
         <div className="absolute inset-0 z-0 overflow-hidden text-clip">
-          {service.image ? (
-            <Image src={service.image} alt={service.title} fill className="object-cover opacity-20" priority />
+          {(service.image && typeof service.image === 'string') ? (
+            <Image src={service.image} alt={service.title || 'Servicio'} fill className="object-cover opacity-20" priority />
           ) : (
             <div className="w-full h-full bg-gradient-to-br from-[#0B1221] to-[#1E293B]" />
           )}

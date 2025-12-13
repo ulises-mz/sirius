@@ -6,17 +6,7 @@ import Image from "next/image";
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
 import { motion } from "framer-motion";
 import { getOptimizedImageUrl } from "@/lib/utils";
-
-interface Project {
-    id: number;
-    slug: string;
-    title: string;
-    description: string;
-    backgroundImage: string;
-    technologies: string[];
-    category: string;
-    // content, keywords etc are not needed for the card view
-}
+import type { Project } from "@/lib/cms-data";
 
 export default function PortfolioClient({ projects }: { projects: Project[] }) {
     const [selectedCategory, setSelectedCategory] = useState("Todos");
@@ -34,13 +24,13 @@ export default function PortfolioClient({ projects }: { projects: Project[] }) {
             // Fallback logic from original file (if migration didn't map categories perfectly)
             switch (selectedCategory) {
                 case "Desarrollo":
-                    return item.technologies.some(tech => ['Next.js', 'React', 'WordPress', 'HTML'].includes(tech));
+                    return (item.technologies || []).some(tech => ['Next.js', 'React', 'WordPress', 'HTML'].includes(tech));
                 case "Apps Móviles":
-                    return item.technologies.some(tech => ['React Native', 'Expo', 'Flutter'].includes(tech)) || item.title.includes('App');
+                    return (item.technologies || []).some(tech => ['React Native', 'Expo', 'Flutter'].includes(tech)) || (item.title || '').includes('App');
                 case "Soluciones":
-                    return item.technologies.some(tech => ['Python', 'AI', 'Node.js'].includes(tech)) && !item.title.includes('App') && !item.title.includes('Web');
+                    return (item.technologies || []).some(tech => ['Python', 'AI', 'Node.js'].includes(tech)) && !(item.title || '').includes('App') && !(item.title || '').includes('Web');
                 case "Consultoría":
-                    return item.title.includes('Coach') || item.title.includes('Consult');
+                    return (item.title || '').includes('Coach') || (item.title || '').includes('Consult');
                 default:
                     return true;
             }
@@ -93,7 +83,7 @@ export default function PortfolioClient({ projects }: { projects: Project[] }) {
                                             {project.backgroundImage ? (
                                                 <Image
                                                     src={getOptimizedImageUrl(project.backgroundImage)}
-                                                    alt={project.title}
+                                                    alt={project.title || 'Proyecto'}
                                                     fill
                                                     className="object-cover transition-transform duration-700 ease-out group-hover:scale-110 opacity-80 group-hover:opacity-100"
                                                     priority={i < 4}

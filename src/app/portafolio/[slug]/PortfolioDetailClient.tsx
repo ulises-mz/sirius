@@ -3,22 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { getOptimizedImageUrl } from "@/lib/utils";
-
-interface Project {
-  id: number;
-  slug: string;
-  title: string;
-  description: string;
-  backgroundImage: string;
-  technologies: string[];
-  content: string;
-  keywords: string;
-  category: string;
-  challenge?: string;
-  solution?: string;
-  results?: string;
-  gallery?: string[];
-}
+import type { Project } from "@/lib/cms-data";
 
 interface PortfolioDetailClientProps {
   project: Project;
@@ -54,7 +39,7 @@ export default function PortfolioDetailClient({ project }: PortfolioDetailClient
           {project.backgroundImage && (
             <Image
               src={getOptimizedImageUrl(project.backgroundImage)}
-              alt={project.title}
+              alt={project.title || 'Proyecto'}
               fill
               className={`object-cover transition-opacity duration-1000 ${imageLoaded ? 'opacity-30' : 'opacity-0'}`}
               onLoad={() => setImageLoaded(true)}

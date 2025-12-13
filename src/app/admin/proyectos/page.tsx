@@ -1,5 +1,6 @@
 
 import Link from "next/link";
+import Image from "next/image";
 import { getProjects } from "@/lib/cms-data";
 import { getOptimizedImageUrl } from "@/lib/utils";
 
@@ -70,7 +71,7 @@ export default async function AdminProjectsPage() {
                                     </span>
                                 ))}
                                 {(project.technologies?.length || 0) > 3 && (
-                                    <span className="text-[10px] text-gray-500 self-center">+{project.technologies.length - 3}</span>
+                                    <span className="text-[10px] text-gray-500 self-center">+{(project.technologies?.length || 0) - 3}</span>
                                 )}
                             </div>
 

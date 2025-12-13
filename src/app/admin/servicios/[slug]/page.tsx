@@ -31,7 +31,7 @@ export default function EditServicePage({ params }: { params: Promise<{ slug: st
 
     const { slug } = use(params);
 
-    const { register, control, handleSubmit, reset, watch, setValue } = useForm<ServiceFormData>({
+    const { register, control, handleSubmit, reset } = useForm<ServiceFormData>({
         defaultValues: {
             popular: false,
             features: [{ value: "" }],
@@ -69,6 +69,7 @@ export default function EditServicePage({ params }: { params: Promise<{ slug: st
 
                 reset(formData);
             } catch (error) {
+                console.error("Service load error:", error);
                 toast.error("Error cargando servicio");
                 router.push("/admin/servicios");
             } finally {
@@ -120,6 +121,7 @@ export default function EditServicePage({ params }: { params: Promise<{ slug: st
             router.push("/admin/servicios");
             router.refresh();
         } catch (error) {
+            console.error("Service delete error:", error);
             alert("Error al eliminar");
         }
     };
