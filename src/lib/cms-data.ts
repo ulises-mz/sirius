@@ -166,7 +166,7 @@ export async function updateUserPassword(email: string, passwordHash: string) {
 }
 // Testimonials
 export async function getTestimonials() {
-    const data = await readJSON('testimonials.json');
+    const data = await readJSON<{ testimonials: any[] }>('testimonials.json');
     return data.testimonials || [];
 }
 

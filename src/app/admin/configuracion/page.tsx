@@ -40,7 +40,7 @@ export default function ConfigPage() {
         }
 
         try {
-            const payload: any = { config: data };
+            const payload: { config: ConfigData; password?: { new: string } } = { config: data };
             if (newPassword) {
                 payload.password = { new: newPassword };
             }
@@ -57,6 +57,7 @@ export default function ConfigPage() {
             setNewPassword("");
             setConfirmPassword("");
         } catch (error) {
+            console.error("Save error:", error);
             toast.error("Error al guardar");
         }
     };
