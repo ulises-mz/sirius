@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server";
 import { deleteService, getServiceBySlug, saveService } from "@/lib/cms-data";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../../auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth-options";
 
 interface RouteContext {
-    params: { slug: string };
+    params: Promise<{ slug: string }>;
 }
 
 export async function GET(request: Request, { params }: RouteContext) {
