@@ -1,6 +1,5 @@
 import { getTestimonials } from "@/lib/cms-data";
 import Link from "next/link";
-import { revalidatePath } from "next/cache";
 
 export default async function AdminTestimonialsPage() {
     const testimonials = await getTestimonials();
@@ -24,7 +23,7 @@ export default async function AdminTestimonialsPage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {testimonials.map((testimonial: any) => (
+                {testimonials.map((testimonial) => (
                     <Link
                         key={testimonial.id}
                         href={`/admin/testimonios/${testimonial.id}`}

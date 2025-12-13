@@ -85,6 +85,12 @@ export interface Config {
 
 export interface Testimonial {
     id: number;
+    name?: string;
+    title?: string;
+    company?: string;
+    rating?: number;
+    quote?: string;
+    result?: string;
     [key: string]: unknown;
 }
 
