@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: ServiceDetailPageProps): Prom
     title: `${service.title} | CodeINVEST Costa Rica`,
     description: `${service.description} Especialistas en ${service.title} para empresas.`,
     keywords: [
-      service.title.toLowerCase(),
+      service.title?.toLowerCase() || 'servicio',
       service.category?.toLowerCase() || 'servicios',
       ...(service.technologies || []).map((tech: string) => tech.toLowerCase()),
       'CodeINVEST',
