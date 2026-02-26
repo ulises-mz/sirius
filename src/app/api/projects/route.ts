@@ -25,8 +25,8 @@ export async function POST(request: Request) {
 
         // Validation could go here
 
-        const newProject = await saveProject(data);
-        return NextResponse.json(newProject);
+        await saveProject(data);
+        return NextResponse.json({ success: true, slug: data.slug });
     } catch (error) {
         return NextResponse.json({ error: "Failed to create project" }, { status: 500 });
     }

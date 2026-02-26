@@ -100,7 +100,7 @@ export default function PrivacidadPage() {
             </h1>
             
             <p className="hero-description">
-              En CodeINVEST nos comprometemos a proteger tu información personal y garantizar que su uso sea 
+              En Sirius nos comprometemos a proteger tu información personal y garantizar que su uso sea 
               transparente y seguro, conforme a la Ley de Protección de la Persona frente al Tratamiento de 
               sus Datos Personales (Ley 8968, Costa Rica).
             </p>
@@ -251,7 +251,7 @@ export default function PrivacidadPage() {
               <div className="contact-info">
                 <div className="contact-item">
                   <span className="contact-icon">📧</span>
-                  <span className="contact-text">info@codeinvestcr.com</span>
+                  <span className="contact-text">info@siriusx.net</span>
                 </div>
                 <div className="contact-item">
                   <span className="contact-icon">📞</span>

@@ -60,9 +60,9 @@ export async function POST(request: NextRequest) {
         // Email automático para el cliente con diseño elegante y SVG
         const calendlyUrl = 'https://calendly.com/admin-siriusx/30min';
         const clientMailOptions = {
-            from: `"CodeINVEST" <${process.env.SMTP_USER}>`,
+            from: `"Sirius" <${process.env.SMTP_USER}>`,
             to: email,
-            subject: '¡Gracias por contactar a CodeINVEST!',
+            subject: '¡Gracias por contactar a Sirius!',
             html: `
         <!DOCTYPE html>
         <html>
@@ -240,7 +240,7 @@ export async function POST(request: NextRequest) {
                                             <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/>
                                         </svg>
                                     </div>
-                                    <a href="https://codeinvestcr.com" class="contact-text">https://codeinvestcr.com</a>
+                                    <a href="https://siriusx.net" class="contact-text">https://siriusx.net</a>
                                 </div>
                                 
                                 <div class="contact-item">
@@ -258,7 +258,7 @@ export async function POST(request: NextRequest) {
                                             <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8l8 5 8-5v10zm-8-7L4 6h16l-8 5z"/>
                                         </svg>
                                     </div>
-                                    <a href="mailto:info@codeinvestcr.com" class="contact-text">info@codeinvestcr.com</a>
+                                    <a href="mailto:info@siriusx.net" class="contact-text">info@siriusx.net</a>
                                 </div>
                             </div>
                             
@@ -278,7 +278,7 @@ export async function POST(request: NextRequest) {
                                         <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                                     </svg>
                                 </a>
-                                <a href="https://codeinvestcr.com" class="social-icon">
+                                <a href="https://siriusx.net" class="social-icon">
                                     <svg class="svg-icon" viewBox="0 0 24 24">
                                         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
                                     </svg>
@@ -294,7 +294,7 @@ export async function POST(request: NextRequest) {
                 
                 <div class="footer">
                     <p>Este es un mensaje automático, por favor no responder directamente a este correo.</p>
-                    <p>© ${new Date().getFullYear()} CodeINVEST. Todos los derechos reservados.</p>
+                    <p>© ${new Date().getFullYear()} Sirius. Todos los derechos reservados.</p>
                 </div>
             </div>
         </body>

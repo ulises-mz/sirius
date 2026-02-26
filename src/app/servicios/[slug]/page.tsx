@@ -4,6 +4,8 @@ import { getServices, getServiceBySlug } from "@/lib/cms-data";
 import ServiceDetailClient from "./ServiceDetailClient";
 import "@/styles/globals.css";
 
+export const revalidate = 60;
+
 interface ServiceDetailPageProps {
   params: Promise<{
     slug: string;
@@ -23,33 +25,33 @@ export async function generateMetadata({ params }: ServiceDetailPageProps): Prom
 
   if (!service) {
     return {
-      title: 'Servicio no encontrado | CodeINVEST',
+      title: 'Servicio no encontrado | Sirius',
       description: 'El servicio que buscas no existe.',
     };
   }
 
   return {
-    title: `${service.title} | CodeINVEST Costa Rica`,
+    title: `${service.title} | Sirius Costa Rica`,
     description: `${service.description} Especialistas en ${service.title} para empresas.`,
     keywords: [
       service.title?.toLowerCase() || 'servicio',
       service.category?.toLowerCase() || 'servicios',
       ...(service.technologies || []).map((tech: string) => tech.toLowerCase()),
-      'CodeINVEST',
+      'Sirius',
       'Costa Rica'
     ],
     openGraph: {
-      title: `${service.title} | CodeINVEST`,
+      title: `${service.title} | Sirius`,
       description: service.description,
       type: 'website',
-      url: `https://www.codeinvestcr.com/servicios/${service.slug}`,
-      siteName: 'CodeINVEST',
+      url: `https://www.siriusx.net/servicios/${service.slug}`,
+      siteName: 'Sirius',
       images: [
         {
           url: (typeof service.image === 'string' && service.image) ? service.image : `/images/services/${service.slug}.png`,
           width: 1200,
           height: 630,
-          alt: `${service.title} CodeINVEST`,
+          alt: `${service.title} Sirius`,
         }
       ],
     },

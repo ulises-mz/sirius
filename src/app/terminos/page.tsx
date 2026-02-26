@@ -26,7 +26,7 @@ export default function TerminosPage() {
     {
       number: "1",
       title: "Objeto",
-      content: "CodeINVEST es una plataforma digital que ofrece servicios de desarrollo web, aplicaciones móviles, automatización de procesos, consultoría tecnológica y soluciones digitales integrales para empresas.",
+      content: "Sirius es una plataforma digital que ofrece servicios de desarrollo web, aplicaciones móviles, automatización de procesos, consultoría tecnológica y soluciones digitales integrales para empresas.",
       icon: "🎯"
     },
     {
@@ -38,25 +38,25 @@ export default function TerminosPage() {
     {
       number: "3",
       title: "Servicios",
-      content: "Los servicios se ofrecen bajo disponibilidad de agenda. CodeINVEST se reserva el derecho de actualizar, modificar o suspender temporalmente los servicios en cualquier momento.",
+      content: "Los servicios se ofrecen bajo disponibilidad de agenda. Sirius se reserva el derecho de actualizar, modificar o suspender temporalmente los servicios en cualquier momento.",
       icon: "🔧"
     },
     {
       number: "4",
       title: "Limitación de responsabilidad",
-      content: "La información proporcionada en las consultas y en la plataforma es de carácter consultivo y técnico. CodeINVEST no garantiza resultados específicos en la implementación de soluciones tecnológicas, ya que el éxito depende de múltiples factores externos. El uso de la información proporcionada es responsabilidad exclusiva del usuario.",
+      content: "La información proporcionada en las consultas y en la plataforma es de carácter consultivo y técnico. Sirius no garantiza resultados específicos en la implementación de soluciones tecnológicas, ya que el éxito depende de múltiples factores externos. El uso de la información proporcionada es responsabilidad exclusiva del usuario.",
       icon: "⚠️"
     },
     {
       number: "5",
       title: "Propiedad intelectual",
-      content: "Todos los contenidos del sitio (textos, imágenes, logotipos, software, gráficos) son propiedad de CodeINVEST. Queda prohibida su reproducción, distribución o modificación sin autorización previa por escrito.",
+      content: "Todos los contenidos del sitio (textos, imágenes, logotipos, software, gráficos) son propiedad de Sirius. Queda prohibida su reproducción, distribución o modificación sin autorización previa por escrito.",
       icon: "©️"
     },
     {
       number: "6",
       title: "Modificaciones",
-      content: "CodeINVEST se reserva el derecho de modificar estos Términos y Condiciones en cualquier momento. Los cambios serán efectivos a partir de su publicación en el sitio web.",
+      content: "Sirius se reserva el derecho de modificar estos Términos y Condiciones en cualquier momento. Los cambios serán efectivos a partir de su publicación en el sitio web.",
       icon: "🔄"
     }
   ];
@@ -83,7 +83,7 @@ export default function TerminosPage() {
             </h1>
             
             <p className="hero-description">
-              Estos Términos y Condiciones regulan el acceso y uso del sitio web y los servicios ofrecidos por CodeINVEST. 
+              Estos Términos y Condiciones regulan el acceso y uso del sitio web y los servicios ofrecidos por Sirius. 
               Al utilizar la plataforma, aceptas estas condiciones en su totalidad.
             </p>
 
@@ -113,7 +113,7 @@ export default function TerminosPage() {
           <div className="section-header">
             <h2 className="section-title">Nuestros Servicios</h2>
             <p className="section-description">
-              CodeINVEST ofrece una gama completa de servicios digitales y consultoría tecnológica
+              Sirius ofrece una gama completa de servicios digitales y consultoría tecnológica
             </p>
           </div>
 
@@ -172,7 +172,7 @@ export default function TerminosPage() {
                 <h3 className="notice-title">Aviso Importante sobre Servicios Tecnológicos</h3>
                 <p className="notice-text">
                   La implementación de soluciones tecnológicas conlleva variables técnicas y de negocio que pueden afectar los resultados. 
-                  CodeINVEST proporciona servicios y asesoría de carácter técnico y consultivo, 
+                  Sirius proporciona servicios y asesoría de carácter técnico y consultivo, 
                   pero el éxito de los proyectos depende de múltiples factores. Siempre evalúa con tu equipo 
                   técnico antes de tomar decisiones importantes sobre implementación tecnológica.
                 </p>
@@ -187,7 +187,7 @@ export default function TerminosPage() {
                 <h3 className="disclaimer-title">Limitación de Responsabilidad</h3>
                 <p className="disclaimer-text">
                   El usuario es el único responsable de las decisiones tecnológicas y de negocio que tome 
-                  basándose en la información proporcionada. CodeINVEST no se hace responsable 
+                  basándose en la información proporcionada. Sirius no se hace responsable 
                   por resultados inesperados en la implementación de soluciones tecnológicas o pérdidas 
                   derivadas del uso de nuestros servicios de consultoría digital.
                 </p>
@@ -208,7 +208,7 @@ export default function TerminosPage() {
             <div className="contact-info">
               <div className="contact-item">
                 <span className="contact-icon">📧</span>
-                <span className="contact-text">info@codeinvestcr.com</span>
+                <span className="contact-text">info@siriusx.net</span>
               </div>
               <div className="contact-item">
                 <span className="contact-icon">📞</span>

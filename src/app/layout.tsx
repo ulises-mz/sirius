@@ -12,6 +12,8 @@ import { SITE, SEO_DEFAULT, OPEN_GRAPH_IMAGE } from '@/lib/constants';
 import { NextAuthProvider } from '@/components/providers/NextAuthProvider';
 import { getConfig } from '@/lib/cms-data';
 
+export const revalidate = 60;
+
 export const metadata = {
   title: {
     default: `${SITE.name} - Agencia de Soluciones Digitales en Costa Rica`,

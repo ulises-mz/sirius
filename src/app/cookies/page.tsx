@@ -53,7 +53,7 @@ export default function CookiesPage() {
             </h1>
             
             <p className="hero-description">
-              En CodeINVEST utilizamos cookies y tecnologías similares para mejorar la experiencia de navegación, 
+              En Sirius utilizamos cookies y tecnologías similares para mejorar la experiencia de navegación, 
               garantizar el correcto funcionamiento de la plataforma y analizar el uso de nuestros servicios.
             </p>
 

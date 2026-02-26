@@ -24,7 +24,7 @@ export default function PageShell({ children, siteConfig }: PageShellProps) {
             <ScrollToTop />
             <Header />
             {children}
-            <WhatsAppFloat />
+            <WhatsAppFloat config={siteConfig} />
             <Footer siteConfig={siteConfig} />
         </>
     );

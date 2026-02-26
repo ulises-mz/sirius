@@ -1,8 +1,9 @@
-export default function WhatsAppFloat() {
+export default function WhatsAppFloat({ config }: { config?: any }) {
+  const waNumber = (config?.whatsappNumber || "50672217873").replace(/[^0-9]/g, '');
   return (
     <div className="sticky bottom-4 sm:bottom-6 md:bottom-8 z-[99999] print:hidden float-right mr-4 sm:mr-6 md:mr-8 pointer-events-none">
       <a
-        href="https://wa.me/50672217873"
+        href={`https://wa.me/${waNumber}`}
         target="_blank"
         rel="noopener noreferrer"
         className="pointer-events-auto inline-flex h-14 w-14 sm:h-16 sm:w-16 bg-[#25D366] text-white rounded-full shadow-lg items-center justify-center hover:bg-[#128C7E] focus:outline-none focus:ring-4 focus:ring-[#25D366]/30 transition-transform duration-200 hover:scale-105 active:scale-95 motion-safe:animate-bounce"
