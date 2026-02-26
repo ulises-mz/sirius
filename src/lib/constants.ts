@@ -11,7 +11,7 @@ export const SITE = {
 	description:
 		'Agencia de soluciones digitales: desarrollo web, automatización, marketing y estrategia tecnológica orientada a resultados.',
 	primaryEmail: 'admin@siriusx.net',
-	phone: '+506 7221 7873',
+	phone: '+506 8433 7752',
 	address: {
 		street: 'Pozos de Santa Ana',
 		city: 'San José',

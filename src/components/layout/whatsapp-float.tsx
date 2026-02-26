@@ -1,5 +1,7 @@
+import { SITE } from "@/lib/constants";
+
 export default function WhatsAppFloat({ config }: { config?: any }) {
-  const waNumber = (config?.whatsappNumber || config?.phone || "50672217873").replace(/[^0-9]/g, '');
+  const waNumber = (config?.whatsappNumber || config?.phone || SITE.phone).replace(/[^0-9]/g, '');
   return (
     <div className="sticky bottom-4 sm:bottom-6 md:bottom-8 z-[99999] print:hidden float-right mr-4 sm:mr-6 md:mr-8 pointer-events-none">
       <a

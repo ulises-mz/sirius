@@ -32,7 +32,7 @@ export default function ContactClient({ config }: { config: any }) {
     const textToSend = message.trim() || "Hola, me interesa cotizar un proyecto con Sirius.";
 
     // Remove '+' and spaces for the wa.me link
-    const waNumber = (config?.whatsappNumber || config?.phone || "50672217873").replace(/[^0-9]/g, '');
+    const waNumber = (config?.whatsappNumber || config?.phone || SITE.phone).replace(/[^0-9]/g, '');
     const whatsappUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(textToSend)}`;
     window.open(whatsappUrl, '_blank');
   };
@@ -92,8 +92,8 @@ export default function ContactClient({ config }: { config: any }) {
                   </div>
                   <div>
                     <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-1">Chat Rápido</h3>
-                    <p className="text-white font-medium text-lg mb-1">{config?.whatsappNumber || config?.phone || "WhatsApp Directo"}</p>
-                    <a href={`https://wa.me/${(config?.whatsappNumber || config?.phone || "50672217873").replace(/[^0-9]/g, '')}`} target="_blank" className="text-[#5E3BEE] hover:text-[#86D4FF] transition-colors inline-flex items-center gap-1 text-sm font-semibold">
+                    <p className="text-white font-medium text-lg mb-1">{config?.whatsappNumber || config?.phone || SITE.phone}</p>
+                    <a href={`https://wa.me/${(config?.whatsappNumber || config?.phone || SITE.phone).replace(/[^0-9]/g, '')}`} target="_blank" className="text-[#5E3BEE] hover:text-[#86D4FF] transition-colors inline-flex items-center gap-1 text-sm font-semibold">
                       Iniciar conversación <span className="transition-transform group-hover:translate-x-1">→</span>
                     </a>
                   </div>
