@@ -1,0 +1,12 @@
+[
+  {
+    "id": "site-config",
+    "siteName": "Sirius",
+    "contactEmail": "jafethj@siriusx.net",
+    "phone": "+506 8433 7752",
+    "address": "PPozos de Santa Ana, San José, Costa Rica",
+    "updatedAt": "2026-02-26T12:26:13.000Z",
+    "schedule": "Lunes a viernes 8am a 5pm y sábados de 8 a 12md.",
+    "whatsappNumber": "+50672217873"
+  }
+]

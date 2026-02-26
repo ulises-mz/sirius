@@ -30,6 +30,7 @@ export async function PUT(
     if (!session) {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
+    const { slug } = await params;
 
     try {
         const data = await request.json();
