@@ -5,7 +5,7 @@ import AboutSection from '@/components/sections/about';
 import { FeaturesBentoSection } from '@/components/sections/features-bento';
 import TestimonialsSection from '@/components/sections/testimonials';
 import { SITE, SEO_DEFAULT, OPEN_GRAPH_IMAGE } from '@/lib/constants';
-import { getServices, getProjects, getTestimonials } from '@/lib/cms-data';
+import { getServices, getProjects, getTestimonials, getConfig } from '@/lib/cms-data';
 
 export const revalidate = 60; // Regenerar al menos cada 60 seg si hay cambios
 
@@ -44,6 +44,7 @@ export default async function Home() {
   const services = await getServices();
   const projects = await getProjects();
   const testimonials = await getTestimonials();
+  const config = await getConfig();
 
   // Limit to exactly 7 projects for the bento layout
   const homepageProjects = projects.slice(0, 7);
@@ -55,7 +56,7 @@ export default async function Home() {
       <AboutSection />
       <FeaturesBentoSection projects={homepageProjects} />
       <TestimonialsSection testimonials={testimonials} />
-      <CtaSection />
+      <CtaSection config={config} />
     </main>
   );
 }
