@@ -9,6 +9,8 @@ interface ConfigData {
     contactEmail: string;
     phone: string;
     address: string;
+    schedule: string;
+    whatsappNumber: string;
 }
 
 export default function ConfigPage() {
@@ -89,6 +91,14 @@ export default function ConfigPage() {
                         <div>
                             <label className="block text-sm font-medium text-gray-400 mb-2">Dirección</label>
                             <input {...register("address")} className="w-full bg-[#101B2C] border border-[#1D2A3C] rounded-xl px-4 py-3 text-white focus:border-[#5E3BEE] focus:outline-none" />
+                        </div>
+                        <div className="md:col-span-2">
+                            <label className="block text-sm font-medium text-gray-400 mb-2">Horario de Atención</label>
+                            <input {...register("schedule")} placeholder="Ej: Lunes a viernes 8am a 5pm y sábados de 8 a 12md." className="w-full bg-[#101B2C] border border-[#1D2A3C] rounded-xl px-4 py-3 text-white focus:border-[#5E3BEE] focus:outline-none" />
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium text-gray-400 mb-2">Número de WhatsApp</label>
+                            <input {...register("whatsappNumber")} placeholder="Ej: +50672217873" className="w-full bg-[#101B2C] border border-[#1D2A3C] rounded-xl px-4 py-3 text-white focus:border-[#5E3BEE] focus:outline-none" />
                         </div>
                     </div>
                 </div>

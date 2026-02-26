@@ -9,6 +9,8 @@ interface Props {
     contactEmail?: string;
     phone?: string;
     address?: string;
+    schedule?: string;
+    whatsappNumber?: string;
   };
 }
 
@@ -35,6 +37,7 @@ export default function Footer({ siteConfig }: Props) {
   const email = siteConfig?.contactEmail || SITE.primaryEmail;
   const phone = siteConfig?.phone || SITE.phone;
   const address = siteConfig?.address || `${SITE.address.street}, ${SITE.address.city}`;
+  const schedule = siteConfig?.schedule || "Lunes a viernes 8am a 5pm y sábados de 8 a 12md.";
 
   const navPrimary = [
     { href: "/servicios", label: "Servicios" },
@@ -131,7 +134,7 @@ export default function Footer({ siteConfig }: Props) {
                 {email}
               </Link>
             </p>
-            <p className="text-white/60">Lunes a viernes 8am a 5pm y sábados de 8 a 12md.</p>
+            <p className="text-white/60">{schedule}</p>
           </div>
 
           {/* Legal */}

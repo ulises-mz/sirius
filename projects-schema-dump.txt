@@ -1,0 +1,15 @@
+id: int(11)
+slug: varchar(191)
+title: varchar(255)
+description: text
+backgroundImage: varchar(500)
+category: varchar(100)
+technologies: longtext
+content: text
+keywords: text
+challenge: text
+solution: text
+results: text
+gallery: longtext
+createdAt: datetime
+updatedAt: datetime

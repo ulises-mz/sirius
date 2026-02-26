@@ -1,10 +1,10 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Portafolio | CodeINVEST - Proyectos Exitosos en Costa Rica',
+  title: 'Portafolio | Sirius - Proyectos Exitosos en Costa Rica',
   description: 'Conoce nuestros proyectos exitosos: sitios web, aplicaciones móviles y e-commerce desarrollados para empresas costarricenses. Casos de estudio reales con resultados comprobados.',
   keywords: [
-    'portafolio CodeINVEST',
+    'portafolio Sirius',
     'proyectos web Costa Rica',
     'casos de estudio desarrollo',
     'apps móviles CR',
@@ -18,29 +18,29 @@ export const metadata: Metadata = {
     'casos éxito digitales'
   ],
   openGraph: {
-    title: 'Portafolio | CodeINVEST - Proyectos Exitosos',
+    title: 'Portafolio | Sirius - Proyectos Exitosos',
     description: 'Descubre nuestros proyectos exitosos: sitios web, apps móviles y e-commerce para empresas costarricenses con resultados comprobados.',
     type: 'website',
     locale: 'es_CR',
-    url: 'https://www.codeinvestcr.com/portafolio',
-    siteName: 'CodeINVEST',
+    url: 'https://www.siriusx.net/portafolio',
+    siteName: 'Sirius',
     images: [
       {
         url: '/images/og/portfolio-page-seo.webp',
         width: 1200,
         height: 630,
-        alt: 'Portafolio CodeINVEST Costa Rica',
+        alt: 'Portafolio Sirius Costa Rica',
       }
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Portafolio | CodeINVEST Costa Rica',
+    title: 'Portafolio | Sirius Costa Rica',
     description: 'Proyectos digitales exitosos para empresas costarricenses con resultados comprobados.',
     images: ['/images/social/portfolio-twitter-card.webp'],
   },
   alternates: {
-    canonical: 'https://www.codeinvestcr.com/portafolio',
+    canonical: 'https://www.siriusx.net/portafolio',
   },
 };
 

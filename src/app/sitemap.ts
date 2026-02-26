@@ -1,12 +1,16 @@
 import { MetadataRoute } from 'next'
-import { services } from '@/data/services'
 import { blogPosts } from '@/data/post'
+import { getServices, getProjects } from '@/lib/cms-data'
 
-export const dynamic = 'force-static'
+export const revalidate = 3600 // Revalidate sitemap every hour
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://www.codeinvestcr.com'
-  
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const baseUrl = 'https://www.siriusx.net'
+
+  // Obtener datos del CMS
+  const services = await getServices();
+  const projects = await getProjects();
+
   // Páginas estáticas principales
   const staticPages = [
     {
@@ -70,10 +74,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${baseUrl}/servicios/${service.slug}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
+    priority: 0.8,
+  }))
+
+  // Páginas de proyectos dinámicas
+  const projectPages = projects.map((project) => ({
+    url: `${baseUrl}/portafolio/${project.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
     priority: 0.7,
   }))
 
-  // Páginas de blog dinámicas
+  // Páginas de blog dinámicas (Aún no migradas al CMS)
   const blogPages = blogPosts.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: new Date(post.publishDate),
@@ -81,5 +93,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }))
 
-  return [...staticPages, ...servicePages, ...blogPages]
+  return [...staticPages, ...servicePages, ...projectPages, ...blogPages]
 }

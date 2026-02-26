@@ -76,6 +76,8 @@ export interface Config {
     contactEmail: string;
     phone?: string;
     address?: string;
+    schedule?: string;
+    whatsappNumber?: string;
 }
 
 export interface User {
@@ -294,7 +296,9 @@ export async function getConfig(): Promise<Config> {
             siteName: 'Sirius',
             contactEmail: 'admin@siriusx.net',
             phone: '+506 7221 7872',
-            address: 'Pozos de Santa Ana, San José, Costa Rica'
+            address: 'Pozos de Santa Ana, San José, Costa Rica',
+            schedule: 'Lunes a viernes 8am a 5pm y sábados de 8 a 12md.',
+            whatsappNumber: '+50672217873'
         };
     }
 
@@ -306,11 +310,12 @@ export async function getConfig(): Promise<Config> {
  */
 export async function updateConfig(config: Config): Promise<void> {
     await pool.execute(
-        `INSERT INTO config (id, siteName, contactEmail, phone, address)
-         VALUES (?, ?, ?, ?, ?)
+        `INSERT INTO config (id, siteName, contactEmail, phone, address, schedule, whatsappNumber)
+         VALUES (?, ?, ?, ?, ?, ?, ?)
          ON DUPLICATE KEY UPDATE
-         siteName=VALUES(siteName), contactEmail=VALUES(contactEmail), phone=VALUES(phone), address=VALUES(address)`,
-        ['site-config', config.siteName, config.contactEmail, config.phone || null, config.address || null]
+         siteName=VALUES(siteName), contactEmail=VALUES(contactEmail), phone=VALUES(phone), address=VALUES(address),
+         schedule=VALUES(schedule), whatsappNumber=VALUES(whatsappNumber)`,
+        ['site-config', config.siteName, config.contactEmail, config.phone || null, config.address || null, config.schedule || null, config.whatsappNumber || null]
     );
 }
 

@@ -24,33 +24,33 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 
   if (!post) {
     return {
-      title: 'Post no encontrado | CodeINVEST Blog',
+      title: 'Post no encontrado | Sirius Blog',
       description: 'El artículo que buscas no existe.',
     };
   }
 
   return {
-    title: `${post.title} | CodeINVEST Blog`,
+    title: `${post.title} | Sirius Blog`,
     description: post.excerpt,
     keywords: [
       ...post.tags,
-      'CodeINVEST',
+      'Sirius',
       'blog tecnología Costa Rica',
       'desarrollo web CR',
       'marketing digital',
       post.category.toLowerCase()
     ],
-    authors: [{ name: 'CodeINVEST' }],
+    authors: [{ name: 'Sirius' }],
     openGraph: {
       title: post.title,
       description: post.excerpt,
       type: 'article',
       locale: 'es_CR',
-      url: `https://www.codeinvestcr.com/blog/${post.slug}`,
-      siteName: 'CodeINVEST',
+      url: `https://www.siriusx.net/blog/${post.slug}`,
+      siteName: 'Sirius',
       publishedTime: post.publishDate,
       modifiedTime: post.publishDate,
-      authors: ['CodeINVEST'],
+      authors: ['Sirius'],
       tags: post.tags,
       images: [
         {
@@ -68,7 +68,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       images: [post.image],
     },
     alternates: {
-      canonical: `https://www.codeinvestcr.com/blog/${post.slug}`,
+      canonical: `https://www.siriusx.net/blog/${post.slug}`,
     },
   };
 }

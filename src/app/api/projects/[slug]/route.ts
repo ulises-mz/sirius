@@ -30,6 +30,7 @@ export async function PUT(
     if (!session) {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
+    const { slug } = await params;
 
     try {
         const data = await request.json();
@@ -37,9 +38,10 @@ export async function PUT(
         // If slug changes, we might need to handle deletion of old slug or CMS handles it if ID based (but we are slug based).
         // For simplicity: Update assumes ID or unique field logic in save, but here we just overwrite.
 
-        const updated = await saveProject(data);
-        return NextResponse.json(updated);
+        await saveProject(data);
+        return NextResponse.json({ success: true, slug: data.slug });
     } catch (error) {
+        console.error("Error saving project:", error);
         return NextResponse.json({ error: "Failed to update project" }, { status: 500 });
     }
 }

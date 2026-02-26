@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Desarrollo Web en San José Costa Rica | CodeINVEST',
+  title: 'Desarrollo Web en San José Costa Rica | Sirius',
   description: 'Servicios de desarrollo web profesional en San José, Costa Rica. Páginas web, apps móviles y e-commerce para empresas josefinas. Consulta gratuita.',
   keywords: [
     'desarrollo web San José',
@@ -13,9 +13,9 @@ export const metadata: Metadata = {
     'e-commerce San José CR'
   ],
   openGraph: {
-    title: 'Desarrollo Web San José Costa Rica | CodeINVEST',
+    title: 'Desarrollo Web San José Costa Rica | Sirius',
     description: 'Transformamos negocios josefinos con soluciones web profesionales.',
-    url: 'https://www.codeinvestcr.com/ubicaciones/san-jose',
+    url: 'https://www.siriusx.net/ubicaciones/san-jose',
   },
 };
 
@@ -28,13 +28,13 @@ export default function SanJosePage() {
             Desarrollo Web Profesional en San José, Costa Rica
           </h1>
           <p className="text-xl text-gray-700 mb-8">
-            CodeINVEST es la agencia líder en desarrollo web en San José. Ayudamos a empresas 
+            Sirius es la agencia líder en desarrollo web en San José. Ayudamos a empresas 
             josefinas a crecer con páginas web modernas, aplicaciones móviles y tiendas online.
           </p>
           
           <div className="grid md:grid-cols-2 gap-8 mt-12">
             <div>
-              <h2 className="text-2xl font-semibold mb-4">¿Por qué elegir CodeINVEST en San José?</h2>
+              <h2 className="text-2xl font-semibold mb-4">¿Por qué elegir Sirius en San José?</h2>
               <ul className="space-y-3">
                 <li>✓ Atención personalizada en el centro de San José</li>
                 <li>✓ +100 proyectos exitosos para empresas josefinas</li>

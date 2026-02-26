@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Blog | CodeINVEST - Insights y Tendencias Digitales Costa Rica',
+  title: 'Blog | Sirius - Insights y Tendencias Digitales Costa Rica',
   description: 'Blog especializado en desarrollo web, marketing digital y tecnología para empresas costarricenses. Consejos prácticos, tendencias actuales y casos de éxito.',
   keywords: [
     'blog tecnología Costa Rica',
@@ -18,29 +18,29 @@ export const metadata: Metadata = {
     'insights digitales Costa Rica'
   ],
   openGraph: {
-    title: 'Blog | CodeINVEST - Insights Digitales Costa Rica',
+    title: 'Blog | Sirius - Insights Digitales Costa Rica',
     description: 'Insights, tendencias y consejos sobre tecnología para empresas costarricenses. Artículos especializados en desarrollo web y marketing digital.',
     type: 'website',
     locale: 'es_CR',
-    url: 'https://www.codeinvestcr.com/blog',
-    siteName: 'CodeINVEST',
+    url: 'https://www.siriusx.net/blog',
+    siteName: 'Sirius',
     images: [
       {
         url: '/images/og/blog-articles-seo.webp',
         width: 1200,
         height: 630,
-        alt: 'Blog CodeINVEST Costa Rica',
+        alt: 'Blog Sirius Costa Rica',
       }
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Blog | CodeINVEST Costa Rica',
+    title: 'Blog | Sirius Costa Rica',
     description: 'Insights y tendencias digitales para empresas costarricenses.',
     images: ['/images/social/blog-twitter-card.webp'],
   },
   alternates: {
-    canonical: 'https://www.codeinvestcr.com/blog',
+    canonical: 'https://www.siriusx.net/blog',
   },
 };
 

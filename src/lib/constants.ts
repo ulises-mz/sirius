@@ -43,4 +43,4 @@ export const SEO_DEFAULT = {
 
 export const OPEN_GRAPH_IMAGE = '/images/og/home-page-seo.webp'; // TODO: actualizar asset con branding Sirius
 
-export const BRAND_NOTES = 'Este contenido fue adaptado desde un proyecto anterior (CodeINVEST) y centralizado.';
+export const BRAND_NOTES = 'Este contenido fue adaptado desde un proyecto anterior (Sirius) y centralizado.';

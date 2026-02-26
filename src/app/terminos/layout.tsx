@@ -1,10 +1,10 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Términos y Condiciones - CodeINVEST',
-  description: 'Términos y condiciones de uso de los servicios de CodeINVEST. Estos Términos y Condiciones regulan el acceso y uso del sitio web y los servicios ofrecidos por CodeINVEST como plataforma digital de asesoría en inversión y consultoría financiera.',
+  title: 'Términos y Condiciones - Sirius',
+  description: 'Términos y condiciones de uso de los servicios de Sirius. Estos Términos y Condiciones regulan el acceso y uso del sitio web y los servicios ofrecidos por Sirius como plataforma digital de asesoría en inversión y consultoría financiera.',
   keywords: [
-    'términos condiciones CodeINVEST',
+    'términos condiciones Sirius',
     'términos uso Costa Rica',
     'condiciones servicio',
     'asesoría inversiones términos',
@@ -12,27 +12,27 @@ export const metadata: Metadata = {
   ],
   robots: 'index, follow',
   openGraph: {
-    title: 'Términos y Condiciones - CodeINVEST',
-    description: 'Términos y condiciones de uso de los servicios de CodeINVEST. Conoce nuestras políticas y condiciones de servicio.',
-    url: 'https://www.codeinvestcr.com/terminos',
+    title: 'Términos y Condiciones - Sirius',
+    description: 'Términos y condiciones de uso de los servicios de Sirius. Conoce nuestras políticas y condiciones de servicio.',
+    url: 'https://www.siriusx.net/terminos',
     type: 'website',
     images: [
       {
-        url: 'https://www.codeinvestcr.com/images/og-terminos.jpg',
+        url: 'https://www.siriusx.net/images/og-terminos.jpg',
         width: 1200,
         height: 630,
-        alt: 'Términos y Condiciones CodeINVEST',
+        alt: 'Términos y Condiciones Sirius',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Términos y Condiciones - CodeINVEST',
-    description: 'Términos y condiciones de uso de los servicios de CodeINVEST.',
-    images: ['https://www.codeinvestcr.com/images/og-terminos.jpg'],
+    title: 'Términos y Condiciones - Sirius',
+    description: 'Términos y condiciones de uso de los servicios de Sirius.',
+    images: ['https://www.siriusx.net/images/og-terminos.jpg'],
   },
   alternates: {
-    canonical: 'https://www.codeinvestcr.com/terminos',
+    canonical: 'https://www.siriusx.net/terminos',
   },
 };
 

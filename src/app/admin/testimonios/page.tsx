@@ -1,6 +1,8 @@
 import { getTestimonials } from "@/lib/cms-data";
 import Link from "next/link";
 
+export const dynamic = 'force-dynamic';
+
 export default async function AdminTestimonialsPage() {
     const testimonials = await getTestimonials();
 

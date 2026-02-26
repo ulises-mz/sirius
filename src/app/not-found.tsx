@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: '404 - Página no encontrada | CodeINVEST',
+  title: '404 - Página no encontrada | Sirius',
   description: 'La página que buscas no existe. Explora nuestros servicios de desarrollo web.',
   robots: {
     index: false,
