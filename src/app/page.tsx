@@ -7,6 +7,8 @@ import TestimonialsSection from '@/components/sections/testimonials';
 import { SITE, SEO_DEFAULT, OPEN_GRAPH_IMAGE } from '@/lib/constants';
 import { getServices, getProjects, getTestimonials } from '@/lib/cms-data';
 
+export const revalidate = 60; // Regenerar al menos cada 60 seg si hay cambios
+
 export const metadata = {
   title: `Soluciones Digitales en Costa Rica | ${SITE.name}`,
   description: SEO_DEFAULT.description,
